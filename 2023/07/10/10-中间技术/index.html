@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>10.中间技术 - Cccccpg</title>
+
+  
+    <meta name="description" content="该部分包括MyBatis、RabbitMQ、设计模式等内容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10.中间技术">
+<meta property="og:url" content="https://cccccpg.github.io/2023/07/10/10-%E4%B8%AD%E9%97%B4%E6%8A%80%E6%9C%AF/index.html">
+<meta property="og:site_name" content="Cccccpg">
+<meta property="og:description" content="该部分包括MyBatis、RabbitMQ、设计模式等内容">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230624161725775.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230803163009431.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230803163408121.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230816193809765.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230816193850993.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230816201456363.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230816201533202.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230816201555462.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230816201617418.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230816202529699.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230818104836110.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230818164646225.png">
+<meta property="article:published_time" content="2023-07-10T05:52:54.000Z">
+<meta property="article:modified_time" content="2023-09-05T07:12:51.678Z">
+<meta property="article:author" content="Cccccpg">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="八股">
+<meta property="article:tag" content="基础">
+<meta property="article:tag" content="面试">
+<meta property="article:tag" content="MyBatis">
+<meta property="article:tag" content="RabbitMQ">
+<meta property="article:tag" content="设计模式">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230624161725775.png">
+  
+  
+  
+  <meta name="keywords" content="Java,八股,基础,面试,MyBatis,RabbitMQ,设计模式">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/%E5%A4%B4%E5%83%8F.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">Cccccpg</div></a></div>
+
+<nav class="menu dis-select"></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">10.中间技术</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E5%92%8C-%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">1.1 #{}和${}区别是什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-%E4%B8%BA%E4%BB%80%E4%B9%88-%E8%83%BD%E6%9C%89%E6%95%88%E9%98%B2%E6%AD%A2SQL%E6%B3%A8%E5%85%A5%EF%BC%9F"><span class="toc-text">1.1.1 为什么#{}能有效防止SQL注入？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-xml%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6%E4%B8%AD%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B8%B8%E8%A7%81%E7%9A%84%E6%A0%87%E7%AD%BE%EF%BC%9F"><span class="toc-text">1.2 xml映射文件中有哪些常见的标签？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-Dao%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">1.3 Dao接口的工作原理是什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-1-Dao%E6%8E%A5%E5%8F%A3%E9%87%8C%E7%9A%84%E6%96%B9%E6%B3%95%E5%9C%A8%E5%8F%82%E6%95%B0%E4%B8%8D%E5%90%8C%E6%97%B6%E5%8F%AF%E4%BB%A5%E9%87%8D%E8%BD%BD%E5%90%97%EF%BC%9F"><span class="toc-text">1.3.1 Dao接口里的方法在参数不同时可以重载吗？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-MyBatis%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E5%88%86%E9%A1%B5%E7%9A%84%EF%BC%9F%E5%88%86%E9%A1%B5%E6%8F%92%E4%BB%B6%E7%9A%84%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">1.4 MyBatis是如何进行分页的？分页插件的原理是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-%E8%AF%B4%E4%B8%80%E8%AF%B4MyBatis%E7%9A%84%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="toc-text">1.5 说一说MyBatis的执行流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-6-Mybatis%E7%9A%84%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD%E4%BA%86%E8%A7%A3%E5%90%97%EF%BC%9F"><span class="toc-text">1.6 Mybatis的延迟加载了解吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-7-MyBatis%E7%9A%84%E4%B8%80%E7%BA%A7%E3%80%81%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98%E7%94%A8%E8%BF%87%E5%90%97%EF%BC%9F"><span class="toc-text">1.7 MyBatis的一级、二级缓存用过吗？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-1-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98%E9%BB%98%E8%AE%A4%E4%B8%8D%E5%BC%80%E5%90%AF%EF%BC%9F"><span class="toc-text">1.7.1 为什么二级缓存默认不开启？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-RabbitMQ%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E4%B8%8D%E4%B8%A2%E5%A4%B1%EF%BC%9F"><span class="toc-text">2.1 RabbitMQ如何保证消息不丢失？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-RabbitMQ%E6%B6%88%E6%81%AF%E7%9A%84%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9%E9%97%AE%E9%A2%98%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F%EF%BC%88%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E7%9A%84%E5%B9%82%E7%AD%89%E6%80%A7%EF%BC%9F%EF%BC%89"><span class="toc-text">2.2 RabbitMQ消息的重复消费问题如何解决？（如何保证消息的幂等性？）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-RabbitMQ%E4%B8%AD%E6%AD%BB%E4%BF%A1%E4%BA%A4%E6%8D%A2%E6%9C%BA%E4%BA%86%E8%A7%A3%E5%90%97%EF%BC%9F%EF%BC%88RabbitMQ%E7%9A%84%E5%BB%B6%E8%BF%9F%E9%98%9F%E5%88%97%E4%BA%86%E8%A7%A3%E5%90%97%EF%BC%9F%EF%BC%89"><span class="toc-text">2.3 RabbitMQ中死信交换机了解吗？（RabbitMQ的延迟队列了解吗？）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-%E5%A6%82%E6%9E%9C%E6%9C%89100w%E6%9D%A1%E6%B6%88%E6%81%AF%E5%A0%86%E7%A7%AF%E5%9C%A8MQ%E4%B8%AD%EF%BC%8C%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F%EF%BC%88%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E6%B6%88%E6%81%AF%E5%A0%86%E7%A7%AF%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9F%EF%BC%89"><span class="toc-text">2.4 如果有100w条消息堆积在MQ中，如何解决？（如何解决消息堆积的问题？）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-RabbitMQ%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8%E6%9C%BA%E5%88%B6%E6%9C%89%E4%BA%86%E8%A7%A3%E8%BF%87%E5%90%97%EF%BC%9F"><span class="toc-text">2.5 RabbitMQ的高可用机制有了解过吗？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-1-%E5%87%BA%E7%8E%B0%E6%95%B0%E6%8D%AE%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%E7%9A%84%EF%BC%9F"><span class="toc-text">2.5.1 出现数据丢失问题怎么解决的？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-6-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E6%A8%A1%E5%9E%8B%E4%BA%86%E8%A7%A3%E5%90%97%EF%BC%9F"><span class="toc-text">2.6 消息队列的模型了解吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-7-Kafka%E5%92%8CRabbitMQ%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%E5%91%A2%EF%BC%9F"><span class="toc-text">2.7 Kafka和RabbitMQ有什么区别呢？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="toc-text">3.1 工厂模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-1-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="toc-text">3.1.1 简单工厂模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-2-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F"><span class="toc-text">3.1.2 工厂方法模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-3-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="toc-text">3.1.3 抽象工厂模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-4-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E5%92%8C%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">3.1.4 简单工厂和抽象工厂的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-5-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E5%92%8C%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">3.1.5 工厂方法和抽象工厂的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F"><span class="toc-text">3.2 策略模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F"><span class="toc-text">3.3 责任链模式</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Java%E5%85%AB%E8%82%A1/">Java八股</a> <span class="sep"></span> <a class="cap breadcrumb-link" href="/categories/Java%E5%85%AB%E8%82%A1/%E5%9F%BA%E7%A1%80/">基础</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-07-10T05:52:54.000Z">2023-07-10</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>10.中间技术</span></h1>
+<h1 id="一、MyBatis"><a href="#一、MyBatis" class="headerlink" title="一、MyBatis"></a>一、MyBatis</h1><p>MyBatis内部封装了JDBC，开发时程序员只需要关注SQL语句本身，而不需要花费时间精力去处理加载驱动、创建链接、创建Statement等繁琐的过程。</p>
+<p><strong>优点：</strong></p>
+<ol>
+<li>基于SQL语句编程，相当灵活，SQL语句卸载XML中，解除了SQL与程序代码的耦合，方便统一管理，支持动态SQL；</li>
+<li>与JDBC相比，减少了代码量，消除了大量冗余代码；</li>
+<li>能很好地与各种数据库相兼容，只要JDBC支持的数据库MyBatis都支持；</li>
+<li>提供映射标签，支持对象与数据库的字段关系映射。</li>
+</ol>
+<p><strong>缺点：</strong></p>
+<ol>
+<li>SQL语句的编写工作量大，尤其是当字段多、关联表多时；</li>
+<li>SQL语句依赖与数据库，导致不可以随意更换数据库。</li>
+</ol>
+<h2 id="1-1-和-区别是什么？"><a href="#1-1-和-区别是什么？" class="headerlink" title="1.1 #{}和${}区别是什么？"></a>1.1 #{}和${}区别是什么？</h2><ol>
+<li><code>#&#123;&#125;</code>是占位符，预编译时会处理；<code>$&#123;&#125;</code>是拼接符，字符串替换，没有预编译处理。</li>
+<li>MyBatis在处理<code>#&#123;&#125;</code>时，会将sql中的<code>#&#123;&#125;</code>替换为？号；MyBatis在处理<code>$&#123;&#125;</code>时，是把<code>$&#123;&#125;</code>替换成变量的值。</li>
+<li><code>#&#123;&#125;</code>可以有效防止SQL注入，提高系统安全性；<code>$&#123;&#125;</code>不能防止SQL注入。</li>
+</ol>
+<h3 id="1-1-1-为什么-能有效防止SQL注入？"><a href="#1-1-1-为什么-能有效防止SQL注入？" class="headerlink" title="1.1.1 为什么#{}能有效防止SQL注入？"></a>1.1.1 为什么#{}能有效防止SQL注入？</h3><p>因为#{}在SQL执行前，会将SQL语句发送给数据库进行编译，在执行的时候，直接使用编译好的SQL语句，替换占位符。因为SQL注入只能对编译过程起作用，所以#{}能很好的避免SQL注入问题。</p>
+<h2 id="1-2-xml映射文件中有哪些常见的标签？"><a href="#1-2-xml映射文件中有哪些常见的标签？" class="headerlink" title="1.2 xml映射文件中有哪些常见的标签？"></a>1.2 xml映射文件中有哪些常见的标签？</h2><p><code>select</code>、<code>insert</code>、<code>update</code>、<code>delete</code>、<code>resultMap</code>、<code>parameterMap</code>、<code>sql</code>、<code>include</code>、<code>selectKey</code>，再加上动态sql的9个标签。</p>
+<h2 id="1-3-Dao接口的工作原理是什么？"><a href="#1-3-Dao接口的工作原理是什么？" class="headerlink" title="1.3 Dao接口的工作原理是什么？"></a>1.3 Dao接口的工作原理是什么？</h2><p>Dao接口的工作原理是JDK动态代理，MyBatis运行的时候会使用JDK动态代理为Dao接口生成代理proxy对象，代理对象proxy会拦截接口方法，转而执行MappedStatement所代表的sql，然后将sql执行结果返回。</p>
+<p>最佳实践中，通常一个xml映射文件都会写一个Dao接口与之对应。</p>
+<p>Dao接口就是我们常说的<code>Mapper</code>接口，</p>
+<ul>
+<li>接口的<strong>全限名</strong>，就是映射文件中的namespace的值；</li>
+<li>接口的<strong>方法名</strong>，就是映射文件中MappedStatement的id值；</li>
+<li>接口<strong>方法内的参数</strong>，就是传递给sql的参数。</li>
+</ul>
+<p><code>Mapper</code>接口是没有实现类的，当调用接口方法时，接口全限名+方法名拼接字符串作为key值，可唯一定位一个MappedStatement。</p>
+<p>比如：<code>com.mabatis3.mappers.StudentDao.findStudentById</code>，可以唯一找到一个namespace为<code>com.mabatis3.mappers.StudentDao</code>下面<code>id=findStudentById</code>的MappedStatement。在MyBatis中，每个<code>&lt;select&gt;</code>、<code>&lt;insert&gt;</code>、<code>&lt;update&gt;</code>、<code>&lt;delete&gt;</code>标签都会被解析为一个MappedStatement对象。</p>
+<h3 id="1-3-1-Dao接口里的方法在参数不同时可以重载吗？"><a href="#1-3-1-Dao接口里的方法在参数不同时可以重载吗？" class="headerlink" title="1.3.1 Dao接口里的方法在参数不同时可以重载吗？"></a>1.3.1 Dao接口里的方法在参数不同时可以重载吗？</h3><p>Dao接口里的方法可以重载，但是MyBatis的xml里面的ID不允许重复。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Mapper接口里面方法重载</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">StuMapper</span> &#123;</span><br><span class="line"></span><br><span class="line"> List&lt;Student&gt; <span class="title function_">getAllStu</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line"> List&lt;Student&gt; <span class="title function_">getAllStu</span><span class="params">(<span class="meta">@Param(&quot;id&quot;)</span> Integer id)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后在<code>StuMapper.xml</code>中利用MyBatis的动态sql就可以实现。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=<span class="string">&quot;getAllStu&quot;</span> resultType=<span class="string">&quot;com.pojo.Student&quot;</span>&gt;</span><br><span class="line">  select * from student</span><br><span class="line">  &lt;where&gt;</span><br><span class="line">    &lt;<span class="keyword">if</span> test=<span class="string">&quot;id != null&quot;</span>&gt;</span><br><span class="line">      id = #&#123;id&#125;</span><br><span class="line">    &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">  &lt;/where&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+
+<p>能够正常运行，并得到相应的结果。</p>
+<p><strong>MyBatis的Dao接口可以有多个重载方法，但是多个接口对应的映射必须只有一个，否则启动会报错。</strong></p>
+<h2 id="1-4-MyBatis是如何进行分页的？分页插件的原理是什么？"><a href="#1-4-MyBatis是如何进行分页的？分页插件的原理是什么？" class="headerlink" title="1.4 MyBatis是如何进行分页的？分页插件的原理是什么？"></a>1.4 MyBatis是如何进行分页的？分页插件的原理是什么？</h2><ol>
+<li>使用MyBatis提供的RowBounds对象进行分页，它是针对ResultSet结果集执行的内存分页，而非物理分页；</li>
+<li>可以在sql内直接书写带有物理分页的参数来完成物理分页的功能，如<code>offset</code>和<code>limit</code>；</li>
+<li>通过MyBatis中的Interceptor拦截器在select语句执行之前动态拼接分页关键字实现分页。</li>
+</ol>
+<p>分页插件的基本原理是使用MyBatis提供的插件接口，实现自定义插件，在插件的拦截方法内拦截待执行的sql，然后重写sql，添加对应的物理分页语句和物理分页参数。</p>
+<h2 id="1-5-说一说MyBatis的执行流程"><a href="#1-5-说一说MyBatis的执行流程" class="headerlink" title="1.5 说一说MyBatis的执行流程"></a>1.5 说一说MyBatis的执行流程</h2><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230624161725775.png" alt="MyBatis执行流程"/></div><div class="image-meta"><span class="image-caption center">MyBatis执行流程</span></div></div>
+
+<ol>
+<li>读取MyBatis配置文件：mybatis-config.xml加载运行环境和映射文件；</li>
+<li>构造SqlSessionFactory；</li>
+<li>工厂创建sqlSession对象；</li>
+<li>操作数据库的接口，Executor执行器，同时负责查询缓存的维护；</li>
+<li>Executor接口的执行方法中有个MappedStatement类型的参数，封装了映射信息；</li>
+<li>输入参数的映射；</li>
+<li>输出结果的映射；</li>
+</ol>
+<h2 id="1-6-Mybatis的延迟加载了解吗？"><a href="#1-6-Mybatis的延迟加载了解吗？" class="headerlink" title="1.6 Mybatis的延迟加载了解吗？"></a>1.6 Mybatis的延迟加载了解吗？</h2><p>MyBatis支持延迟加载，即需要用到数据时才进行加载，不用的时候就不加载数据。</p>
+<p>延迟加载默认是关闭的，如果需要使用，可以在配置文件中开启。</p>
+<p><strong>延迟加载的原理：</strong></p>
+<ol>
+<li>使用CGlib创建目标对象的代理对象，这里的目标对象就是开启了延迟加载的mapper；</li>
+<li>当调用目标方法时，进入拦截器invoke方法，发现目标方法是null值，执行sql查询；</li>
+<li>获取数据后，调用set方法设置属性值，再继续查询目标方法，就可以查到值。</li>
+</ol>
+<h2 id="1-7-MyBatis的一级、二级缓存用过吗？"><a href="#1-7-MyBatis的一级、二级缓存用过吗？" class="headerlink" title="1.7 MyBatis的一级、二级缓存用过吗？"></a>1.7 MyBatis的一级、二级缓存用过吗？</h2><ul>
+<li>一级缓存：是基于PerpetualCache的HashMap本地缓存，其作用域是sqlSession，当进行flush或close后，该session中的所有缓存都清空，默认打开一级缓存；</li>
+<li>二级缓存：是基于PerpetualCache的HashMap本地缓存，其作用域是namespace和mapper，可以跨sqlSession，需要单独开启缓存；</li>
+</ul>
+<p>注：当某一个作用域进行了<strong>增、删、改</strong>操作后，默认该作用域下的所有缓存都将被清理。</p>
+<h3 id="1-7-1-为什么二级缓存默认不开启？"><a href="#1-7-1-为什么二级缓存默认不开启？" class="headerlink" title="1.7.1 为什么二级缓存默认不开启？"></a>1.7.1 为什么二级缓存默认不开启？</h3><p>因为二级缓存是跨sqlSession的，会存在严重的脏读问题，所以默认关闭二级缓存。</p>
+<h1 id="二、RabbitMQ"><a href="#二、RabbitMQ" class="headerlink" title="二、RabbitMQ"></a>二、RabbitMQ</h1><h2 id="2-1-RabbitMQ如何保证消息不丢失？"><a href="#2-1-RabbitMQ如何保证消息不丢失？" class="headerlink" title="2.1 RabbitMQ如何保证消息不丢失？"></a>2.1 RabbitMQ如何保证消息不丢失？</h2><ol>
+<li>开启<strong>生产者确认机制</strong>，确保生产者的消息能到达队列，如果报错可以先记录到日志中，再去修复数据。</li>
+<li>开启<strong>持久化功能</strong>，确保消息未消费前，在队列中不会丢失，其中的<strong>交换机、队列和消息</strong>都要做持久化。</li>
+<li>开启<strong>消费者确认机制为auto</strong>，由spring确认消息处理成功后完成ack，<strong>也要设置一定的重试次数</strong>（一般是3次），如果重试之后仍然没有收到消息，就将失败后的消息投递到异常交换机。</li>
+</ol>
+<h2 id="2-2-RabbitMQ消息的重复消费问题如何解决？（如何保证消息的幂等性？）"><a href="#2-2-RabbitMQ消息的重复消费问题如何解决？（如何保证消息的幂等性？）" class="headerlink" title="2.2 RabbitMQ消息的重复消费问题如何解决？（如何保证消息的幂等性？）"></a>2.2 RabbitMQ消息的重复消费问题如何解决？（如何保证消息的幂等性？）</h2><ol>
+<li>每条消息设置一个唯一的标识id，通过id可以保证消息不会被重复消费；</li>
+<li>通过幂等方案解决，比如分布式锁或者数据库锁。</li>
+</ol>
+<h2 id="2-3-RabbitMQ中死信交换机了解吗？（RabbitMQ的延迟队列了解吗？）"><a href="#2-3-RabbitMQ中死信交换机了解吗？（RabbitMQ的延迟队列了解吗？）" class="headerlink" title="2.3 RabbitMQ中死信交换机了解吗？（RabbitMQ的延迟队列了解吗？）"></a>2.3 RabbitMQ中死信交换机了解吗？（RabbitMQ的延迟队列了解吗？）</h2><ul>
+<li>医院挂号管理系统中的<strong>订单模块</strong>就用到了<strong>延迟队列</strong>去解决<strong>超时订单</strong>的问题；</li>
+<li>其中<strong>延迟队列</strong>其实就是基于<strong>死信交换机</strong>和<strong>TTL（消息存活时间）</strong>来实现的；</li>
+<li>如果消息超时未消费就会变成死信，队列可以绑定一个死信交换机，在发送消息时可以按照要求指定TTL，这样超时未消费的死信就会通过死信交换机进入死信队列中，实现了延迟队列的功能。</li>
+</ul>
+<h2 id="2-4-如果有100w条消息堆积在MQ中，如何解决？（如何解决消息堆积的问题？）"><a href="#2-4-如果有100w条消息堆积在MQ中，如何解决？（如何解决消息堆积的问题？）" class="headerlink" title="2.4 如果有100w条消息堆积在MQ中，如何解决？（如何解决消息堆积的问题？）"></a>2.4 如果有100w条消息堆积在MQ中，如何解决？（如何解决消息堆积的问题？）</h2><ol>
+<li>增加更多的消费者，提高消费的速度；</li>
+<li>在消费者内开启线程池，加快消息处理速度；</li>
+<li>扩大队列容积，提高消息堆积的上限；</li>
+</ol>
+<p>也可以使用惰性队列来解决，</p>
+<ol>
+<li>接收到消息后存放在磁盘中，而不是内存；</li>
+<li>消费者需要消费时，才会从磁盘中读取并加载到内存；</li>
+<li>支持数百万条消息的存储；</li>
+</ol>
+<h2 id="2-5-RabbitMQ的高可用机制有了解过吗？"><a href="#2-5-RabbitMQ的高可用机制有了解过吗？" class="headerlink" title="2.5 RabbitMQ的高可用机制有了解过吗？"></a>2.5 RabbitMQ的高可用机制有了解过吗？</h2><p>可以通过镜像队列来实现高可用，其结构式一主多从，所有的操作都是主节点完成，然后同步给镜像节点。</p>
+<p>如果主节点宕机后，镜像节点就会替代成为新的主节点。如果在主从同步完成之前主节点就已经宕机，可能会出现数据丢失问题。</p>
+<h3 id="2-5-1-出现数据丢失问题怎么解决的？"><a href="#2-5-1-出现数据丢失问题怎么解决的？" class="headerlink" title="2.5.1 出现数据丢失问题怎么解决的？"></a>2.5.1 出现数据丢失问题怎么解决的？</h3><p>可以使用仲裁队列，其与镜像队列一样，都是主从模式，支持主从数据同步，是强一致性。而且使用起来非常简单，不需要额外的配置。</p>
+<h2 id="2-6-消息队列的模型了解吗？"><a href="#2-6-消息队列的模型了解吗？" class="headerlink" title="2.6 消息队列的模型了解吗？"></a>2.6 消息队列的模型了解吗？</h2><p>消息队列一共有两种模型：<strong>队列模型</strong>和<strong>发布&#x2F;订阅模型</strong>。</p>
+<ul>
+<li>队列模型：就是最经典的“发送-存放-接收”模型。生产者往队列里发消息，一个队列可以存储多个生产者的消息，一个队列也可以有多个消费者，但是消费者与消费者之间是竞争关系，一个消息只能被一个消费者消费。</li>
+</ul>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230803163009431.png" alt="队列模型"/></div><div class="image-meta"><span class="image-caption center">队列模型</span></div></div>
+
+<ul>
+<li>发布&#x2F;订阅模型：消息的发送方被称为<strong>发布者</strong>，接收方被称为<strong>订阅者</strong>，存放消息的容器叫<strong>主题</strong>。发布者将消息发到主题里，订阅者在接受消息之前需要先订阅主题，只有订阅了的订阅者，才能接收到所有消息。</li>
+</ul>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230803163408121.png" alt="发布/订阅模型"/></div><div class="image-meta"><span class="image-caption center">发布/订阅模型</span></div></div>
+
+<p><strong>这两种模型的区别是什么？</strong></p>
+<p>其实本质上没有什么区别，唯一不同的是：<strong>一份消息数据是否可以被多次消费</strong>。</p>
+<h2 id="2-7-Kafka和RabbitMQ有什么区别呢？"><a href="#2-7-Kafka和RabbitMQ有什么区别呢？" class="headerlink" title="2.7 Kafka和RabbitMQ有什么区别呢？"></a>2.7 Kafka和RabbitMQ有什么区别呢？</h2><ol>
+<li>RabbitMQ用于实时的场景，对可靠性要求比较高的消息传递，而Kafka用于大数据量的处理；</li>
+<li>RabbitMQ有消息确认机制，而Kafka没有消息确认机制；</li>
+<li>RabbitMQ不支持批量操作，吞吐量较小，Kafka内部采用消息的批量处理，消息处理效率高，吞吐量高；</li>
+</ol>
+<h1 id="三、设计模式"><a href="#三、设计模式" class="headerlink" title="三、设计模式"></a>三、设计模式</h1><h2 id="3-1-工厂模式"><a href="#3-1-工厂模式" class="headerlink" title="3.1 工厂模式"></a>3.1 工厂模式</h2><p>在Java中创建对象时，需要用户自己去new对象，这种创建方式会使得该对象耦合严重，加入我们需要更换对象，那么多有new对象的地方都需要修改。</p>
+<p>所以可以使用工厂模式来生产对象，而我们直接与工厂交互，彻底和对象解耦，如果需要更换对象，直接在工厂中更换对象即可，从而实现了与对象解耦的目的。</p>
+<p>所以说工厂模式最大的优点就是：<strong>解耦</strong>。</p>
+<p>工厂模式包含三种工厂：</p>
+<ul>
+<li>简单工厂模式</li>
+<li>工厂方法模式</li>
+<li>抽象工厂模式</li>
+</ul>
+<h3 id="3-1-1-简单工厂模式"><a href="#3-1-1-简单工厂模式" class="headerlink" title="3.1.1 简单工厂模式"></a>3.1.1 简单工厂模式</h3><p>简单工厂模式不是一种设计模式，更像是一种编程习惯。</p>
+<p>其中包含三种角色：</p>
+<ul>
+<li>抽象产品 ：定义了产品的规范，描述了产品的主要特性和功能；</li>
+<li>具体产品 ：实现或者继承抽象产品的子类；</li>
+<li>具体工厂 ：提供了创建产品的方法，调用者通过该方法来获取产品。</li>
+</ul>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230816193809765.png" alt="代码截图" style="zoom:50%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230816193850993.png" alt="代码截图" style="zoom:50%;" />
+
+<p>一旦有了工厂类，就可以在<code>orderCoffee()</code>中直接创建工厂对象，然后调用工厂对象的<code>creatCoffee()</code>方法并且传入参数就能获取对应的coffee了。</p>
+<p>这种简单工厂模式虽然解除了<code>Coffee</code>和<code>CoffeeStore</code>之间的耦合，但是<code>CoffeeStore</code>对象和<code>SimpleCoffeeFactory</code>工厂对象之间又新产生了耦合。</p>
+<p>后期如果要增加新的咖啡，仍然需要在工厂里面修改代码。</p>
+<p>优点：</p>
+<ul>
+<li>封装了创建对象的过程，可以通过参数直接获取对象；</li>
+<li>将对象的创建和业务逻辑分开，可以避免修改客户代码；</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>新增产品时，仍然需要在工厂类中修改代码，违背了“开闭原则”；</li>
+</ul>
+<h3 id="3-1-2-工厂方法模式"><a href="#3-1-2-工厂方法模式" class="headerlink" title="3.1.2 工厂方法模式"></a>3.1.2 工厂方法模式</h3><p>定义一个用于创建对象的接口，让子类决定实例化哪个产品类对象；</p>
+<p>其中包含四种角色：</p>
+<ul>
+<li>抽象工厂：提供了创建产品的接口，调用者通过它访问抽象工厂的工厂方法来创建产品；</li>
+<li>具体工厂：主要是实现抽象工厂中的抽象方法，完成具体产品的创建；</li>
+<li>抽象产品：描述产品的主要特性和功能；</li>
+<li>具体产品：实现了抽象产品所定义的接口，由具体工厂来创建。</li>
+</ul>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230816201456363.png" alt="工厂方法流程" style="zoom:50%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230816201533202.png" alt="image-20230816201533202" style="zoom:50%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230816201555462.png" alt="image-20230816201555462" style="zoom:50%;" />
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230816201617418.png" alt="image-20230816201617418" style="zoom:50%;" />
+
+<p>虽然增加产品类时也要增加相应的工厂类，但是不需要修改工厂类的代码了，这样就解决了简单工厂模式的缺点。</p>
+<p>工厂方法模式其实就是简单工厂模式的进一步抽象。由于使用了Java中多态的特性，工厂方法模式保持了简单工厂模式的优点，同时解决了它的缺点。</p>
+<p>优点：</p>
+<ul>
+<li>用户只需要知道具体工厂的名称就可得到所要的产品，无须知道产品的具体创建过程；</li>
+<li>在系统增加新的产品时只需要添加具体产品类和对应的具体工厂类，无须对 原工厂进行任何修改，满足开闭原则；</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>每增加一个产品就要增加一个具体产品类和一个对应的具体工厂类，这增加 了系统的复杂度。</li>
+</ul>
+<h3 id="3-1-3-抽象工厂模式"><a href="#3-1-3-抽象工厂模式" class="headerlink" title="3.1.3 抽象工厂模式"></a>3.1.3 抽象工厂模式</h3><p>抽象工厂模式是工厂方法模式的升级版本，工厂方法模式只生产一个等级的产品，而抽象工厂模式可生产多个等级的产品。 </p>
+<p>一个超级工厂创建其他工厂，该超级工厂又称为其他工厂的工厂</p>
+<p>抽象工厂模式与工厂方法模式一样，主要有四种角色：抽象工厂、具体工厂、抽象产品、具体产品。</p>
+<p>加入现在咖啡店要求不仅仅只能点咖啡，还要求能点甜品。如果按照工厂方法模式，需要定义提拉米苏类、抹茶慕斯类、提拉米苏工厂、抹茶慕斯工厂、甜品工厂类，如果再增加其他功能，势必会导致添加的类更多，会发生类爆炸的问题。</p>
+<p>所以这里就可以使用抽象工厂模式：</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230816202529699.png" alt="抽象工厂模式"/></div><div class="image-meta"><span class="image-caption center">抽象工厂模式</span></div></div>
+
+<ul>
+<li>优点：当一个产品族中的多个对象被设计成一起工作时，它能保证客户端始终只使用同 一个产品族中的对象。</li>
+<li>缺点：当产品族中需要增加一个新的产品时，所有的工厂类都需要进行修改。</li>
+</ul>
+<p>使用场景：</p>
+<ul>
+<li>当需要创建的对象是一系列相互关联或相互依赖的产品族时，比如电器工厂中的电视、洗衣机、冰箱、空调等；</li>
+<li>系统中有多个产品族，但每次只使用其中的某一族产品，比如有人虽然有很多牌子的衣柜，但只喜欢穿某一个品牌的衣服和鞋；</li>
+<li>系统中提供了产品的类库，且所有产品的接口相同，客户端不依赖产品实例的创建细节和内部结构。</li>
+</ul>
+<h3 id="3-1-4-简单工厂和抽象工厂的区别"><a href="#3-1-4-简单工厂和抽象工厂的区别" class="headerlink" title="3.1.4 简单工厂和抽象工厂的区别"></a>3.1.4 简单工厂和抽象工厂的区别</h3><p>抽象工厂相当于抽象了两层，一层抽象层，一层是实现抽象层的具体层，这样后期的扩展和维护会很方便；</p>
+<p>简单工厂直接抽取成了一层具体层，完全没有考虑后期的扩展和维护。</p>
+<h3 id="3-1-5-工厂方法和抽象工厂的区别"><a href="#3-1-5-工厂方法和抽象工厂的区别" class="headerlink" title="3.1.5 工厂方法和抽象工厂的区别"></a>3.1.5 工厂方法和抽象工厂的区别</h3><p>两者最终都是创建对象，但是方法有所不同。</p>
+<p>工厂方法采用的是继承，抽象工厂采用的是组合。</p>
+<p>抽象工厂中蕴含着许多的工厂方法，所以抽象工厂的相比于工厂方法的另一个优点就是可以把一群相关的产品集合起来（之前提到的各种咖啡，各种甜品等），但是同时也带来了反作用，如果新增一个产品，那么接口将被修改，那是很严重的。所以抽象工厂需要一个很大的接口，因为抽象工厂是创建整个产品家族的，而工厂方法是创建单个产品的，所以说抽象工厂中蕴含着工厂方法。</p>
+<h2 id="3-2-策略模式"><a href="#3-2-策略模式" class="headerlink" title="3.2 策略模式"></a>3.2 策略模式</h2><p>该模式定义了一系列算法，并将每个算法封装起来，使它们可以相互替换，且算法的变化不会影响使用算法的客户。</p>
+<p>策略模式属于对象行为模式，它通过对算法进行封装，把使用算法的责任和算法的实现分割开来，并委派给不同的对象对这些算法进行管理。</p>
+<p>比如我们去旅游选择出行模式有很多，可以骑自行车、可以坐汽车、可以坐火车、可以坐飞机等等，最终的目的就是出行，交通工具就相当于是不同的算法，使用哪个算法都可以实现出行的目的。</p>
+<p>策略模式主要的角色：</p>
+<ul>
+<li>抽象策略类：是一个抽象的角色，通常由一个接口或抽象类实现。此角色所给出所有的具体策略类所需的接口；</li>
+<li>具体策略类：实现了抽象策略定义的接口，提供具体的算法实现或行为；</li>
+<li>环境类：持有一个策略类的引用，最终给客户端调用。</li>
+</ul>
+<p>最经典的例子就是登录问题，对于一个成熟的网站来说，登录方式是有多种的：账号密码登录、QQ登录、微信登录、短信验证码登录等。</p>
+<p>所以这里就可以使用策略模式，因为对于用户来说最终的目的是登录网站，至于具体选择哪种登录方式，是用户自身决定的。</p>
+<p>抽象策略类：UserGranter</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230818104836110.png" alt="image-20230818104836110" style="zoom:50%;" />
+
+<p>具体的策略类：AccountGranter、SmsGranter、WeChatGranter</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 策略：账号登录</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AccountGranter</span> <span class="keyword">implements</span> <span class="title class_">UserGranter</span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> LoginResp <span class="title function_">login</span><span class="params">(LoginReq loginReq)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;登录方式为账号登录&quot;</span> + loginReq);</span><br><span class="line">		<span class="comment">// TODO</span></span><br><span class="line">		<span class="comment">// 执行业务操作</span></span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">LoginResp</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 策略:短信登录</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SmsGranter</span> <span class="keyword">implements</span> <span class="title class_">UserGranter</span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> LoginResp <span class="title function_">login</span><span class="params">(LoginReq loginReq)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;登录方式为短信登录&quot;</span> + loginReq);</span><br><span class="line">        <span class="comment">// TODO</span></span><br><span class="line">        <span class="comment">// 执行业务操作</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">LoginResp</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 策略:微信登录</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WeChatGranter</span> <span class="keyword">implements</span> <span class="title class_">UserGranter</span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> LoginResp <span class="title function_">login</span><span class="params">(LoginReq loginReq)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;登录方式为微信登录&quot;</span> + loginReq);</span><br><span class="line">		<span class="comment">// TODO</span></span><br><span class="line">		<span class="comment">// 执行业务操作</span></span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">LoginResp</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>环境类根据用户前端传来的登录类型，选择具体的登录策略。</p>
+<p>其实实际开发中场景有很多：</p>
+<ul>
+<li>支付策略：<ul>
+<li>支付宝支付</li>
+<li>微信支付</li>
+<li>银行卡支付</li>
+</ul>
+</li>
+<li>促销活动<ul>
+<li>满300打9折</li>
+<li>满500打8折</li>
+<li>满1000打7折</li>
+</ul>
+</li>
+<li>物流运费<ul>
+<li>5kg以下</li>
+<li>5kg - 10kg</li>
+<li>10kg - 20kg</li>
+<li>20kg以上</li>
+</ul>
+</li>
+</ul>
+<p>一句话总结：只要代码中有冗长的<code>if...else</code>或<code>switch</code>分支判断的代码，都可以采用策略模式进行优化。</p>
+<h2 id="3-3-责任链模式"><a href="#3-3-责任链模式" class="headerlink" title="3.3 责任链模式"></a>3.3 责任链模式</h2><p>为了避免请求发送者与多个请求处理器耦合在一起，将所有请求的处理者通过前一对象记录其下一个对象的引用，而形成一条链；</p>
+<p>当有请求发生时，可将请求沿着这条链传递，知道有对象处理它为止。</p>
+<p>比如生活中在学校里我们需要请假，但是批假的人有导师、辅导员、副院长、书记等。不同的领导能批的天数不同，我们必须要根据自己的请假天数去找不同的领导签字。</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230818164646225.png" alt="image-20230818164646225" style="zoom:50%;" />
+
+<p>责任链模式主要包含以下角色：</p>
+<ul>
+<li>抽象处理者（Handler）：定义一个处理请求的接口，包含抽象处理方法和一个后继连接；</li>
+<li>具体处理者：实现抽象处理者的处理方法，判断能否处理本次请求，如果可以处理请求则处理，否则就将该请求转给它的后继；</li>
+<li>客户类：创建处理链，并向链头的具体处理者对象提交请求，它并不关心处理的细节和请求的传递过程。</li>
+</ul>
+<p>代码实现：</p>
+<p>抽象处理者：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 抽象处理者</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Handler</span> &#123;</span><br><span class="line">	<span class="keyword">protected</span> Handler handler;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setNext</span><span class="params">(Handler handler)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.handler = handler;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 处理过程</span></span><br><span class="line"><span class="comment">    * 需要子类进行实现</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">process</span><span class="params">(OrderInfo order)</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>具体处理者：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 订单校验</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderValidition</span> <span class="keyword">extends</span> <span class="title class_">Handler</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">process</span><span class="params">(OrderInfo order)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;校验订单基本信息&quot;</span>);</span><br><span class="line">        <span class="comment">//校验</span></span><br><span class="line">        handler.process(order);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 补充订单信息</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderFill</span> <span class="keyword">extends</span> <span class="title class_">Handler</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">process</span><span class="params">(OrderInfo order)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;补充订单信息&quot;</span>);</span><br><span class="line">        handler.process(order);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 计算金额</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderAmountCalcuate</span> <span class="keyword">extends</span> <span class="title class_">Handler</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">process</span><span class="params">(OrderInfo order)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;计算金额-优惠券、VIP、活动打折&quot;</span>);</span><br><span class="line">        handler.process(order);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 订单入库</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderCreate</span> <span class="keyword">extends</span> <span class="title class_">Handler</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">process</span><span class="params">(OrderInfo order)</span> &#123;</span><br><span class="line">    	System.out.println(<span class="string">&quot;订单入库&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//检验订单</span></span><br><span class="line">        <span class="type">Handler</span> <span class="variable">orderValidition</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OrderValidition</span>();</span><br><span class="line">        <span class="comment">//补充订单信息</span></span><br><span class="line">        <span class="type">Handler</span> <span class="variable">orderFill</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OrderFill</span>();</span><br><span class="line">        <span class="comment">//订单算价</span></span><br><span class="line">        <span class="type">Handler</span> <span class="variable">orderAmountCalcuate</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OrderAmountCalcuate</span>();</span><br><span class="line">        <span class="comment">//订单落库</span></span><br><span class="line">        <span class="type">Handler</span> <span class="variable">orderCreate</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OrderCreate</span>();</span><br><span class="line">        <span class="comment">//设置责任链路</span></span><br><span class="line">        orderValidition.setNext(orderFill);</span><br><span class="line">        orderFill.setNext(orderAmountCalcuate);</span><br><span class="line">        orderAmountCalcuate.setNext(orderCreate);</span><br><span class="line">        <span class="comment">//开始执行</span></span><br><span class="line">        orderValidition.process(<span class="keyword">new</span> <span class="title class_">OrderInfo</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>优点：</strong></p>
+<ul>
+<li>降低了对象之间的耦合，降低了发送者和接收者的耦合度；</li>
+<li>增强了可扩展性，可以根据需要增加新的请求处理类，满足开闭原则；</li>
+<li>增强了给对象指派职责的灵活性，当工作流程发生变化时，可以动态改变流程顺序；</li>
+<li>每个类只需要处理自己该处理的工作，不能处理的传给下一个对象，明确了格雷的责任范围；</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>对于比较长的责任链，请求的处理可能涉及多个处理对象，性能会受到一定影响；</li>
+<li>不能保证每一个请求一定被处理，由于一个请求没有明确的接受者，所以不能保证它一定会被处理；</li>
+<li>责任链建立的合理性要考客户端来保证，增加了客户端的复杂性；</li>
+</ul>
+<p>其实责任链模式实际的开发应用有很多：</p>
+<ul>
+<li>内容审核；</li>
+<li>订单创建；</li>
+<li>简易流程审批；</li>
+</ul>
+
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/07/20/%E5%B8%B8%E8%80%83%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/">常考手撕代码</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/07/06/9-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">9.操作系统</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

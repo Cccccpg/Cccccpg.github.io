@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>5.数据字典 - Cccccpg</title>
+
+  
+    <meta name="description" content="数据字典一、数据字典介绍数据字典就是管理系统中常用的分类数据或者一些固定数据，例如：省市区三级联动数据、民族数据、行业数据、学历数据等，由于该系统大量使用这种数据，所以我们要做一个数据管理方便管理系统数据，一般系统基本都会做数据管理。 二、数据字典开发1.搭建service-cmn模块 config controller mapper service impl    2.数据字典接口列表-后台 1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5.数据字典">
+<meta property="og:url" content="https://cccccpg.github.io/2022/06/22/5.%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/index.html">
+<meta property="og:site_name" content="Cccccpg">
+<meta property="og:description" content="数据字典一、数据字典介绍数据字典就是管理系统中常用的分类数据或者一些固定数据，例如：省市区三级联动数据、民族数据、行业数据、学历数据等，由于该系统大量使用这种数据，所以我们要做一个数据管理方便管理系统数据，一般系统基本都会做数据管理。 二、数据字典开发1.搭建service-cmn模块 config controller mapper service impl    2.数据字典接口列表-后台 1">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-22T02:51:15.000Z">
+<meta property="article:modified_time" content="2023-08-25T05:36:25.461Z">
+<meta property="article:author" content="Cccccpg">
+<meta property="article:tag" content="工作">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="项目">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  <meta name="keywords" content="工作,Java,项目,前端">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/%E5%A4%B4%E5%83%8F.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">Cccccpg</div></a></div>
+
+<nav class="menu dis-select"></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">5.数据字典</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8%E4%BB%8B%E7%BB%8D"><span class="toc-text">一、数据字典介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8%E5%BC%80%E5%8F%91"><span class="toc-text">二、数据字典开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%90%AD%E5%BB%BAservice-cmn%E6%A8%A1%E5%9D%97"><span class="toc-text">1.搭建service-cmn模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8%E6%8E%A5%E5%8F%A3"><span class="toc-text">2.数据字典接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-SpringCache%E5%B8%B8%E7%94%A8%E7%BC%93%E5%AD%98%E6%A0%87%E7%AD%BE"><span class="toc-text">3. SpringCache常用缓存标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-text">4. 数据字典的应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E9%85%8D%E7%BD%AEnginx"><span class="toc-text">5. 配置nginx</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Java%E6%8A%80%E6%9C%AF/">Java技术</a> <span class="sep"></span> <a class="cap breadcrumb-link" href="/categories/Java%E6%8A%80%E6%9C%AF/%E5%8C%BB%E9%99%A2%E5%9C%A8%E7%BA%BF%E9%A2%84%E7%BA%A6%E7%B3%BB%E7%BB%9F/">医院在线预约系统</a></div><div id="post-meta">发布于&nbsp;<time datetime="2022-06-22T02:51:15.000Z">2022-06-22</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>5.数据字典</span></h1>
+<h1 id="数据字典"><a href="#数据字典" class="headerlink" title="数据字典"></a>数据字典</h1><h2 id="一、数据字典介绍"><a href="#一、数据字典介绍" class="headerlink" title="一、数据字典介绍"></a>一、数据字典介绍</h2><p>数据字典就是管理系统中常用的分类数据或者一些固定数据，例如：省市区三级联动数据、民族数据、行业数据、学历数据等，由于该系统大量使用这种数据，所以我们要做一个数据管理方便管理系统数据，一般系统基本都会做数据管理。</p>
+<h2 id="二、数据字典开发"><a href="#二、数据字典开发" class="headerlink" title="二、数据字典开发"></a>二、数据字典开发</h2><h3 id="1-搭建service-cmn模块"><a href="#1-搭建service-cmn模块" class="headerlink" title="1.搭建service-cmn模块"></a>1.搭建service-cmn模块</h3><ul>
+<li>config</li>
+<li>controller</li>
+<li>mapper</li>
+<li>service<ul>
+<li>impl</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-数据字典接口"><a href="#2-数据字典接口" class="headerlink" title="2.数据字典接口"></a>2.数据字典接口</h3><p><strong>列表-后台</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@Api(tags = &quot;数据字典的接口&quot;)</span></span><br><span class="line"><span class="meta">@CrossOrigin</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/admin/cmn/dict&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DictController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> DictService dictService;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据数据id查询子数据列表</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> id</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@ApiOperation(value = &quot;根据数据id查询子数据列表&quot;)</span></span><br><span class="line">    <span class="meta">@GetMapping(&quot;findChildData/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Result <span class="title function_">findChildData</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span>&#123;</span><br><span class="line">        List&lt;Dict&gt; dictList = dictService.findChildData(id);</span><br><span class="line">        <span class="keyword">return</span> Result.ok(dictList);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DictServiceImpl</span> <span class="keyword">extends</span> <span class="title class_">ServiceImpl</span>&lt;DictMapper, Dict&gt; <span class="keyword">implements</span> <span class="title class_">DictService</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//根据数据id查询子数据列表</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Dict&gt; <span class="title function_">findChildData</span><span class="params">(Long id)</span> &#123;</span><br><span class="line">        QueryWrapper&lt;Dict&gt; wrapper = <span class="keyword">new</span> <span class="title class_">QueryWrapper</span>&lt;&gt;();</span><br><span class="line">        wrapper.eq(<span class="string">&quot;parent_id&quot;</span>,id);</span><br><span class="line">        <span class="comment">//ServiceImpl中已经帮忙注入了，所以直接调用就行</span></span><br><span class="line">        List&lt;Dict&gt; dictList = baseMapper.selectList(wrapper);</span><br><span class="line">        <span class="comment">//向list集合每个dict对象中设置hasChildren</span></span><br><span class="line">        <span class="keyword">for</span> (Dict dict : dictList) &#123;</span><br><span class="line">            <span class="type">Long</span> <span class="variable">dictId</span> <span class="operator">=</span> dict.getId();</span><br><span class="line">            <span class="type">boolean</span> <span class="variable">hasChildren</span> <span class="operator">=</span> <span class="built_in">this</span>.hasChildren(dictId);</span><br><span class="line">            dict.setHasChildren(hasChildren);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dictList;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//判断id下面是否有子节点</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">boolean</span> <span class="title function_">hasChildren</span><span class="params">(Long id)</span>&#123;</span><br><span class="line">        QueryWrapper&lt;Dict&gt; wrapper = <span class="keyword">new</span> <span class="title class_">QueryWrapper</span>&lt;&gt;();</span><br><span class="line">        wrapper.eq(<span class="string">&quot;parent_id&quot;</span>,id);</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">count</span> <span class="operator">=</span> baseMapper.selectCount(wrapper);</span><br><span class="line">        <span class="keyword">return</span> count&gt;<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>列表-前端</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数据字典列表</span></span><br><span class="line"><span class="title function_">getDictList</span>(<span class="params">id</span>) &#123;</span><br><span class="line">    dict.<span class="title function_">dictList</span>(id)</span><br><span class="line">        .<span class="title function_">then</span>(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">list</span> = response.<span class="property">data</span></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,</span><br><span class="line">    <span class="comment">//层级显示</span></span><br><span class="line">    <span class="title function_">getChildren</span>(<span class="params">tree, treeNode, resolve</span>) &#123;</span><br><span class="line">        dict.<span class="title function_">dictList</span>(tree.<span class="property">id</span>).<span class="title function_">then</span>(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">resolve</span>(response.<span class="property">data</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-table</span><br><span class="line">:data=&quot;list&quot;</span><br><span class="line">style=&quot;width: 100%&quot;</span><br><span class="line">row-key=&quot;id&quot;</span><br><span class="line">border</span><br><span class="line">lazy</span><br><span class="line">:load=&quot;getChildren&quot;</span><br><span class="line">:tree-props=&quot;&#123;children: &#x27;children&#x27;, hasChildren: &#x27;hasChildren&#x27;&#125;&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;el-table-column label=&quot;名称&quot; width=&quot;230&quot; align=&quot;left&quot;&gt;</span><br><span class="line">    &lt;template slot-scope=&quot;scope&quot;&gt;</span><br><span class="line">    &lt;span&gt;&#123;&#123; scope.row.name &#125;&#125;&lt;/span&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">    &lt;/el-table-column&gt;</span><br><span class="line">    &lt;el-table-column label=&quot;编码&quot; width=&quot;220&quot;&gt;</span><br><span class="line">    &lt;template slot-scope=&quot;&#123;row&#125;&quot;&gt;</span><br><span class="line">            &#123;&#123; row.dictCode &#125;&#125;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">    &lt;/el-table-column&gt;</span><br><span class="line">    &lt;el-table-column label=&quot;值&quot; width=&quot;230&quot; align=&quot;left&quot;&gt;</span><br><span class="line">    &lt;template slot-scope=&quot;scope&quot;&gt;</span><br><span class="line">    &lt;span&gt;&#123;&#123; scope.row.value &#125;&#125;&lt;/span&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">    &lt;/el-table-column&gt;</span><br><span class="line"></span><br><span class="line">    &lt;el-table-column label=&quot;创建时间&quot; align=&quot;center&quot;&gt;</span><br><span class="line">    &lt;template slot-scope=&quot;scope&quot;&gt;</span><br><span class="line">    &lt;span&gt;&#123;&#123; scope.row.createTime &#125;&#125;&lt;/span&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">    &lt;/el-table-column&gt;</span><br><span class="line">&lt;/el-table&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>EasyExcel-写操作</strong></p>
+<ol>
+<li><p>引入依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>easyexcel<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建实体类，在对应的属性上设置注解，注解内容就是表头的内容</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserData</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ExcelProperty(&quot;用户编号&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> uid;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ExcelProperty(&quot;用户名称&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现写操作的代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestWrite</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//构建数据list集合</span></span><br><span class="line">        List&lt;UserData&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            <span class="type">UserData</span> <span class="variable">data</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UserData</span>();</span><br><span class="line">            data.setUid(i);</span><br><span class="line">            data.setUsername(<span class="string">&quot;Sirius&quot;</span>+(i+<span class="number">1</span>);</span><br><span class="line">            list.add(data);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//设置excel文件路径和名称</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">fileName</span> <span class="operator">=</span> <span class="string">&quot;E:\\StudyFiles\\TestExcel\\write01.xlsx&quot;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//调用方法实现写操作</span></span><br><span class="line">        EasyExcel.write(fileName,UserData.class).sheet(<span class="string">&quot;用户信息&quot;</span>)</span><br><span class="line">                .doWrite(list);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><strong>EasyExcel-读操作</strong></p>
+<ol>
+<li><p>创建实体类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserData</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ColumnWidth(20)</span>    <span class="comment">//设置列宽</span></span><br><span class="line">    <span class="meta">@ExcelProperty(value = &quot;用户编号&quot;,index = 0)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> uid;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ColumnWidth(20)</span></span><br><span class="line">    <span class="meta">@ExcelProperty(value = &quot;用户名称&quot;,index = 1)</span></span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>写一个监听器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ExcelListener</span> <span class="keyword">extends</span> <span class="title class_">AnalysisEventListener</span>&lt;UserData&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//一行一行读取excel的内容，从第二行读取，因为第一行是表头</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">invoke</span><span class="params">(UserData userData, AnalysisContext analysisContext)</span> &#123;</span><br><span class="line">        System.out.println(userData);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">invokeHeadMap</span><span class="params">(Map&lt;Integer,String&gt; headMap, AnalysisContext analysisContext)</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;表头信息：&quot;</span>+headMap);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//读取之后会执行</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doAfterAllAnalysed</span><span class="params">(AnalysisContext analysisContext)</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现读操作的代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestRead</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//读取文件的路径和名称</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">fileName</span> <span class="operator">=</span> <span class="string">&quot;E:\\StudyFiles\\TestExcel\\write01.xlsx&quot;</span>;</span><br><span class="line">        <span class="comment">//调用方法实现读取操作</span></span><br><span class="line">        EasyExcel.read(fileName,UserData.class,<span class="keyword">new</span> <span class="title class_">ExcelListener</span>()).sheet().doRead();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><strong>数据字典-导出</strong></p>
+<p>serviceImpl</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导出数据字典接口</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">exportDictData</span><span class="params">(HttpServletResponse response)</span> &#123;</span><br><span class="line">    <span class="comment">//设置类型</span></span><br><span class="line">    response.setContentType(<span class="string">&quot;application/vnd.ms-excel&quot;</span>);</span><br><span class="line">    <span class="comment">//设置编码</span></span><br><span class="line">    response.setCharacterEncoding(<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">    <span class="comment">//这里使用URLEncode.encode可以防止中文乱码，当然和easyexcel没有关系</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">fileName</span> <span class="operator">=</span> <span class="string">&quot;dict&quot;</span>;</span><br><span class="line">    response.setHeader(<span class="string">&quot;Content-disposition&quot;</span>,<span class="string">&quot;attachment;filename=&quot;</span>+fileName+<span class="string">&quot;.xlsx&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//查询数据库</span></span><br><span class="line">    List&lt;Dict&gt; dictList = baseMapper.selectList(<span class="literal">null</span>);</span><br><span class="line">    <span class="comment">//把Dict转换成DictEeVo</span></span><br><span class="line">    List&lt;DictEeVo&gt; dictEeVoList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (Dict dict : dictList) &#123;</span><br><span class="line">        <span class="type">DictEeVo</span> <span class="variable">dictEeVo</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DictEeVo</span>();</span><br><span class="line">        BeanUtils.copyProperties(dict,dictEeVo);</span><br><span class="line">        dictEeVoList.add(dictEeVo);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//调用方法进行写的操作</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        EasyExcel.write(response.getOutputStream(), DictEeVo.class).sheet(<span class="string">&quot;dict&quot;</span>)</span><br><span class="line">                .doWrite(dictEeVoList);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>controller</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;exportData&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">exportDict</span><span class="params">(HttpServletResponse response)</span>&#123;</span><br><span class="line">    dictService.exportDictData(response);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>前端</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//下载数据字典</span></span><br><span class="line"><span class="title function_">exportData</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">//调用导出接口</span></span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">href</span>=<span class="string">&quot;http://localhost:8202/admin/cmn/dict/exportData&quot;</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;http://localhost:8202/admin/cmn/dict/exportData&quot; target=&quot;_blank&quot;&gt;</span><br><span class="line">    &lt;el-button type=&quot;primary&quot;&gt;&lt;i class=&quot;el-icon--right el-icon-download&quot;&gt;&lt;/i&gt;&amp;nbsp;&amp;nbsp;下载&lt;/el-button&gt;</span><br><span class="line">&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>数据字典导入</strong></p>
+<p>注意：listener、fitter都不是Spring容器管理的，无法在这些类中直接使用Spring注解的方式来注入我们需要的对象。</p>
+<p>controller</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostMapping(&quot;importData&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Result <span class="title function_">importDict</span><span class="params">(MultipartFile file)</span>&#123;</span><br><span class="line">    dictService.importDictData(file);</span><br><span class="line">    <span class="keyword">return</span> Result.ok();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>serviceImpl</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导入数据字典实现</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">importDictData</span><span class="params">(MultipartFile file)</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        EasyExcel.read(file.getInputStream(),DictEeVo.class,<span class="keyword">new</span> <span class="title class_">DictListener</span>(baseMapper)).sheet().doRead();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>listener</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DictListener</span> <span class="keyword">extends</span> <span class="title class_">AnalysisEventListener</span>&lt;DictEeVo&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//这里不能用Autowired注入</span></span><br><span class="line">    <span class="keyword">private</span> DictMapper dictMapper;</span><br><span class="line">    <span class="comment">//有参构造</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">DictListener</span><span class="params">(DictMapper dictMapper)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.dictMapper = dictMapper;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//一行一行读取</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">invoke</span><span class="params">(DictEeVo dictEeVo, AnalysisContext analysisContext)</span> &#123;</span><br><span class="line">        <span class="comment">//调用方法添加数据库</span></span><br><span class="line">        <span class="type">Dict</span> <span class="variable">dict</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Dict</span>();</span><br><span class="line">        BeanUtils.copyProperties(dictEeVo,dict);</span><br><span class="line">        dictMapper.insert(dict);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doAfterAllAnalysed</span><span class="params">(AnalysisContext analysisContext)</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>前端</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-dialog title=&quot;上传&quot; :visible.sync=&quot;dialogImportVisible&quot; width=&quot;480px&quot;&gt;</span><br><span class="line">    &lt;el-form label-position=&quot;right&quot; label-width=&quot;170px&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;el-form-item label=&quot;文件&quot;&gt;</span><br><span class="line"></span><br><span class="line">            &lt;el-upload</span><br><span class="line">                       :multiple=&quot;false&quot;</span><br><span class="line">                       :on-success=&quot;onUploadSuccess&quot;</span><br><span class="line">                       :action=&quot;&#x27;http://localhost:8202/admin/cmn/dict/importData&#x27;&quot;</span><br><span class="line">                       class=&quot;upload-demo&quot;&gt;</span><br><span class="line">                &lt;el-button size=&quot;small&quot; type=&quot;primary&quot;&gt;点击上传&lt;/el-button&gt;</span><br><span class="line">                &lt;div slot=&quot;tip&quot; class=&quot;el-upload__tip&quot;&gt;只能上传excel文件，且不超过500kb&lt;/div&gt;</span><br><span class="line">            &lt;/el-upload&gt;</span><br><span class="line"></span><br><span class="line">        &lt;/el-form-item&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/el-form&gt;</span><br><span class="line">    &lt;div slot=&quot;footer&quot; class=&quot;dialog-footer&quot;&gt;</span><br><span class="line">        &lt;el-button @click=&quot;dialogImportVisible = false&quot;&gt;</span><br><span class="line">            取消</span><br><span class="line">        &lt;/el-button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/el-dialog&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="comment">//设置弹框是否弹出 false为不弹出</span></span><br><span class="line">            <span class="attr">dialogImportVisible</span>:<span class="literal">false</span>,</span><br><span class="line">            <span class="attr">list</span>:[] <span class="comment">//数据字典列表数组</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="title function_">created</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">getDictList</span>(<span class="number">1</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">methods</span>: &#123;</span><br><span class="line">        <span class="comment">//上传数据字典</span></span><br><span class="line">        <span class="title function_">importData</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">dialogImportVisible</span> = <span class="literal">true</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">//上传成功调用</span></span><br><span class="line">        <span class="title function_">onUploadSuccess</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="comment">//关闭弹框</span></span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">dialogImportVisible</span> = <span class="literal">false</span></span><br><span class="line">            <span class="comment">//刷新页面</span></span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">getDictList</span>(<span class="number">1</span>)</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">//下载数据字典</span></span><br><span class="line">        <span class="title function_">exportData</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="comment">//调用导出接口</span></span><br><span class="line">            <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">href</span>=<span class="string">&quot;http://localhost:8202/admin/cmn/dict/exportData&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">//数据字典列表</span></span><br><span class="line">        <span class="title function_">getDictList</span>(<span class="params">id</span>) &#123;</span><br><span class="line">            dict.<span class="title function_">dictList</span>(id)</span><br><span class="line">                .<span class="title function_">then</span>(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">                    <span class="variable language_">this</span>.<span class="property">list</span> = response.<span class="property">data</span></span><br><span class="line">                &#125;)</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">//层级显示</span></span><br><span class="line">        <span class="title function_">getChildren</span>(<span class="params">tree, treeNode, resolve</span>) &#123;</span><br><span class="line">            dict.<span class="title function_">dictList</span>(tree.<span class="property">id</span>).<span class="title function_">then</span>(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="title function_">resolve</span>(response.<span class="property">data</span>)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>数据字典-添加缓存</strong></p>
+<p>缓存：提高查询速度</p>
+<p><strong>不经常修改的数据</strong>、<strong>固定的数据</strong>、<strong>经常查询的数据</strong>适合做缓存</p>
+<p><strong>项目集成SpringCache + Redis</strong></p>
+<ol>
+<li><p>在service_util中添加依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- redis --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- spring2.X集成redis所需common-pool2--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.commons<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-pool2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.6.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在service_util中的config包下添加redis的配置类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="comment">//开启缓存处理</span></span><br><span class="line"><span class="meta">@EnableCaching</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RedisConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 自定义key规则</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> KeyGenerator <span class="title function_">keyGenerator</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">KeyGenerator</span>() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> Object <span class="title function_">generate</span><span class="params">(Object target, Method method, Object... params)</span> &#123;</span><br><span class="line">                <span class="type">StringBuilder</span> <span class="variable">stringBuilder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">                stringBuilder.append(target.getClass().getName());</span><br><span class="line">                stringBuilder.append(method.getName());</span><br><span class="line">                <span class="keyword">for</span> (Object obj : params) &#123;</span><br><span class="line">                    stringBuilder.append(obj.toString());</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> stringBuilder.toString();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 设置RedisTemplate规则</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> redisConnectionFactory</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> RedisTemplate&lt;Object, Object&gt; <span class="title function_">redisTemplate</span><span class="params">(RedisConnectionFactory redisConnectionFactory)</span> &#123;</span><br><span class="line">        RedisTemplate&lt;Object, Object&gt; redisTemplate = <span class="keyword">new</span> <span class="title class_">RedisTemplate</span>&lt;&gt;();</span><br><span class="line">        redisTemplate.setConnectionFactory(redisConnectionFactory);</span><br><span class="line">        <span class="type">Jackson2JsonRedisSerializer</span> <span class="variable">jackson2JsonRedisSerializer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Jackson2JsonRedisSerializer</span>(Object.class);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//解决查询缓存转换异常的问题</span></span><br><span class="line">        <span class="type">ObjectMapper</span> <span class="variable">om</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectMapper</span>();</span><br><span class="line">        <span class="comment">// 指定要序列化的域，field,get和set,以及修饰符范围，ANY是都有包括private和public</span></span><br><span class="line">        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);</span><br><span class="line">        <span class="comment">// 指定序列化输入的类型，类必须是非final修饰的，final修饰的类，比如String,Integer等会跑出异常</span></span><br><span class="line">        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);</span><br><span class="line">        jackson2JsonRedisSerializer.setObjectMapper(om);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//序列号key value</span></span><br><span class="line">        redisTemplate.setKeySerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line">        redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);</span><br><span class="line">        redisTemplate.setHashKeySerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line">        redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);</span><br><span class="line"></span><br><span class="line">        redisTemplate.afterPropertiesSet();</span><br><span class="line">        <span class="keyword">return</span> redisTemplate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 设置CacheManager缓存规则</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> factory</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> CacheManager <span class="title function_">cacheManager</span><span class="params">(RedisConnectionFactory factory)</span> &#123;</span><br><span class="line">        RedisSerializer&lt;String&gt; redisSerializer = <span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>();</span><br><span class="line">        <span class="type">Jackson2JsonRedisSerializer</span> <span class="variable">jackson2JsonRedisSerializer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Jackson2JsonRedisSerializer</span>(Object.class);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//解决查询缓存转换异常的问题</span></span><br><span class="line">        <span class="type">ObjectMapper</span> <span class="variable">om</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectMapper</span>();</span><br><span class="line">        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);</span><br><span class="line">        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);</span><br><span class="line">        jackson2JsonRedisSerializer.setObjectMapper(om);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 配置序列化（解决乱码的问题）,过期时间600秒</span></span><br><span class="line">        <span class="type">RedisCacheConfiguration</span> <span class="variable">config</span> <span class="operator">=</span> RedisCacheConfiguration.defaultCacheConfig()</span><br><span class="line">                .entryTtl(Duration.ofSeconds(<span class="number">600</span>))</span><br><span class="line">                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(redisSerializer))</span><br><span class="line">                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jackson2JsonRedisSerializer))</span><br><span class="line">                .disableCachingNullValues();</span><br><span class="line"></span><br><span class="line">        <span class="type">RedisCacheManager</span> <span class="variable">cacheManager</span> <span class="operator">=</span> RedisCacheManager.builder(factory)</span><br><span class="line">                .cacheDefaults(config)</span><br><span class="line">                .build();</span><br><span class="line">        <span class="keyword">return</span> cacheManager;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在application.properties中添加redis配置</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#redis服务器地址</span></span><br><span class="line"><span class="attr">spring.redis.host</span>=<span class="string">192.168.134.134</span></span><br><span class="line"><span class="comment">#redis服务器连接端口</span></span><br><span class="line"><span class="attr">spring.redis.port</span>=<span class="string">6379</span></span><br><span class="line"><span class="comment">#redis数据库索引(默认为0)</span></span><br><span class="line"><span class="attr">spring.redis.database</span>=<span class="string">0</span></span><br><span class="line"><span class="comment">#连接超时时间（毫秒）</span></span><br><span class="line"><span class="attr">spring.redis.timeout</span>=<span class="string">1800000</span></span><br><span class="line"><span class="comment">#连接池最大连接数（使用负值表示没有限制）</span></span><br><span class="line"><span class="attr">spring.redis.lettuce.pool.max-active</span>=<span class="string">20</span></span><br><span class="line"><span class="comment">#最大阻塞等待时间（使用负值表示没有限制）</span></span><br><span class="line"><span class="attr">spring.redis.lettuce.pool.max-wait</span>=<span class="string">-1</span></span><br><span class="line"><span class="comment">#连接池中最大空闲连接</span></span><br><span class="line"><span class="attr">spring.redis.lettcue.pool.max-idle</span>=<span class="string">5</span></span><br><span class="line"><span class="comment">#连接池中最小空闲连接</span></span><br><span class="line"><span class="attr">spring.redis.lettuce.pool.min-idle</span>=<span class="string">0</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="3-SpringCache常用缓存标签"><a href="#3-SpringCache常用缓存标签" class="headerlink" title="3. SpringCache常用缓存标签"></a>3. SpringCache常用缓存标签</h3><ol>
+<li><p><strong>缓存@Cacheable</strong></p>
+<p>根据方法对其返回结果进行缓存，下次请求时，如果缓存存在，则直接读取缓存数据返回；如果缓存不存在，则执行方法，并把返回的结果存入缓存中。一般用在<code>查询</code>方法上。</p>
+<p>查看源码，其属性值如下：</p>
+<p><code>value</code>：缓存名，必填，它指定了你的缓存放在哪块命名空间</p>
+<p><code>cacheNames</code>：和value差不多，二选一即可</p>
+<p><code>key</code>：可选属性，可以使用SpEl标签自定义缓存的key</p>
+</li>
+<li><p><strong>缓存@CachePut</strong></p>
+<p>使用该注解标志的方法，每次都会执行，并将结果存入指定的缓存中。其他方法可以直接从响应的缓存中读取缓存数据，而不需要再去查询数据库。一般用在<code>新增</code>方法上。</p>
+<p>查看源码，属性值如下：</p>
+<p><code>value</code>：缓存名，必填，它指定了你的缓存放在哪块命名空间</p>
+<p><code>cacheNames</code>：和value差不多，二选一即可</p>
+<p><code>key</code>：可选属性，可以使用SpEl标签自定义缓存的key</p>
+</li>
+</ol>
+<p>​	<strong>3. 缓存@CacheEvict</strong></p>
+<p>​	使用该注解标志的方法，会清空指定的缓存。一般用在<code>更新或者删除</code>方法上</p>
+<p>​	查看源码，属性值如下：</p>
+<p>​	<code>value</code>：缓存名，必填，它指定了你的缓存放在哪块命名空间</p>
+<p>​	<code>cacheNames</code>：和value差不多，二选一即可</p>
+<p>​	<code>key</code>：可选属性，可以使用SpEl标签自定义缓存的key</p>
+<p>​	<code>allEntries</code>：是否清空所有缓存，默认为false</p>
+<p>​	<code>beforeInvocation</code>：是否在方法执行前就清空，默认为false</p>
+<h3 id="4-数据字典的应用"><a href="#4-数据字典的应用" class="headerlink" title="4. 数据字典的应用"></a>4. 数据字典的应用</h3><p>在DictServiceImpl中加入注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据数据id查询子数据列表</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="meta">@Cacheable(value = &quot;dict&quot;,keyGenerator = &quot;keyGenerator&quot;)</span></span><br><span class="line"><span class="keyword">public</span> List&lt;Dict&gt; <span class="title function_">findChildData</span><span class="params">(Long id)</span> &#123;</span><br><span class="line">    QueryWrapper&lt;Dict&gt; wrapper = <span class="keyword">new</span> <span class="title class_">QueryWrapper</span>&lt;&gt;();</span><br><span class="line">    wrapper.eq(<span class="string">&quot;parent_id&quot;</span>,id);</span><br><span class="line">    <span class="comment">//ServiceImpl中已经帮忙注入了，所以直接调用就行</span></span><br><span class="line">    List&lt;Dict&gt; dictList = baseMapper.selectList(wrapper);</span><br><span class="line">    <span class="comment">//向list集合每个dict对象中设置hasChildren</span></span><br><span class="line">    <span class="keyword">for</span> (Dict dict : dictList) &#123;</span><br><span class="line">        <span class="type">Long</span> <span class="variable">dictId</span> <span class="operator">=</span> dict.getId();</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">hasChildren</span> <span class="operator">=</span> <span class="built_in">this</span>.hasChildren(dictId);</span><br><span class="line">        dict.setHasChildren(hasChildren);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dictList;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>启动项目查询后，进入redis就可以看到查询的所有数据已经被存入redis中了。</p>
+<h3 id="5-配置nginx"><a href="#5-配置nginx" class="headerlink" title="5. 配置nginx"></a>5. 配置nginx</h3><ol>
+<li><p>下载nginx（windows版本，因为后面会用网关代替nginx）</p>
+</li>
+<li><p>配置nginx.conf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       9001;</span><br><span class="line">    server_name  localhost;</span><br><span class="line">	location ~ /hosp/ &#123;           </span><br><span class="line">		proxy_pass http://localhost:8201;</span><br><span class="line">	&#125;</span><br><span class="line">	location ~ /cmn/ &#123;           </span><br><span class="line">		proxy_pass http://localhost:8202;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>去dev.env.js中修改BASE_API</p>
+</li>
+</ol>
+<ul>
+<li><p>后续添加service模块自行添加nginx配置，不做说明</p>
+</li>
+<li><p>后续我们将了Spring Cloud Gateway网关，将替代nginx网关</p>
+</li>
+</ul>
+
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2022/06/26/6.%E6%95%B0%E6%8D%AE%E6%8E%A5%E5%8F%A3/">6.数据接口</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2022/06/18/4.%E5%89%8D%E7%AB%AF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">4.前端环境搭建</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

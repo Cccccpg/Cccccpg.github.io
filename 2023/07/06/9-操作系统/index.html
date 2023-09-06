@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>9.操作系统 - Cccccpg</title>
+
+  
+    <meta name="description" content="该部分主要总结了操作系统基础知识、进程线程、死锁、内存管理和文件系统的相关知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="9.操作系统">
+<meta property="og:url" content="https://cccccpg.github.io/2023/07/06/9-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="Cccccpg">
+<meta property="og:description" content="该部分主要总结了操作系统基础知识、进程线程、死锁、内存管理和文件系统的相关知识">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/Kernel_Layout.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/usermode-and-kernelmode.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/the-way-switch-between-user-mode-and-kernel-mode.drawio.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/system-call-procedure.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/java-runtime-data-areas-jdk1.8.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/state-transition-of-process.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/scheduling-algorithms-of-process.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/2019-4%E6%AD%BB%E9%94%811.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/process-resource-allocation-diagram.jpg">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/memory-management-roles.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/internal-and-external-fragmentation.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/linux-buddy-system.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/virtual-memory.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/physical-virtual-address-translation.png)">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/segment-virtual-address-composition.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/segment-external-memory-fragmentation.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/paging-virtual-address-composition.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/multilevel-page-table.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/physical-virtual-address-translation-mmu.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230409113009139.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/disk-scheduling-algorithms.png">
+<meta property="article:published_time" content="2023-07-06T01:51:06.000Z">
+<meta property="article:modified_time" content="2023-09-06T08:42:47.336Z">
+<meta property="article:author" content="Cccccpg">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="八股">
+<meta property="article:tag" content="基础">
+<meta property="article:tag" content="面试">
+<meta property="article:tag" content="操作系统">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/Kernel_Layout.png">
+  
+  
+  
+  <meta name="keywords" content="Java,八股,基础,面试,操作系统">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/%E5%A4%B4%E5%83%8F.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">Cccccpg</div></a></div>
+
+<nav class="menu dis-select"></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">9.操作系统</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AF%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%9F"><span class="toc-text">1.1 什么是操作系统？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%86%85%E6%A0%B8%E5%92%8CCPU%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">1.2 操作系统的内核和CPU有什么区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%BB%E8%A6%81%E6%9C%89%E5%93%AA%E4%BA%9B%E5%8A%9F%E8%83%BD%EF%BC%9F"><span class="toc-text">1.3 操作系统主要有哪些功能？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E4%BB%80%E4%B9%88%E6%98%AF%E7%94%A8%E6%88%B7%E6%80%81%E5%92%8C%E5%86%85%E6%A0%B8%E6%80%81%EF%BC%9F"><span class="toc-text">1.4 什么是用户态和内核态？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89%E7%94%A8%E6%88%B7%E6%80%81%E5%92%8C%E5%86%85%E6%A0%B8%E6%80%81%EF%BC%9F%E5%8F%AA%E6%9C%89%E4%B8%80%E4%B8%AA%E5%86%85%E6%A0%B8%E6%80%81%E4%B8%8D%E8%A1%8C%E5%90%97%EF%BC%9F"><span class="toc-text">1.5 为什么要有用户态和内核态？只有一个内核态不行吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-6-%E7%94%A8%E6%88%B7%E6%80%81%E5%92%8C%E5%86%85%E6%A0%B8%E6%80%81%E6%98%AF%E5%A6%82%E4%BD%95%E5%88%87%E6%8D%A2%E7%9A%84%EF%BC%9F"><span class="toc-text">1.6 用户态和内核态是如何切换的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-7-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E8%BF%87%E7%A8%8B%E4%BA%86%E8%A7%A3%E5%90%97%EF%BC%9F"><span class="toc-text">1.7 系统调用的过程了解吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-8-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%92%8C%E5%BA%93%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">1.8 系统调用和库函数调用的区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E4%BB%80%E4%B9%88%E6%98%AF%E8%BF%9B%E7%A8%8B%E3%80%81%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%8D%8F%E7%A8%8B%EF%BC%9F"><span class="toc-text">2.1 什么是进程、线程和协程？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">2.2 进程和线程的区别是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%9F"><span class="toc-text">2.3 为什么要使用多线程？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-%E7%BA%BF%E7%A8%8B%E9%97%B4%E5%90%8C%E6%AD%A5%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">2.4 线程间同步的方式有哪些？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-%E4%BB%80%E4%B9%88%E6%98%AFPCB%EF%BC%9F"><span class="toc-text">2.5 什么是PCB？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-6-%E8%BF%9B%E7%A8%8B%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E7%8A%B6%E6%80%81%EF%BC%9F"><span class="toc-text">2.6 进程有哪几种状态？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-7-%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">2.7 进程间通信方式有哪些？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7-1-%E7%AE%A1%E9%81%93%E6%9C%89%E4%BA%86%E8%A7%A3%E8%BF%87%E5%90%97%EF%BC%9F%E8%AF%B4%E4%B8%80%E8%AF%B4"><span class="toc-text">2.7.1 管道有了解过吗？说一说</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7-2-%E9%82%A3%E5%88%86%E5%88%AB%E8%AF%B4%E8%AF%B4%E5%8C%BF%E5%90%8D%E7%AE%A1%E9%81%93%E5%92%8C%E6%9C%89%E5%90%8D%E7%AE%A1%E9%81%93"><span class="toc-text">2.7.2 那分别说说匿名管道和有名管道</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-8-%E8%BF%9B%E7%A8%8B%E7%9A%84%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">2.8 进程的调度算法有哪些？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-9-%E4%BB%80%E4%B9%88%E6%98%AF%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B%E5%92%8C%E5%AD%A4%E5%84%BF%E8%BF%9B%E7%A8%8B%EF%BC%9F"><span class="toc-text">2.9 什么是僵尸进程和孤儿进程？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E4%BB%80%E4%B9%88%E6%98%AF%E6%AD%BB%E9%94%81"><span class="toc-text">3.1 什么是死锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E4%BA%A7%E7%94%9F%E6%AD%BB%E9%94%81%E7%9A%84%E5%BF%85%E8%A6%81%E6%9D%A1%E4%BB%B6%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">3.2 产生死锁的必要条件是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-%E5%86%99%E4%B8%80%E4%B8%AA%E6%A8%A1%E6%8B%9F%E4%BA%A7%E7%94%9F%E6%AD%BB%E9%94%81%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="toc-text">3.3 写一个模拟产生死锁的代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-%E8%A7%A3%E5%86%B3%E6%AD%BB%E9%94%81%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">3.4 解决死锁的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-1-%E6%AD%BB%E9%94%81%E7%9A%84%E9%A2%84%E9%98%B2"><span class="toc-text">3.4.1 死锁的预防</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-2-%E6%AD%BB%E9%94%81%E7%9A%84%E9%81%BF%E5%85%8D"><span class="toc-text">3.4.2 死锁的避免</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-3-%E6%AD%BB%E9%94%81%E7%9A%84%E6%A3%80%E6%B5%8B"><span class="toc-text">3.4.3 死锁的检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-4-%E6%AD%BB%E9%94%81%E7%9A%84%E8%A7%A3%E9%99%A4"><span class="toc-text">3.4.4 死锁的解除</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E4%B8%BB%E8%A6%81%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">4.1 内存管理主要是做什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E4%BB%80%E4%B9%88%E6%98%AF%E5%86%85%E5%AD%98%E7%A2%8E%E7%89%87%EF%BC%9F"><span class="toc-text">4.2 什么是内存碎片？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-%E5%B8%B8%E8%A7%81%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">4.3 常见的内存管理方式有哪些？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-1-%E8%BF%9E%E7%BB%AD%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="toc-text">4.3.1 连续内存管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-2-%E9%9D%9E%E8%BF%9E%E7%BB%AD%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="toc-text">4.3.2 非连续内存管理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-%E4%BB%80%E4%B9%88%E6%98%AF%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%EF%BC%9F%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%EF%BC%9F"><span class="toc-text">4.4 什么是虚拟内存？有什么用？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-1-%E4%BB%80%E4%B9%88%E6%98%AF%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E5%92%8C%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80%EF%BC%9F"><span class="toc-text">4.4.1 什么是虚拟地址和物理地址？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-5-%E5%88%86%E6%AE%B5%E6%9C%BA%E5%88%B6"><span class="toc-text">4.5 分段机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-1-%E6%AE%B5%E8%A1%A8%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%EF%BC%9F%E5%9C%B0%E5%9D%80%E7%BF%BB%E8%AF%91%E8%BF%87%E7%A8%8B%E6%98%AF%E6%80%8E%E4%B9%88%E6%A0%B7%E7%9A%84%EF%BC%9F"><span class="toc-text">4.5.1 段表有什么用？地址翻译过程是怎么样的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-2-%E9%80%9A%E8%BF%87%E6%AE%B5%E5%8F%B7%E4%B8%80%E5%AE%9A%E8%83%BD%E6%89%BE%E5%88%B0%E5%AF%B9%E5%BA%94%E7%9A%84%E6%AE%B5%E8%A1%A8%E9%A1%B9%E5%90%97%EF%BC%9F"><span class="toc-text">4.5.2 通过段号一定能找到对应的段表项吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-3-%E5%88%86%E6%AE%B5%E6%9C%BA%E5%88%B6%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%AF%BC%E8%87%B4%E5%86%85%E5%AD%98%E5%A4%96%E9%83%A8%E7%A2%8E%E7%89%87%EF%BC%9F"><span class="toc-text">4.5.3 分段机制为什么会导致内存外部碎片？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-6-%E5%88%86%E9%A1%B5%E6%9C%BA%E5%88%B6"><span class="toc-text">4.6 分页机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-1-%E9%A1%B5%E8%A1%A8%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%EF%BC%9F%E5%9C%B0%E5%9D%80%E7%BF%BB%E8%AF%91%E8%BF%87%E7%A8%8B%E6%98%AF%E6%80%8E%E4%B9%88%E6%A0%B7%E7%9A%84%EF%BC%9F"><span class="toc-text">4.6.1 页表有什么用？地址翻译过程是怎么样的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-2-%E9%80%9A%E8%BF%87%E9%A1%B5%E5%8F%B7%E4%B8%80%E5%AE%9A%E8%83%BD%E6%89%BE%E5%88%B0%E5%AF%B9%E5%BA%94%E7%9A%84%E7%89%A9%E7%90%86%E9%A1%B5%E5%8F%B7%E5%90%97%EF%BC%9F"><span class="toc-text">4.6.2 通过页号一定能找到对应的物理页号吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-3-%E5%8D%95%E7%BA%A7%E9%A1%B5%E8%A1%A8%E6%9C%89%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%A4%9A%E7%BA%A7%E9%A1%B5%E8%A1%A8%EF%BC%9F"><span class="toc-text">4.6.3 单级页表有什么问题？为什么需要多级页表？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-4-TLB%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%EF%BC%9F%E4%BD%BF%E7%94%A8TLB%E4%B9%8B%E5%90%8E%E7%9A%84%E5%9C%B0%E5%9D%80%E7%BF%BB%E8%AF%91%E6%B5%81%E7%A8%8B%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">4.6.4 TLB有什么用？使用TLB之后的地址翻译流程是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-5-%E4%BB%80%E4%B9%88%E6%98%AF%E9%A1%B5%E7%BC%BA%E5%A4%B1%EF%BC%9F"><span class="toc-text">4.6.5 什么是页缺失？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-7-%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="toc-text">4.7 页面置换算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-1-%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-text">4.7.1 页面置换算法的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-2-%E5%B8%B8%E8%A7%81%E7%9A%84%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="toc-text">4.7.2 常见的页面置换算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-3-%E5%85%88%E8%BF%9B%E5%85%88%E5%87%BA%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95%E6%80%A7%E8%83%BD%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E5%A5%BD%EF%BC%9F"><span class="toc-text">4.7.3 先进先出页面置换算法性能为什么不好？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-8-%E5%88%86%E9%A1%B5%E6%9C%BA%E5%88%B6%E5%92%8C%E5%88%86%E6%AE%B5%E6%9C%BA%E5%88%B6%E6%9C%89%E5%93%AA%E4%BA%9B%E5%85%B1%E5%90%8C%E7%82%B9%E5%92%8C%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">4.8 分页机制和分段机制有哪些共同点和区别？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-8-1-%E5%85%B1%E5%90%8C%E7%82%B9"><span class="toc-text">4.8.1 共同点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-8-2-%E5%8C%BA%E5%88%AB"><span class="toc-text">4.8.2  区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-9-%E5%B1%80%E9%83%A8%E6%80%A7%E5%8E%9F%E7%90%86%E4%BA%86%E8%A7%A3%E5%90%97%EF%BC%9F"><span class="toc-text">4.9 局部性原理了解吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%8A%9F%E8%83%BD%EF%BC%9F"><span class="toc-text">5.1 文件系统的功能？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-%E8%BD%AF%E8%BF%9E%E6%8E%A5%E5%92%8C%E7%A1%AC%E9%93%BE%E6%8E%A5%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">5.2 软连接和硬链接有什么区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-%E7%A1%AC%E9%93%BE%E6%8E%A5%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E8%B7%A8%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%EF%BC%9F"><span class="toc-text">5.3 硬链接为什么不能跨文件系统？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-%E6%8F%90%E9%AB%98%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%80%A7%E8%83%BD%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">5.4 提高文件系统性能的方式有哪些？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-5-%E5%B8%B8%E8%A7%81%E7%9A%84%E7%A3%81%E7%9B%98%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">5.5 常见的磁盘调度算法有哪些？</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Java%E5%85%AB%E8%82%A1/">Java八股</a> <span class="sep"></span> <a class="cap breadcrumb-link" href="/categories/Java%E5%85%AB%E8%82%A1/%E5%9F%BA%E7%A1%80/">基础</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-07-06T01:51:06.000Z">2023-07-06</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>9.操作系统</span></h1>
+<h1 id="一、操作系统基础"><a href="#一、操作系统基础" class="headerlink" title="一、操作系统基础"></a>一、操作系统基础</h1><h2 id="1-1-什么是操作系统？"><a href="#1-1-什么是操作系统？" class="headerlink" title="1.1 什么是操作系统？"></a>1.1 什么是操作系统？</h2><ol>
+<li>操作系统是<strong>管理计算机硬件</strong>与<strong>软件资源</strong>的<strong>软件程序</strong>，是计算机的基石。</li>
+<li>操作系统的内核（Kernel）是操作系统的核心部分，负责系统的<strong>内存管理</strong>、<strong>硬件设备管理</strong>、<strong>文件系统管理</strong>和<strong>应用程序管理</strong>。内核是连接应用程序和硬件的桥梁，决定着系统的性能和稳定性。</li>
+</ol>
+<h2 id="1-2-操作系统的内核和CPU有什么区别？"><a href="#1-2-操作系统的内核和CPU有什么区别？" class="headerlink" title="1.2 操作系统的内核和CPU有什么区别？"></a>1.2 操作系统的内核和CPU有什么区别？</h2><ol>
+<li>操作系统的内核属于操作系统层面，而CPU属于硬件。</li>
+<li>CPU主要提供运算，处理各种指令的能力。内核主要负责系统的管理。</li>
+</ol>
+<p>下图是程序、内核、CPU三者的关系：</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/Kernel_Layout.png" alt="Kernel_Layout"/></div><div class="image-meta"><span class="image-caption center">Kernel_Layout</span></div></div>
+
+<h2 id="1-3-操作系统主要有哪些功能？"><a href="#1-3-操作系统主要有哪些功能？" class="headerlink" title="1.3 操作系统主要有哪些功能？"></a>1.3 操作系统主要有哪些功能？</h2><ol>
+<li><strong>进程和线程的管理</strong>，进程的创建、撤销、阻塞、唤醒，进程间的通信等。；</li>
+<li><strong>存储管理</strong>，内存的分配和管理、外存（磁盘等）的分配和管理等；</li>
+<li><strong>文件管理</strong>，文件的读、写、创建及删除等；</li>
+<li><strong>设备管理</strong>，完成设备（输入输出设备和外部存储设备等）的请求或释放，以及设备启动等功能；</li>
+<li><strong>网络管理</strong>，操作系统负责管理计算机网络的使用。；</li>
+<li><strong>安全管理</strong>，用户的身份认证、访问控制、文件加密等，以防止非法用户对系统资源的访问和操作；</li>
+</ol>
+<h2 id="1-4-什么是用户态和内核态？"><a href="#1-4-什么是用户态和内核态？" class="headerlink" title="1.4 什么是用户态和内核态？"></a>1.4 什么是用户态和内核态？</h2><p>根据<strong>进程访问资源</strong>的特点，可以把进程在系统上的运行分为<strong>用户态</strong>和<strong>内核态</strong>：</p>
+<ul>
+<li><strong>用户态</strong>：用户态运行的进程可以<strong>直接读取用户程序的数据</strong>，<strong>拥有较低的权限</strong>。当应用程序需要执行某些需要特殊权限的操作，例如读写磁盘、网络通信等，就需要向操作系统发起系统调用请求，进入内核态。</li>
+<li><strong>内核态</strong>：内核态运行的进程<strong>几乎可以访问计算机的任何资源</strong>，包括系统的内存空间、设备、驱动程序等，<strong>不受限制，拥有非常高的权限</strong>。</li>
+</ul>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/usermode-and-kernelmode.png" alt="用户态和内核态"/></div><div class="image-meta"><span class="image-caption center">用户态和内核态</span></div></div>
+
+<p><strong>总结：内核态相比用户态拥有更高的特权级别，因此能够执行更底层、更敏感的操作。不过，由于进入内核态需要付出较高的开销，应该尽量减少进入内核态的次数，以提高系统的性能和稳定性。</strong></p>
+<h2 id="1-5-为什么要有用户态和内核态？只有一个内核态不行吗？"><a href="#1-5-为什么要有用户态和内核态？只有一个内核态不行吗？" class="headerlink" title="1.5 为什么要有用户态和内核态？只有一个内核态不行吗？"></a>1.5 为什么要有用户态和内核态？只有一个内核态不行吗？</h2><ul>
+<li><p>在 CPU 的所有指令中，有一些指令是比较危险的比如内存分配、设置时钟、IO 处理等，如果所有的程序都能使用这些指令的话，会对系统的正常运行造成灾难性地影响。因此，我们需要<strong>限制这些危险指令只能内核态运行</strong>。这些只能由操作系统内核态执行的指令也被叫做 <strong>特权指令</strong> 。</p>
+</li>
+<li><p>如果计算机系统中只有一个内核态，那么所有程序或进程都必须共享系统资源，例如内存、CPU、硬盘等，这将导致系统资源的竞争和冲突，从而<strong>影响系统性能和效率</strong>。并且，这样也会<strong>让系统的安全性降低</strong>，毕竟所有程序或进程都具有相同的特权级别和访问权限。</p>
+</li>
+</ul>
+<h2 id="1-6-用户态和内核态是如何切换的？"><a href="#1-6-用户态和内核态是如何切换的？" class="headerlink" title="1.6 用户态和内核态是如何切换的？"></a>1.6 用户态和内核态是如何切换的？</h2><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/the-way-switch-between-user-mode-and-kernel-mode.drawio.png" alt="用户态切换到内核态的 3 种方式"/></div><div class="image-meta"><span class="image-caption center">用户态切换到内核态的 3 种方式</span></div></div>
+
+<ol>
+<li><strong>系统调用</strong>：用户态进程<strong>主动</strong>要求切换到内核态；</li>
+<li><strong>中断</strong>：当设备完成用户请求的操作后，会向CPU发出相应的中断信号。</li>
+<li><strong>异常</strong>：当CPU在执行运行在用户态的程序时，发生了某些事先不可知的异常，就会触发切换。</li>
+</ol>
+<p>住：中断和异常类似，都是通过中断向量表来找到相应的处理程序进行处理。区别在于，中断来自处理器内部，异常是执行当前指令的结果。</p>
+<h2 id="1-7-系统调用的过程了解吗？"><a href="#1-7-系统调用的过程了解吗？" class="headerlink" title="1.7 系统调用的过程了解吗？"></a>1.7 系统调用的过程了解吗？</h2><ol>
+<li>用户态的程序发起系统调用，因为系统调用中涉及一些特权指令，用户态程序权限不足，就会中断执行。</li>
+<li>发生中断后，当前CPU执行的程序就会中断，调转到中断处理程序。内核程序开始执行，也即开始处理系统调用。</li>
+<li>内核处理完成后，主动触发Trap，再次发生中断，切换回用户态工作。</li>
+</ol>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/system-call-procedure.png" alt="系统调用的过程"/></div><div class="image-meta"><span class="image-caption center">系统调用的过程</span></div></div>
+
+<h2 id="1-8-系统调用和库函数调用的区别？"><a href="#1-8-系统调用和库函数调用的区别？" class="headerlink" title="1.8 系统调用和库函数调用的区别？"></a>1.8 系统调用和库函数调用的区别？</h2><ul>
+<li><strong>系统调用通常不可替换，而库函数通常可替换。</strong></li>
+<li><strong>系统调用通常提供最小接口，而库函数通常提供较复杂功能。</strong></li>
+<li><strong>系统调用运行在内核空间，而库函数运行在用户空间。</strong></li>
+<li><strong>内核调用都返回一个整数值，而库函数并非一定如此。</strong></li>
+<li><strong>系统调用开销相对库函数来说更大。</strong></li>
+</ul>
+<h1 id="二、进程和线程"><a href="#二、进程和线程" class="headerlink" title="二、进程和线程"></a>二、进程和线程</h1><h2 id="2-1-什么是进程、线程和协程？"><a href="#2-1-什么是进程、线程和协程？" class="headerlink" title="2.1 什么是进程、线程和协程？"></a>2.1 什么是进程、线程和协程？</h2><ul>
+<li><strong>进程</strong>：指计算机中正在运行的程序实例。比如，打开浏览器，就是一个进程。</li>
+<li><strong>线程</strong>：也被称为轻量级进程。多个线程可以在同一个进程中同时执行，并且共享进程的资源。比如内存空间、网络连接等。</li>
+<li><strong>协程</strong>：也被称为微线程，是一种<strong>用户态</strong>的轻量级线程，一个线程可以拥有多个协程，协程完全由程序所控制，能提升性能，不会像线程切换那样消耗资源。</li>
+</ul>
+<h2 id="2-2-进程和线程的区别是什么？"><a href="#2-2-进程和线程的区别是什么？" class="headerlink" title="2.2 进程和线程的区别是什么？"></a>2.2 进程和线程的区别是什么？</h2><p>从JVM的角度来说一说两者区别，</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/java-runtime-data-areas-jdk1.8.png" alt="Java 运行时数据区域（JDK1.8 之后）" style="zoom:70%;" />
+
+<p>一个进程可以有多个线程，多个线程共享进程的<strong>堆和元空间</strong>的资源，但是<strong>每个线程有自己的程序计数器、虚拟机栈和本地方法栈</strong>。</p>
+<ul>
+<li><strong>线程是进程划分成的最小的运行单位</strong>，一个进程在其执行的过程中可以产生多个线程。</li>
+<li>线程和进程最大的不同在于，<strong>各个进程是独立的，而各个线程则不一定</strong>，因为同一个进程中的线程极有可能会互相影响。</li>
+<li>线程执行开销小，不利于资源的管理和保护；而进程则相反。</li>
+</ul>
+<h2 id="2-3-为什么要使用多线程？"><a href="#2-3-为什么要使用多线程？" class="headerlink" title="2.3 为什么要使用多线程？"></a>2.3 为什么要使用多线程？</h2><ul>
+<li>线程可以比作轻量化的进程，是执行程序的最小单位，线程间的切换和调度的成本远远小于进程。</li>
+<li>现在的系统要求百万级甚至千万级并发量，而多线程并发编程正式开发高并发系统的基础，使用多线程能够大大提高系统整体的并发能力和性能。</li>
+</ul>
+<h2 id="2-4-线程间同步的方式有哪些？"><a href="#2-4-线程间同步的方式有哪些？" class="headerlink" title="2.4 线程间同步的方式有哪些？"></a>2.4 线程间同步的方式有哪些？</h2><ul>
+<li><strong>互斥锁</strong>：采用互斥对象机制，只有拥有互斥对象的线程才有访问公共资源的权限。因为互斥对象只有一个，所以<strong>可以保证公共资源不会被多个线程同时访问</strong>。比如 Java 中的 <code>synchronized</code> 关键词和各种 <code>Lock</code> 都是这种机制。</li>
+<li><strong>读写锁</strong>：允许多个线程读取共享资源，但是只有一个线程可以对共享资源进行写操作。</li>
+<li><strong>信号量</strong>：允许同一时刻多个线程访问同一资源，但是控制同一时刻可访问的最大线程数量。</li>
+<li><strong>屏障</strong>：用于等待多个线程到达某个点再一起继续执行。</li>
+<li><strong>事件</strong>：通过通知操作的方式保持多线程同步。</li>
+</ul>
+<h2 id="2-5-什么是PCB？"><a href="#2-5-什么是PCB？" class="headerlink" title="2.5 什么是PCB？"></a>2.5 什么是PCB？</h2><p><strong>PCB（Process Control Block）</strong> 即进程控制块，是操作系统中用来管理和跟踪进程的数据结构，每个进程都对应着一个独立的 PCB。你可以将 PCB 视为进程的大脑。</p>
+<p>PCB包括以下信息：</p>
+<ul>
+<li>进程的描述信息；</li>
+<li>进程的调度信息；</li>
+<li>进程对资源的需求情况；</li>
+<li>进程打开的文件信息；</li>
+</ul>
+<h2 id="2-6-进程有哪几种状态？"><a href="#2-6-进程有哪几种状态？" class="headerlink" title="2.6 进程有哪几种状态？"></a>2.6 进程有哪几种状态？</h2><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/state-transition-of-process.png" alt="进程状态图转换图"/></div><div class="image-meta"><span class="image-caption center">进程状态图转换图</span></div></div>
+
+<ul>
+<li><strong>创建</strong>：进程正在被创建，尚未达到就绪状态。</li>
+<li><strong>就绪</strong>：进程处于准备运行状态，此时进程获得了除处理器之外的一切资源，一旦得到CPU分配的时间片即可运行。</li>
+<li><strong>运行</strong>：进程正在处理器上运行。</li>
+<li><strong>阻塞</strong>：又称等待，进程正在等待某一事件而暂停运行，比如等待某资源或等待IO操作完成。哪怕此时CPU空闲，该线程也不能运行。</li>
+<li><strong>结束</strong>：进程正在从系统中消失，退出运行。</li>
+</ul>
+<h2 id="2-7-进程间通信方式有哪些？"><a href="#2-7-进程间通信方式有哪些？" class="headerlink" title="2.7 进程间通信方式有哪些？"></a>2.7 进程间通信方式有哪些？</h2><ol>
+<li><strong>管道&#x2F;匿名管道</strong>：仅用于具有亲缘关系的父子进程间、或兄弟进程间通信。</li>
+<li><strong>有名管道</strong>：遵循先进先出，以磁盘文件的方式存在，可以实现本机中任意两个进程通信。</li>
+<li><strong>信号</strong>：用于通知接收进程某个事件已经发生。</li>
+<li><strong>消息队列</strong>：是消息的链表，存放在内核中，可以实现消息的随机查询。克服了<strong>信号承载信息量少</strong>、<strong>管道只能承载无格式字节流以及缓冲区受限</strong>的缺点。</li>
+<li><strong>信号量</strong>：相当于一个计数器，用于多进程对共享数据的访问，主要用于进程间同步。</li>
+<li><strong>共享内存</strong>：使得多个进程可以访问同一块内存空间，不同进程之间可以及时看到其他进程对共享内存中数据的更新。</li>
+<li><strong>套接字</strong>：主要用于客户端和服务器之间通过网络进行通信。</li>
+</ol>
+<h3 id="2-7-1-管道有了解过吗？说一说"><a href="#2-7-1-管道有了解过吗？说一说" class="headerlink" title="2.7.1 管道有了解过吗？说一说"></a>2.7.1 管道有了解过吗？说一说</h3><p>管道主要用于实现两个或多个进程间的数据传输。可以将一个进程的输出连接到另一个进程的输入，从而实现数据的流动和共享。</p>
+<p>管道主要分为两种类型：<strong>匿名管道</strong>和<strong>有名管道</strong>。</p>
+<h3 id="2-7-2-那分别说说匿名管道和有名管道"><a href="#2-7-2-那分别说说匿名管道和有名管道" class="headerlink" title="2.7.2 那分别说说匿名管道和有名管道"></a>2.7.2 那分别说说匿名管道和有名管道</h3><ol>
+<li>匿名管道：匿名管道是一种最简单的管道形式，<strong>只能用于父进程与其直接创建的子进程之间的通信</strong>。匿名管道是<strong>单向</strong>的，数据只能在一个方向上流动。它通过操作系统提供的缓冲区将数据从一个进程传递给另一个进程。</li>
+<li>命名管道：命名管道是一种更通用的管道形式，<strong>可以用于不相关的进程之间的通信</strong>。命名管道是有名字的，可以被多个进程打开和使用。命名管道可以在<strong>不同的进程之间实现双向数据传输</strong>。</li>
+</ol>
+<h2 id="2-8-进程的调度算法有哪些？"><a href="#2-8-进程的调度算法有哪些？" class="headerlink" title="2.8 进程的调度算法有哪些？"></a>2.8 进程的调度算法有哪些？</h2><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/scheduling-algorithms-of-process.png" alt="常见进程调度算法"/></div><div class="image-meta"><span class="image-caption center">常见进程调度算法</span></div></div>
+
+<ul>
+<li><strong>先来先服务</strong>：从就绪队列中选择一个最先进入队列的进程分配资源。</li>
+<li><strong>短作业优先</strong>：从就绪队列中选择运行时间最短的进程分配资源。</li>
+<li><strong>时间片轮转</strong>：是一种最古老、最简单、最公平、使用最广的算法。每个进程被分配一个时间片。</li>
+<li><strong>优先级调度</strong>：给每个进程分配优先级，按优先级顺序执行进程。</li>
+<li><strong>多级反馈队列</strong>：既能使高优先级的作业得到响应，又能使短作业迅速完成，是一种公认的较好的进程调度算法。</li>
+</ul>
+<h2 id="2-9-什么是僵尸进程和孤儿进程？"><a href="#2-9-什么是僵尸进程和孤儿进程？" class="headerlink" title="2.9 什么是僵尸进程和孤儿进程？"></a>2.9 什么是僵尸进程和孤儿进程？</h2><ul>
+<li><strong>僵尸进程</strong>：子进程已经终止，但是父进程仍在运行，且父进程没有调用wait()系统调用来获取子进程的状态信息，释放子进程占用的资源，导致子进程的PCB仍然存在于系统中，但无法被进一步使用。</li>
+<li><strong>孤儿进程</strong>：一个进程的父进程已经终止或不存在，但该进程仍然在运行。</li>
+</ul>
+<h1 id="三、死锁"><a href="#三、死锁" class="headerlink" title="三、死锁"></a>三、死锁</h1><h2 id="3-1-什么是死锁"><a href="#3-1-什么是死锁" class="headerlink" title="3.1 什么是死锁"></a>3.1 什么是死锁</h2><p>多个进程或线程同时被阻塞，他们中的一个或全部都在等待某个资源被释放。由于进程或线程被无限期的阻塞，因此程序不可能正常终止。</p>
+<p>比如，现在有两个进程A和B，以及两个资源X和Y，进程A占用X资源，现在需要Y资源，但是进程B此时占用Y资源，需要X资源。两个进程都在等对方释放各自的资源，无法继续往下执行，所以陷入了死锁状态。</p>
+<h2 id="3-2-产生死锁的必要条件是什么？"><a href="#3-2-产生死锁的必要条件是什么？" class="headerlink" title="3.2 产生死锁的必要条件是什么？"></a>3.2 产生死锁的必要条件是什么？</h2><ol>
+<li><strong>互斥</strong>：资源必须处于非共享模式，即一次只有一个进程可以使用该资源。</li>
+<li><strong>占有并等待</strong>：一个进程至少应该占有一个资源，并等待另一个资源，而需要的资源被其他进程占有。</li>
+<li><strong>非抢占</strong>：进程所占有的资源不能被抢占，只有能进程执行完毕后才会释放。</li>
+<li><strong>循环等待</strong>：有一组进程P1、P2。。。Pn，P1所需的资源被P2占有，P2所需的资源被P3占有。。。Pn的所需资源被P1占有。</li>
+</ol>
+<p><strong>注：这四个条件是必要条件。</strong>也即只要发生死锁，这些条件必然成立，但是这些条件有一个不满足，就不会发生死锁。</p>
+<h2 id="3-3-写一个模拟产生死锁的代码"><a href="#3-3-写一个模拟产生死锁的代码" class="headerlink" title="3.3 写一个模拟产生死锁的代码"></a>3.3 写一个模拟产生死锁的代码</h2><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/2019-4%E6%AD%BB%E9%94%811.png" alt="线程死锁示意图"/></div><div class="image-meta"><span class="image-caption center">线程死锁示意图</span></div></div>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Object</span> <span class="variable">resource1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();<span class="comment">//资源1</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Object</span> <span class="variable">resource2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();<span class="comment">//资源2</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (resource1)&#123;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">&quot;获取资源1&quot;</span>);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">&quot;等待资源2&quot;</span>);</span><br><span class="line">                <span class="keyword">synchronized</span> (resource2)&#123;</span><br><span class="line">                    System.out.println(Thread.currentThread() + <span class="string">&quot;获取资源2&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">&quot;线程1&quot;</span>).start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (resource2)&#123;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">&quot;获取资源2&quot;</span>);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">&quot;等待资源1&quot;</span>);</span><br><span class="line">                <span class="keyword">synchronized</span> (resource1)&#123;</span><br><span class="line">                    System.out.println(Thread.currentThread() +<span class="string">&quot;获取资源1&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">&quot;线程2&quot;</span>).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Thread[线程1,5,main]获取资源1</span><br><span class="line">Thread[线程2,5,main]获取资源2</span><br><span class="line">Thread[线程1,5,main]等待资源2</span><br><span class="line">Thread[线程2,5,main]等待资源1</span><br></pre></td></tr></table></figure>
+
+<p>线程 1 通过 <code>synchronized (resource1)</code> 获得 <code>resource1</code> 的监视器锁，然后通过<code>Thread.sleep(1000);</code>让线程 1休眠 1s 为的是让线程 2 得到执行然后获取到 <code>resource2</code> 的监视器锁。线程1 和线程 2 休眠结束了都开始企图请求获取对方的资源，然后这两个线程就会陷入互相等待的状态，这也就产生了死锁。</p>
+<h2 id="3-4-解决死锁的方法"><a href="#3-4-解决死锁的方法" class="headerlink" title="3.4 解决死锁的方法"></a>3.4 解决死锁的方法</h2><ul>
+<li><strong>预防</strong>：采用某种策略，<strong>限制并发进程对资源的请求</strong>，从而使得死锁的必要条件在系统执行的任何时间上都不满足。</li>
+<li><strong>避免</strong>：系统在分配资源时，根据资源使用情况<strong>提前做出预测</strong>，从而<strong>避免死锁的发生</strong>。</li>
+<li><strong>检测</strong>：系统设置<strong>专门的机构</strong>，当死锁发生时，该机构能检测死锁的发生，并精确地确定与死锁有关的进程和资源。</li>
+<li><strong>解除</strong>：将进程从死锁状态解脱出来。</li>
+</ul>
+<h3 id="3-4-1-死锁的预防"><a href="#3-4-1-死锁的预防" class="headerlink" title="3.4.1 死锁的预防"></a>3.4.1 死锁的预防</h3><ol>
+<li><strong>静态分配策略</strong>。可以破坏产生死锁的第二个条件，指一个进程必须<strong>在执行前</strong>就申请到它所需要的<strong>全部资源</strong>，得到所有资源后，才能开始执行。这种策略的逻辑很简单，<strong>但是缺点是严重降低了资源利用率</strong>。</li>
+<li><strong>层次分配策略</strong>。可以破坏产生死锁的第四个条件，所有资源被分成多个层次，一个进程得到某一层的一个资源后，只能再申请较高一层的资源；当一个进程要释放某一层的资源时，必须先释放所占用的较高层的资源，这样就避免了循环等待。</li>
+</ol>
+<h3 id="3-4-2-死锁的避免"><a href="#3-4-2-死锁的避免" class="headerlink" title="3.4.2 死锁的避免"></a>3.4.2 死锁的避免</h3><p>将系统的状态分为<strong>安全</strong>和<strong>不安全</strong>，每当未申请者分配资源前先测试系统状态，若把系统资源分配给申请者会产生死锁，那就拒绝分配，否则为它分配资源。</p>
+<p>最具有代表性的算法就是银行家算法，用一句话描述就是：当一个进程申请使用资源的时候，银行家算法通过<strong>先试探分配给该进程资源</strong>，然后<strong>通过安全性算法</strong>判断分配后系统<strong>是否处于安全状态</strong>，若不安全则试探分配作废，让该进程继续等待，若安全，则给该进程分配资源。</p>
+<p>银行家算法改善了死锁预防中的资源利用率低的问题，但是缺点是<strong>需要不断地检测每个进程对各类资源的占用和申请</strong>，并进行<strong>安全性检查</strong>，需要花费较多时间。</p>
+<h3 id="3-4-3-死锁的检测"><a href="#3-4-3-死锁的检测" class="headerlink" title="3.4.3 死锁的检测"></a>3.4.3 死锁的检测</h3><p>操作系统中每个时刻的系统状态都可以用<strong>进程-资源分配图</strong>来表示，可以用于检测系统是否处于死锁状态。</p>
+<p>用方框表示资源类，方框中的黑点表示资源类中的各个资源，圆圈表示进程，用有向边表示进程申请资源和资源被分配的情况。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/process-resource-allocation-diagram.jpg" alt="进程-资源分配图"/></div><div class="image-meta"><span class="image-caption center">进程-资源分配图</span></div></div>
+
+<p>图2-21中共有三个资源类，每个进程的资源占有和申请情况已经可以清楚看到。在这个图中，由于存在占有和等待资源的环路，导致一组进程永远处于等待资源的状态，所以产生了死锁。</p>
+<p><strong>但是存在环路并不一定是发生了死锁。</strong>比如图2-22中，也存在环路，虽然进程 P1 和进程 P3 分别占用了一个资源 R1 和一个资源 R2，并且因为等待另一个资源 R2 和另一个资源 R1 形成了环路，但进程 P2 和进程 P4 分别占有了一个资源 R1 和一个资源 R2，它们申请的资源得到了满足，在有限的时间里会归还资源，于是进程 P1 或 P3 都能获得另一个所需的资源，环路自动解除，系统也就不存在死锁状态了。</p>
+<p>所以可以通过以下步骤检测是否产生了死锁：</p>
+<ol>
+<li>如果进程-资源分配图中无环路，则此时系统没有发生死锁。</li>
+<li>如果进程-资源分配图中有环路，且每个资源类仅有一个资源，则系统中已经发生了死锁。</li>
+<li>如果进程-资源分配图中有环路，且涉及到的每个资源类由多个资源，此时系统未必会发生死锁。</li>
+</ol>
+<h3 id="3-4-4-死锁的解除"><a href="#3-4-4-死锁的解除" class="headerlink" title="3.4.4 死锁的解除"></a>3.4.4 死锁的解除</h3><ol>
+<li><strong>立即结束所有进程的执行，重新启动操作系统</strong>。这种方法简单，但是之前的所有工作全部作废，损失很大。</li>
+<li><strong>撤销涉及死锁的所有进程，解除死锁后继续运行</strong>。这种方法能彻底打破死锁的循环等待条件，但是付出的代价也很大。</li>
+<li><strong>逐个撤销涉及死锁的进程，回收其资源直至死锁解除</strong>。</li>
+<li><strong>抢占资源</strong>。从涉及死锁的几个进程中抢占资源，把获得的资源再分配给涉及死锁的进程，直至死锁解除。</li>
+</ol>
+<h1 id="四、内存管理"><a href="#四、内存管理" class="headerlink" title="四、内存管理"></a>四、内存管理</h1><h2 id="4-1-内存管理主要是做什么？"><a href="#4-1-内存管理主要是做什么？" class="headerlink" title="4.1 内存管理主要是做什么？"></a>4.1 内存管理主要是做什么？</h2><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/memory-management-roles.png" alt="内存管理主要做的事情"/></div><div class="image-meta"><span class="image-caption center">内存管理主要做的事情</span></div></div>
+
+<ul>
+<li><strong>内存分配与回收</strong>：对进程所需的内存进行分配和释放。</li>
+<li><strong>地址转换</strong>：将程序中的虚拟地址转换成为内存中的物理地址。</li>
+<li><strong>内存扩充</strong>：当没有足够的内存时，利用虚拟内存的技术或自动覆盖技术，从逻辑上扩充内存。</li>
+<li><strong>内存映射</strong>：将一个文件直接映射到进程的进程空间中，这样可以通过内存指针直接存取文件内容。</li>
+<li><strong>内存优化</strong>：通过调整内存分配策略和回收算法来优化内存使用效率。</li>
+<li><strong>内存安全</strong>：保证进程间使用内存互不干扰，避免恶意程序破坏系统安全性。</li>
+</ul>
+<h2 id="4-2-什么是内存碎片？"><a href="#4-2-什么是内存碎片？" class="headerlink" title="4.2 什么是内存碎片？"></a>4.2 什么是内存碎片？</h2><p>内存碎片是内存的申请和释放产生的，通常分为以下两种：</p>
+<ul>
+<li><strong>内部内存碎片</strong>：已经分配给内存使用，但是还未使用的内存。</li>
+<li><strong>外部内存碎片</strong>：由于未分配的连续内存区域太小，以至于不能满足任何进程所需的内存需求，这些小片段且不连续的内存空间。</li>
+</ul>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/internal-and-external-fragmentation.png" alt="内存碎片"/></div><div class="image-meta"><span class="image-caption center">内存碎片</span></div></div>
+
+<h2 id="4-3-常见的内存管理方式有哪些？"><a href="#4-3-常见的内存管理方式有哪些？" class="headerlink" title="4.3 常见的内存管理方式有哪些？"></a>4.3 常见的内存管理方式有哪些？</h2><ul>
+<li><strong>连续内存管理</strong>：为一个用户程序分配一个连续的内存空间，内存利用率一般不高。</li>
+<li><strong>非连续内存管理</strong>：允许一个程序使用的内存分布在离散或者说不连续的内存中，比较灵活。</li>
+</ul>
+<h3 id="4-3-1-连续内存管理"><a href="#4-3-1-连续内存管理" class="headerlink" title="4.3.1 连续内存管理"></a>4.3.1 连续内存管理</h3><ul>
+<li><strong>块式管理</strong>：将内存分为几个固定大小的块，每个块中只包含一个进程。但是这种方法存在严重的内存碎片问题。</li>
+<li><strong>伙伴系统算法</strong>：Linux系统中连续内存分配算法，将内存按2的幂次划分，并将<strong>相邻</strong>的内存块组合成为一堆伙伴。当进行内存分配时，伙伴系统会尝试找到大小最合适的内存块。如果找到的内存块过大，就将其一分为二，分成两个大小相等的伙伴块。如果还是大的话，就继续切分，直到到达合适的大小为止。假设两块相邻的内存块都被释放，系统会将这两个内存块合并，进而形成一个更大的内存块，以便后续的内存分配。这样就可以减少内存碎片的问题，提高内存利用率</li>
+</ul>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/linux-buddy-system.png" alt="伙伴系统（Buddy System）内存管理"/></div><div class="image-meta"><span class="image-caption center">伙伴系统（Buddy System）内存管理</span></div></div>
+
+<h3 id="4-3-2-非连续内存管理"><a href="#4-3-2-非连续内存管理" class="headerlink" title="4.3.2 非连续内存管理"></a>4.3.2 非连续内存管理</h3><ul>
+<li><strong>段式管理</strong>：以段的形式管理和分配内存。</li>
+<li><strong>页式管理</strong>：把物理内存分为连续等长的物理页，应用程序的虚拟地址空间也被分为连续等长的虚拟页。</li>
+<li><strong>段页式管理</strong>：结合了段式和页式管理的一种内存管理机制，把物理内存先分为若干段，每个段又继续分为若干大小的页。</li>
+</ul>
+<h2 id="4-4-什么是虚拟内存？有什么用？"><a href="#4-4-什么是虚拟内存？有什么用？" class="headerlink" title="4.4 什么是虚拟内存？有什么用？"></a>4.4 什么是虚拟内存？有什么用？</h2><p><strong>虚拟内存(Virtual Memory)</strong> 是计算机系统内存管理非常重要的一个技术，本质上来说它只是逻辑存在的，是一个假想出来的内存空间，主要作用是<strong>作为进程访问主存（物理内存）的桥梁并简化内存管理</strong>。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/virtual-memory.png" alt="虚拟内存作为进程访问主存的桥梁"/></div><div class="image-meta"><span class="image-caption center">虚拟内存作为进程访问主存的桥梁</span></div></div>
+
+<ul>
+<li><strong>隔离进程</strong>：使进程间彼此隔离，一个进程无法更改另一个进程的物理内存。</li>
+<li><strong>提升物理内存的利用率</strong>。</li>
+<li><strong>简化内存管理</strong>。</li>
+<li><strong>多个进程共享物理内存</strong>。</li>
+<li><strong>提高内存使用安全性</strong>。</li>
+<li><strong>提供更大的可使用内存空间</strong>。</li>
+</ul>
+<h3 id="4-4-1-什么是虚拟地址和物理地址？"><a href="#4-4-1-什么是虚拟地址和物理地址？" class="headerlink" title="4.4.1 什么是虚拟地址和物理地址？"></a>4.4.1 什么是虚拟地址和物理地址？</h3><p><strong>物理地址</strong>是物理内存中的地址，也即内存地址寄存器中的地址。</p>
+<p><strong>虚拟地址</strong>是程序中访问的内存地址，也即开发时访问的地址。</p>
+<p>操作系统中一般通过<strong>内存管理单元</strong>将虚拟地址转化为物理地址，这个过程被称为<strong>地址转换</strong>。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/physical-virtual-address-translation.png)" alt="### 4.4.2 虚拟地址和物理地址之间是怎么映射的？ 主要有三种方式： 1. 分段机制 2. 分页机制 3. 段页机制 现代操作系统中更多采用分页机制。 ### 4.4.3 为什么虚拟地址切换空间会比较费时？ 进程都有自己的虚拟地址空间，把虚拟地址转换为物理地址需要查找页表，页表查找是一个很慢的过程，因此通常使用 Cache 来缓存常用的地址映射，这样可以加速页表查找。 这个 Cache 就是 TLB（translation Lookaside Buffer）， TLB 本质上就是一个 Cache，是用来加速页表查找的 地址翻译过程"/></div><div class="image-meta"><span class="image-caption center">### 4.4.2 虚拟地址和物理地址之间是怎么映射的？ 主要有三种方式： 1. 分段机制 2. 分页机制 3. 段页机制 现代操作系统中更多采用分页机制。 ### 4.4.3 为什么虚拟地址切换空间会比较费时？ 进程都有自己的虚拟地址空间，把虚拟地址转换为物理地址需要查找页表，页表查找是一个很慢的过程，因此通常使用 Cache 来缓存常用的地址映射，这样可以加速页表查找。 这个 Cache 就是 TLB（translation Lookaside Buffer）， TLB 本质上就是一个 Cache，是用来加速页表查找的 地址翻译过程</span></div></div>。
+
+<p>由于每个进程都有自己的虚拟地址空间，每个进程都有自己的页表记录虚拟地址与物理地址的转换关系， 那么当进程切换后页表也要进行切换，页表切换后 TLB 就失效了，Cache 失效导致命中率降低，那么虚拟地址转换为物理地址就会变慢，表现出来的就是程序运行会变慢。而线程切换则不会导致 TLB 失效，因为线程无需切换地址空间，因此我们通常说线程切换要比较进程切换块，原因就在这里。</p>
+<h2 id="4-5-分段机制"><a href="#4-5-分段机制" class="headerlink" title="4.5 分段机制"></a>4.5 分段机制</h2><p>分段机制以段的形式管理、分配物理内存。</p>
+<h3 id="4-5-1-段表有什么用？地址翻译过程是怎么样的？"><a href="#4-5-1-段表有什么用？地址翻译过程是怎么样的？" class="headerlink" title="4.5.1 段表有什么用？地址翻译过程是怎么样的？"></a>4.5.1 段表有什么用？地址翻译过程是怎么样的？</h3><p>分段机制通过段表映射虚拟地址和物理地址。虚拟地址由两部分组成：</p>
+<ul>
+<li><strong>段号</strong>：标识着该虚拟地址属于整个虚拟地址空间中那一段。</li>
+<li><strong>段内偏移量</strong>：相当于该段起始地址的偏移量。</li>
+</ul>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/segment-virtual-address-composition.png" alt="分段机制下的地址翻译过程"/></div><div class="image-meta"><span class="image-caption center">分段机制下的地址翻译过程</span></div></div>
+
+<p>具体的地址翻译过程如下：</p>
+<ol>
+<li>内存管理单元首先解析得到虚拟地址中的段号；</li>
+<li>通过段号去段表中取出对应的段信息；</li>
+<li>从段信息中取出该段的起始地址加上段内偏移量，最终得到物理地址。</li>
+</ol>
+<h3 id="4-5-2-通过段号一定能找到对应的段表项吗？"><a href="#4-5-2-通过段号一定能找到对应的段表项吗？" class="headerlink" title="4.5.2 通过段号一定能找到对应的段表项吗？"></a>4.5.2 通过段号一定能找到对应的段表项吗？</h3><p>不一定。段表项可能不存在：</p>
+<ul>
+<li><strong>段表项被删除</strong>。</li>
+<li><strong>段表项还未创建</strong>。如果内存不足或无法分配连续的物理内存块就会导致段表项无法被创建。</li>
+</ul>
+<h3 id="4-5-3-分段机制为什么会导致内存外部碎片？"><a href="#4-5-3-分段机制为什么会导致内存外部碎片？" class="headerlink" title="4.5.3 分段机制为什么会导致内存外部碎片？"></a>4.5.3 分段机制为什么会导致内存外部碎片？</h3><p>在分段机制中，每个段的大小可以不同，因此在分配内存时会留下不同大小的空闲空间，这些空闲空间可能无法被合并使用，从而导致外部碎片的产生。当内存分配器需要寻找一块足够大的连续内存块时，它可能会因为这些零散的空闲空间而无法找到合适的内存块，从而导致内存分配失败。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/segment-external-memory-fragmentation.png" alt="分段机制导致外部内存碎片"/></div><div class="image-meta"><span class="image-caption center">分段机制导致外部内存碎片</span></div></div>
+
+<h2 id="4-6-分页机制"><a href="#4-6-分页机制" class="headerlink" title="4.6 分页机制"></a>4.6 分页机制</h2><p>分页机制把物理内存分成<strong>连续等长</strong>的物理页。</p>
+<h3 id="4-6-1-页表有什么用？地址翻译过程是怎么样的？"><a href="#4-6-1-页表有什么用？地址翻译过程是怎么样的？" class="headerlink" title="4.6.1 页表有什么用？地址翻译过程是怎么样的？"></a>4.6.1 页表有什么用？地址翻译过程是怎么样的？</h3><p>分页管理通过<strong>页表</strong>映射虚拟地址和物理地址。</p>
+<p>每个应用程序都会有一个对应的页表。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/paging-virtual-address-composition.png" alt="分页机制下的地址翻译过程"/></div><div class="image-meta"><span class="image-caption center">分页机制下的地址翻译过程</span></div></div>
+
+<p>虚拟地址由两部分组成：</p>
+<ul>
+<li><strong>页号</strong>：通过虚拟页号可以从页表中取出对应的物理页号。</li>
+<li><strong>页内偏移量</strong>：物理页起始地址+页内偏移量&#x3D;物理内存地址。</li>
+</ul>
+<p>具体翻译过程如下：</p>
+<ol>
+<li>内存管理单元首先解析得到虚拟地址中的虚拟页号；</li>
+<li>通过虚拟页号找到页表，取出对应的物理页号；</li>
+<li>通过物理页号对应的起始地址加上页内偏移量得到最终的物理地址。</li>
+</ol>
+<h3 id="4-6-2-通过页号一定能找到对应的物理页号吗？"><a href="#4-6-2-通过页号一定能找到对应的物理页号吗？" class="headerlink" title="4.6.2 通过页号一定能找到对应的物理页号吗？"></a>4.6.2 通过页号一定能找到对应的物理页号吗？</h3><p>不一定！可能会存在页缺失。也即物理内存中没有对应的物理页，或者物理页与虚拟页之间未建立映射。</p>
+<h3 id="4-6-3-单级页表有什么问题？为什么需要多级页表？"><a href="#4-6-3-单级页表有什么问题？为什么需要多级页表？" class="headerlink" title="4.6.3 单级页表有什么问题？为什么需要多级页表？"></a>4.6.3 单级页表有什么问题？为什么需要多级页表？</h3><p>以32位操作系统为例，一个程序啥也不干，光页表大小就得占4MB。应用程序一旦多起来，页表的开销非常大。而且绝大多数应用程序可能只能用到页表中的几项，其他只能浪费。</p>
+<p>所以为了解决这个问题，引入了多级页表，多级页表对应多个页表，每个页表与前一个页表相关联，可以极大节省空间占用。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/multilevel-page-table.png" alt="多级页表"/></div><div class="image-meta"><span class="image-caption center">多级页表</span></div></div>
+
+<p>多级页表属于时间换空间的典型，利用增加页表查询次数减少页表占用的空间。</p>
+<h3 id="4-6-4-TLB有什么用？使用TLB之后的地址翻译流程是什么？"><a href="#4-6-4-TLB有什么用？使用TLB之后的地址翻译流程是什么？" class="headerlink" title="4.6.4 TLB有什么用？使用TLB之后的地址翻译流程是什么？"></a>4.6.4 TLB有什么用？使用TLB之后的地址翻译流程是什么？</h3><p>TLB也称为快表，目的是<strong>提高虚拟地址到物理地址的转换速度。</strong></p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/physical-virtual-address-translation-mmu.png" alt="加入 TLB 之后的地址翻译"/></div><div class="image-meta"><span class="image-caption center">加入 TLB 之后的地址翻译</span></div></div>
+
+<p>TLB本质上属于内存管理单元，其实是一块高速缓存，缓存了虚拟页号到物理页号之间的映射关系。可以简单看作是哈希表，key是虚拟页号，value是物理页号。</p>
+<p>使用了快表后翻译流程：</p>
+<ol>
+<li>用虚拟地址中的虚拟页号作为key去快表中查询；</li>
+<li>如果能查到对应的物理页，就不用去查询页表，这种情况被称为TLB命中；</li>
+<li>如果查不到，再去也飙中查询，同时将页表中查到的项加入到快表中。</li>
+<li>当快表被填满时，又要重新登记新页时，按淘汰策略淘汰掉一个页。</li>
+</ol>
+<p><strong>其实本质上相当于Redis缓存。</strong></p>
+<h3 id="4-6-5-什么是页缺失？"><a href="#4-6-5-什么是页缺失？" class="headerlink" title="4.6.5 什么是页缺失？"></a>4.6.5 什么是页缺失？</h3><p>当软件试图访问已映射在虚拟空间中，但是未被加载在物理内存中的一个分页时，由内存管理单元发出的中断。</p>
+<p>常见的页缺失有以下两种：</p>
+<ul>
+<li><strong>硬性页缺失</strong>：物理内存中没有对应的物理页。</li>
+<li><strong>软性页缺失</strong>：物理内存中有对应的物理页，但是虚拟页还未和物理页建立映射。</li>
+</ul>
+<h2 id="4-7-页面置换算法"><a href="#4-7-页面置换算法" class="headerlink" title="4.7 页面置换算法"></a>4.7 页面置换算法</h2><h3 id="4-7-1-页面置换算法的作用"><a href="#4-7-1-页面置换算法的作用" class="headerlink" title="4.7.1 页面置换算法的作用"></a>4.7.1 页面置换算法的作用</h3><p>当发生页缺失时，如果物理内存中没有空闲的物理页面可用的话。操作系统就必须将物理内存中的一个物理页淘汰出去，这个淘汰规则就是页面置换算法，这样就可以腾出空间来加载新页面了。</p>
+<h3 id="4-7-2-常见的页面置换算法"><a href="#4-7-2-常见的页面置换算法" class="headerlink" title="4.7.2 常见的页面置换算法"></a>4.7.2 常见的页面置换算法</h3><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230409113009139.png" alt="常见的页面置换算法"/></div><div class="image-meta"><span class="image-caption center">常见的页面置换算法</span></div></div>
+
+<ul>
+<li><strong>最佳页面置换算法</strong>：优先选择淘汰的页面是以后永不使用的，或者长时间不再访问的页面，这样可以获取最低的缺页率。只存在于理论中，无法实现。</li>
+<li><strong>先进先出页面置换算法</strong>：总是淘汰先进入内存的页面，也即选择在内存中驻留时间最久的页面淘汰。</li>
+<li><strong>最近最久未使用页面置换算法</strong>：该算法赋予每个页面一个访问字段，用来记录该页面自上次访问以来经历的时间，淘汰最近最久未使用的页面。</li>
+<li><strong>最少使用页面置换算法</strong>：和最近最久未使用算法类似，不过该算法选择的是一段时间内使用最少的页面作为淘汰页。</li>
+<li><strong>时钟页面置换算法</strong>：也可以认为是最近未使用算法，也即淘汰的页面都是最近没有使用的。</li>
+</ul>
+<h3 id="4-7-3-先进先出页面置换算法性能为什么不好？"><a href="#4-7-3-先进先出页面置换算法性能为什么不好？" class="headerlink" title="4.7.3 先进先出页面置换算法性能为什么不好？"></a>4.7.3 先进先出页面置换算法性能为什么不好？</h3><ol>
+<li><strong>经常访问或需要长期存在的页面会被频繁调入调出</strong>。</li>
+<li><strong>无法识别访问页面的频率和重要性，只考了页面进入的顺序</strong>。</li>
+</ol>
+<h2 id="4-8-分页机制和分段机制有哪些共同点和区别？"><a href="#4-8-分页机制和分段机制有哪些共同点和区别？" class="headerlink" title="4.8 分页机制和分段机制有哪些共同点和区别？"></a>4.8 分页机制和分段机制有哪些共同点和区别？</h2><h3 id="4-8-1-共同点"><a href="#4-8-1-共同点" class="headerlink" title="4.8.1 共同点"></a>4.8.1 共同点</h3><ol>
+<li>都是非连续内存管理的方法；</li>
+<li>都采用了地址映射的方法，将虚拟地址映射到物理地址。</li>
+</ol>
+<h3 id="4-8-2-区别"><a href="#4-8-2-区别" class="headerlink" title="4.8.2  区别"></a>4.8.2  区别</h3><ul>
+<li>分页机制以页为单位，分段机制以段为单位。页的大小是固定的，通常为2的幂次方，而段的大小是不确定的，通常由运行的程序决定。</li>
+<li>页是物理单位，段式逻辑单位。</li>
+<li>分段机制容易出现外部内存碎片。分页机制解决了外部内存碎片的问题，但是可能会出现内部内存碎片问题。</li>
+<li>分页机制采用了页表来完成虚拟地址到物理地址的映射，其中页表通过多级页表来实现多级映射。而分段机制则采用段表来完成，没有多级段表。</li>
+<li>分页机制对程序没有任何要求，程序只需要按照虚拟地址进行访问即可。分段机制需要程序员主动将程序分为多个段，并显式的使用段寄存器来访问不同段。</li>
+</ul>
+<h2 id="4-9-局部性原理了解吗？"><a href="#4-9-局部性原理了解吗？" class="headerlink" title="4.9 局部性原理了解吗？"></a>4.9 局部性原理了解吗？</h2><p>在程序执行过程中，数据和指令的访问存在一定的空间和时间上的局部特点。</p>
+<ul>
+<li><strong>时间局部性</strong>：由于程序中存在一定的循环或者重复操作，因此会反复访问同一个页或一些特定的页，这就体现了时间局部性特点。为了利用时间局部性，分页机制中通常采用缓存机制来提高页面的命中率。</li>
+<li><strong>空间局部性</strong>：由于程序中数据和指令的访问通常是具有一定的空间连续性，因此访问某个页时，会顺带访问相邻的一些页。为了利用空间局部性，分页机制中通常采用预取技术来预先将相邻的一些页存入内存缓存中，以便未来能直接使用。</li>
+</ul>
+<p>总之，局部性原理是计算机体系结构设计的重要原则之一，也是许多优化算法的基础。采用缓存和预取技术，可以提高页面的命中率，从而提高内存访问效率。</p>
+<h1 id="五、文件系统"><a href="#五、文件系统" class="headerlink" title="五、文件系统"></a>五、文件系统</h1><h2 id="5-1-文件系统的功能？"><a href="#5-1-文件系统的功能？" class="headerlink" title="5.1 文件系统的功能？"></a>5.1 文件系统的功能？</h2><ol>
+<li><strong>存储管理</strong>；</li>
+<li><strong>文件管理</strong>；</li>
+<li><strong>目录管理</strong>；</li>
+<li><strong>文件访问控制</strong>。</li>
+</ol>
+<h2 id="5-2-软连接和硬链接有什么区别？"><a href="#5-2-软连接和硬链接有什么区别？" class="headerlink" title="5.2 软连接和硬链接有什么区别？"></a>5.2 软连接和硬链接有什么区别？</h2><ol>
+<li><strong>硬链接</strong>：是一个指向文件物理地址的链接，多个硬链接共享同一个物理文件。硬链接只有在同一个文件系统中才能使用，因为它们使用相同的索引节点标识文件。在删除一个硬链接时，文件本身不会被删除，只有当最后一个硬链接被删除时，文件才会被删除。</li>
+<li><strong>软链接</strong>：是一个指向文件名的链接，它是一个特殊类型的文件，它存储着另一个文件的路径名，相当于快捷方式。软链接可以跨文件系统，因为它们使用路径名标识文件。当删除一个软链接时，原始文件不受影响，只有软链接本身被删除。</li>
+</ol>
+<p>总结：软链接更灵活，但是性能不如硬链接。硬链接的缺点是不能跨越文件系统，但是优点是可以减少磁盘空间占用，因为多个硬链接共享一个物理文件。</p>
+<h2 id="5-3-硬链接为什么不能跨文件系统？"><a href="#5-3-硬链接为什么不能跨文件系统？" class="headerlink" title="5.3 硬链接为什么不能跨文件系统？"></a>5.3 硬链接为什么不能跨文件系统？</h2><p>因为硬链接是通过索引节点建立连接的，然而每个文件系统都有自己的独立索引表，并且每个索引表只维护该文件系统内的索引。在不同的文件系统之间创建硬链接会导致索引节点之间冲突，所以硬链接不能跨文件系统。</p>
+<h2 id="5-4-提高文件系统性能的方式有哪些？"><a href="#5-4-提高文件系统性能的方式有哪些？" class="headerlink" title="5.4 提高文件系统性能的方式有哪些？"></a>5.4 提高文件系统性能的方式有哪些？</h2><ul>
+<li>优化硬件</li>
+<li>选择合适的文件系统</li>
+<li>运用缓存</li>
+<li>避免磁盘过度使用</li>
+<li>对磁盘进行合理分区</li>
+</ul>
+<h2 id="5-5-常见的磁盘调度算法有哪些？"><a href="#5-5-常见的磁盘调度算法有哪些？" class="headerlink" title="5.5 常见的磁盘调度算法有哪些？"></a>5.5 常见的磁盘调度算法有哪些？</h2><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/disk-scheduling-algorithms.png" alt="常见的磁盘调度算法"/></div><div class="image-meta"><span class="image-caption center">常见的磁盘调度算法</span></div></div>
+
+<ol>
+<li><strong>先来先服务算法</strong>：按照请求到达磁盘调度器的顺序处理。不过平均寻道时间较长，而且后到的请求可能需要等待很长时间。</li>
+<li><strong>最短寻道时间优先算法</strong>：优先选择距离<strong>当前磁头位置最近</strong>的请求进行服务。但远离磁头位置的请求可能长时间得不到响应。</li>
+<li>**扫描算法(SCAN)**：磁头沿着一个方向扫描磁盘，如果有请求就处理，直到磁盘边界，然后改变方向，依次往复。</li>
+<li>**循环扫描算法(C-SCAN)**：SCAN的变体，只在磁盘的一侧进行扫描，并且只按照一个方向扫描，直到到达磁盘边界，然后回到磁盘起点，重新开始循环。</li>
+<li>**边扫描边观察算法(LOOK)**：SCAN是到了磁盘边界才改变移动方向，这样可能会做很多无用功，LOOK是移动方向上如果没有请求，就立即改变方向，依次往复。</li>
+<li>**均衡循环扫描算法(C-LOOK)**：C-SCAN是到边界才改变方向，这样可能会做很多无用功，C-LOOK对C-SCAN做了改进，如果移动方向上没有请求了，就立即让磁头返回，而且不需要返回到起点，只需要返回到有磁道访问请求的位置即可。</li>
+</ol>
+
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/07/10/10-%E4%B8%AD%E9%97%B4%E6%8A%80%E6%9C%AF/">10.中间技术</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/07/05/8-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">8.计算机网络</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

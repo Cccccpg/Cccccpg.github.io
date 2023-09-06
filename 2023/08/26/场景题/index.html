@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>场景题 - Cccccpg</title>
+
+  
+    <meta name="description" content="该部分总结了一些网上常见的面试场景题，并且给出了自己的一些解决方案">
+<meta property="og:type" content="article">
+<meta property="og:title" content="场景题">
+<meta property="og:url" content="https://cccccpg.github.io/2023/08/26/%E5%9C%BA%E6%99%AF%E9%A2%98/index.html">
+<meta property="og:site_name" content="Cccccpg">
+<meta property="og:description" content="该部分总结了一些网上常见的面试场景题，并且给出了自己的一些解决方案">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-26T01:52:34.000Z">
+<meta property="article:modified_time" content="2023-08-26T04:27:05.727Z">
+<meta property="article:author" content="Cccccpg">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="面试">
+<meta property="article:tag" content="面经">
+<meta property="article:tag" content="场景题">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  <meta name="keywords" content="Java,面试,面经,场景题">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/%E5%A4%B4%E5%83%8F.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">Cccccpg</div></a></div>
+
+<nav class="menu dis-select"></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">场景题</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E9%AB%98%E5%B9%B6%E5%8F%91%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84Web%E7%B3%BB%E7%BB%9F%EF%BC%9F"><span class="toc-text">1. 如何设计一个高并发高可用的Web系统？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E6%A8%A1%E5%9D%97%E6%8B%86%E5%88%86"><span class="toc-text">1.1 模块拆分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E7%BC%93%E5%AD%98"><span class="toc-text">1.2 缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-MQ"><span class="toc-text">1.3 MQ</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8"><span class="toc-text">1.4 分库分表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB"><span class="toc-text">1.5 读写分离</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%EF%BC%9F"><span class="toc-text">2.如何设计一个日志管理平台？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E9%87%87%E9%9B%86%E7%9A%84%E8%BF%87%E7%A8%8B%E8%A6%81%E6%80%8E%E4%B9%88%E5%81%9A%E6%89%8D%E8%83%BD%E4%B8%8D%E5%BD%B1%E5%93%8D%E5%85%B6%E4%BB%96%E7%9A%84%E6%9C%8D%E5%8A%A1%EF%BC%9F"><span class="toc-text">2.1 采集的过程要怎么做才能不影响其他的服务？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E9%87%87%E9%9B%86%E4%B8%8B%E6%9D%A5%E7%9A%84%E6%97%A5%E5%BF%97%E6%95%B0%E6%8D%AE%E7%94%A8%E4%BB%80%E4%B9%88%E5%AD%98%E5%82%A8%EF%BC%9F%E6%95%B0%E6%8D%AE%E9%87%8F%E5%A4%A7%E4%BA%86%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="toc-text">2.2 采集下来的日志数据用什么存储？数据量大了怎么办？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E7%9A%84%E6%90%9C%E7%B4%A2%E5%B7%B2%E7%BB%8F%E5%AD%98%E5%82%A8%E7%9A%84%E6%97%A5%E5%BF%97%EF%BC%9F"><span class="toc-text">2.3 如何高效的搜索已经存储的日志？</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Java%E5%85%AB%E8%82%A1/">Java八股</a> <span class="sep"></span> <a class="cap breadcrumb-link" href="/categories/Java%E5%85%AB%E8%82%A1/%E6%89%A9%E5%B1%95%E5%86%85%E5%AE%B9/">扩展内容</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-08-26T01:52:34.000Z">2023-08-26</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>场景题</span></h1>
+<h2 id="1-如何设计一个高并发高可用的Web系统？"><a href="#1-如何设计一个高并发高可用的Web系统？" class="headerlink" title="1. 如何设计一个高并发高可用的Web系统？"></a>1. 如何设计一个高并发高可用的Web系统？</h2><p>这个问题我觉得可以从下面五个点回答：</p>
+<ul>
+<li>微服务模块拆分</li>
+<li>缓存</li>
+<li>MQ</li>
+<li>分库分表</li>
+<li>读写分离</li>
+</ul>
+<h3 id="1-1-模块拆分"><a href="#1-1-模块拆分" class="headerlink" title="1.1 模块拆分"></a>1.1 模块拆分</h3><p>通过Spring Cloud将一个系统拆分为多个子系统，也即微服务模块，然后每个微服务模块连接一个数据库，这样就有多个数据库同时处理并发业务。</p>
+<p>同时通过微服务拆分业务模块有以下优点：</p>
+<ol>
+<li>不同的微服务之间可以使用不同的技术；</li>
+<li>隔离性。一个服务不可用不会导致其他服务不可用；</li>
+<li>可扩展性。某个服务出现性能瓶颈，只需对此服务进行升级即可；</li>
+<li>简化部署。服务的部署是独立的，哪个服务出现问题，只需对此服务进行修改重新部署；</li>
+</ol>
+<h3 id="1-2-缓存"><a href="#1-2-缓存" class="headerlink" title="1.2 缓存"></a>1.2 缓存</h3><p>这也是常见的一种优化方式，在数据库层之上加一层缓存，减少对数据库的访问压力。</p>
+<p>因为缓存中的数据都是存储在内存里的，而数据库中的数据是写在磁盘上的，所以访问内存肯定是比访问磁盘快的可不止一个数量级。</p>
+<p>大部分的高并发场景，都是<strong>读多写少</strong>，那完全可以在数据库和缓存里都写一份，然后读的时候大量走缓存。毕竟 Redis 轻轻松松单机几万的并发。</p>
+<p>所以那些主要请求是<strong>读多写少的高并发场景下，可以采用缓存来抗高并发</strong>。</p>
+<h3 id="1-3-MQ"><a href="#1-3-MQ" class="headerlink" title="1.3 MQ"></a>1.3 MQ</h3><p>用Redis可以解决读多写少的情况，那么大量写操作的情况下可以采用MQ解决，因为MQ的优点就是可以：流量削峰、异步处理。</p>
+<p>当大量的写请求灌入 MQ 里，让这些请求一个一个排队慢慢玩儿，<strong>后台系统根据实际情况觉得消费速度，然后慢慢写</strong>，将并发量控制在 MySQL 承载范围的之内。</p>
+<p>所以高并发场景下那些承载复杂写业务逻辑的场景里，如何用 MQ 来异步写，提升并发性，MQ 单机抗几万并发也是 ok 的。</p>
+<h3 id="1-4-分库分表"><a href="#1-4-分库分表" class="headerlink" title="1.4 分库分表"></a>1.4 分库分表</h3><p>当数据量达到某个阀值时，数据库拆分就会成为一个紧急的需求。</p>
+<p>一般从业务上进行垂直拆分，也即按照业务类型进行拆分。但如果业务单一，也可从水平上进行拆分。</p>
+<p>拆分的原则一般要<strong>避免跨数据库事务</strong>。跨数据库事务可以选择在前期调研时把同一事务中的表放在一个数据库中。</p>
+<p>将一个数据库拆分为多个库，多个库来扛更高的并发；然后将一个表<strong>拆分为多个表</strong>，每个表的数据量保持少一点，提高 SQL的性能。 </p>
+<h3 id="1-5-读写分离"><a href="#1-5-读写分离" class="headerlink" title="1.5 读写分离"></a>1.5 读写分离</h3><p>读写分离，这个就是说大部分时候数据库可能也是读多写少，没必要所有请求都集中在一个库上，可以搞个主从模式，<strong>主库写入，从库读取</strong>，搞一个读写分离。</p>
+<p>当<strong>读流量太多</strong>的时候，还可以<strong>加更多的从库</strong>。</p>
+<h2 id="2-如何设计一个日志管理平台？"><a href="#2-如何设计一个日志管理平台？" class="headerlink" title="2.如何设计一个日志管理平台？"></a>2.如何设计一个日志管理平台？</h2><p><strong>持久层（数据库层）设计：</strong></p>
+<ol>
+<li><strong>数据库选择：</strong> 选择适合的数据库管理系统，如关系型数据库（如MySQL、PostgreSQL）或非关系型数据库（如MongoDB、Elasticsearch）等，根据日志数据的特性和需求来选择。</li>
+<li><strong>表设计：</strong> 设计适合存储日志数据的数据表结构，可以考虑分表、分区等策略，以提高查询性能。常见的字段包括时间戳、日志级别、模块、内容等。</li>
+<li><strong>索引优化：</strong> 根据常见的查询需求，添加合适的索引以提高查询效率。例如，根据时间范围、模块、关键字等查询。</li>
+<li><strong>数据清理：</strong> 定期清理过期的日志数据，避免数据库过大影响性能。</li>
+</ol>
+<p><strong>缓存设计：</strong></p>
+<ol>
+<li><strong>缓存类型：</strong> 可以考虑使用缓存来加速频繁查询的数据。常见的缓存系统有Redis等。</li>
+<li><strong>缓存策略：</strong> 根据访问模式和数据更新频率，选择合适的缓存策略，如LRU（最近最少使用）、TTL（过期时间）、缓存预热等。</li>
+<li><strong>数据同步：</strong> 如果涉及到数据更新，需要考虑缓存和数据库之间的数据同步机制，以保持数据的一致性。</li>
+</ol>
+<p><strong>控制层（应用程序）设计：</strong></p>
+<ol>
+<li><strong>日志收集：</strong> 设计日志收集模块，能够从不同的应用、模块收集日志，并进行标准化、分类。</li>
+<li><strong>日志级别和分类：</strong> 设计合适的日志级别（如DEBUG、INFO、ERROR等），根据不同的级别分类存储和展示。</li>
+<li><strong>日志展示：</strong> 设计用户界面以展示日志数据，可以实现按时间、级别、模块等过滤和查询。</li>
+<li><strong>权限管理：</strong> 考虑日志的访问权限，确保只有授权的用户可以访问相应的日志数据。</li>
+<li><strong>实时监控：</strong> 如果需要实时监控系统运行情况，可以设计实时监控面板，显示实时的日志信息和系统状态。</li>
+<li><strong>告警和通知：</strong> 根据日志的内容和级别，设计告警和通知机制，及时通知管理员发现问题。</li>
+</ol>
+<h3 id="2-1-采集的过程要怎么做才能不影响其他的服务？"><a href="#2-1-采集的过程要怎么做才能不影响其他的服务？" class="headerlink" title="2.1 采集的过程要怎么做才能不影响其他的服务？"></a>2.1 采集的过程要怎么做才能不影响其他的服务？</h3><p>通过Spring AOP来实现，因为AOP能够将那些<strong>与业务无关，但却对多个对象产生影响的公共行为和逻辑</strong>（例如事务处理、日志管理、权限控制等）抽取公共模块复用，便于<strong>减少系统的重复代码</strong>，<strong>降低模块间的耦合度</strong>，并有利于未来的<strong>可拓展性</strong>和<strong>可维护性</strong>。</p>
+<ol>
+<li><strong>创建切面类：</strong> 首先，你需要创建一个切面类，该类将包含日志采集的逻辑。这个类应该继承自 <code>org.aspectj.lang.annotation.Aspect</code>，并使用 <code>@Aspect</code> 注解进行标记。在切面类中，你可以定义通知（Advice）来拦截指定的方法。</li>
+<li><strong>定义切点：</strong> 在切面类中，你需要定义切点，切点是指在哪些方法上应用切面逻辑。可以使用 <code>@Pointcut</code> 注解来定义切点表达式，以匹配要拦截的方法。</li>
+<li><strong>编写通知：</strong> 通知是在切点方法执行前、执行后、出现异常时等特定时机执行的逻辑。Spring AOP 支持多种类型的通知，如 <code>@Before</code>、<code>@After</code>、<code>@AfterReturning</code> 和 <code>@AfterThrowing</code>。</li>
+<li><strong>配置切面：</strong> 在 Spring 配置文件（如 XML 配置文件或 Java 配置类）中，将切面类和切点配置为 Spring Bean，并将通知与切点关联起来。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.aspectj.lang.JoinPoint;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.*;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LoggingAspect</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Pointcut(&quot;execution(* com.example.myapp.service.*.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">serviceMethods</span><span class="params">()</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before(&quot;serviceMethods()&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">beforeMethod</span><span class="params">(JoinPoint joinPoint)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">methodName</span> <span class="operator">=</span> joinPoint.getSignature().getName();</span><br><span class="line">        System.out.println(<span class="string">&quot;Before method: &quot;</span> + methodName);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@AfterReturning(pointcut = &quot;serviceMethods()&quot;, returning = &quot;result&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterReturningMethod</span><span class="params">(JoinPoint joinPoint, Object result)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">methodName</span> <span class="operator">=</span> joinPoint.getSignature().getName();</span><br><span class="line">        System.out.println(<span class="string">&quot;After returning method: &quot;</span> + methodName + <span class="string">&quot;, Result: &quot;</span> + result);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@AfterThrowing(pointcut = &quot;serviceMethods()&quot;, throwing = &quot;exception&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterThrowingMethod</span><span class="params">(JoinPoint joinPoint, Exception exception)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">methodName</span> <span class="operator">=</span> joinPoint.getSignature().getName();</span><br><span class="line">        System.out.println(<span class="string">&quot;After throwing method: &quot;</span> + methodName + <span class="string">&quot;, Exception: &quot;</span> + exception.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上面的示例中创建了一个名为 <code>LoggingAspect</code> 的切面类，定义了 <code>serviceMethods()</code> 切点用于匹配位于 <code>com.example.myapp.service</code> 包下的所有方法。然后，我们编写了 <code>@Before</code>、<code>@AfterReturning</code> 和 <code>@AfterThrowing</code> 通知，分别用于在方法执行前、执行后（包括返回结果）和出现异常时执行相应的日志记录。</p>
+<p>最后，将切面类配置为 Spring Bean，可以通过 XML 配置文件或者使用 <code>@ComponentScan</code> 注解扫描到该类。这样，当匹配的方法被调用时，切面逻辑会自动触发。</p>
+<h3 id="2-2-采集下来的日志数据用什么存储？数据量大了怎么办？"><a href="#2-2-采集下来的日志数据用什么存储？数据量大了怎么办？" class="headerlink" title="2.2 采集下来的日志数据用什么存储？数据量大了怎么办？"></a>2.2 采集下来的日志数据用什么存储？数据量大了怎么办？</h3><p>日志基本都是以文件形式采集的，所以可以采用文本类型的数据库进行存储，比如MongoDB数据库，该数据库更适合存储大量文本类型的数据。</p>
+<p>当日志数据量过大时，有几种解决办法：</p>
+<ol>
+<li><strong>数据清理和归档：</strong> 定期清理过期的日志数据，将数据归档到硬盘中，以保持数据库的性能。</li>
+<li><strong>数据压缩和索引优化：</strong>可以使用数据压缩技术和适当的索引优化来减少存储空间和提高查询性能。</li>
+<li><strong>分布式计算和存储：</strong> 对于大数据量，可以考虑使用分布式计算和存储解决方案，如Hadoop、Spark等，以实现高性能的数据处理和分析。</li>
+<li><strong>流式处理：</strong> 如果日志数据是实时产生的，可以考虑使用流式处理平台，如Apache Kafka，将日志数据以流的形式进行处理和存储。</li>
+</ol>
+<h3 id="2-3-如何高效的搜索已经存储的日志？"><a href="#2-3-如何高效的搜索已经存储的日志？" class="headerlink" title="2.3 如何高效的搜索已经存储的日志？"></a>2.3 如何高效的搜索已经存储的日志？</h3><ol>
+<li><strong>索引：</strong> 为日志数据建立合适的索引，索引可以显著提高查询性能。索引字段应该基于查询的频率和条件来选择，例如时间戳、关键字、日志级别等。对于文本搜索，全文索引技术可以帮助搜索非结构化的日志数据。</li>
+<li><strong>合理的查询语句：</strong> 编写优化的查询语句，避免不必要的全表扫描。使用适当的条件、操作符和逻辑连接符来缩小查询范围，提高查询效率。</li>
+<li><strong>分区和分表：</strong> 对于关系型数据库，可以使用分区和分表策略，将数据分散存储在多个物理存储位置上，以减少每次查询的数据量。</li>
+</ol>
+
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/08/28/%E8%85%BE%E8%AE%AF%E4%B8%80%E9%9D%A2/">腾讯一面</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/08/17/%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80/">测试基础</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

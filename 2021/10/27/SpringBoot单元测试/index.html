@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>SpringBoot单元测试 - Cccccpg</title>
+
+  
+    <meta name="description" content="1、单元测试-JUnit5简介Spring Boot 2.2.0 版本开始引入 JUnit 5 作为单元测试默认库 作为最新版本的JUnit框架，JUnit5与之前版本的JUnit框架有很大的不同。由三个不同子项目的几个不同模块组成。 JUnit 5 &#x3D; JUnit Platform + JUnit Jupiter + JUnit Vintage  JUnit Platform: Jun">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot单元测试">
+<meta property="og:url" content="https://cccccpg.github.io/2021/10/27/SpringBoot%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/index.html">
+<meta property="og:site_name" content="Cccccpg">
+<meta property="og:description" content="1、单元测试-JUnit5简介Spring Boot 2.2.0 版本开始引入 JUnit 5 作为单元测试默认库 作为最新版本的JUnit框架，JUnit5与之前版本的JUnit框架有很大的不同。由三个不同子项目的几个不同模块组成。 JUnit 5 &#x3D; JUnit Platform + JUnit Jupiter + JUnit Vintage  JUnit Platform: Jun">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-27T01:32:15.000Z">
+<meta property="article:modified_time" content="2023-08-25T04:21:23.955Z">
+<meta property="article:author" content="Cccccpg">
+<meta property="article:tag" content="工作">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="SpringBoot">
+<meta property="article:tag" content="测试">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  <meta name="keywords" content="工作,技术,SpringBoot,测试">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/%E5%A4%B4%E5%83%8F.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">Cccccpg</div></a></div>
+
+<nav class="menu dis-select"></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">SpringBoot单元测试</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E6%96%AD%E8%A8%80"><span class="toc-text">简单断言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E6%96%AD%E8%A8%80"><span class="toc-text">数组断言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E5%90%88%E6%96%AD%E8%A8%80"><span class="toc-text">组合断言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E6%96%AD%E8%A8%80"><span class="toc-text">异常断言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B6%85%E6%97%B6%E6%96%AD%E8%A8%80"><span class="toc-text">超时断言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%A4%B1%E8%B4%A5"><span class="toc-text">快速失败</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Java%E6%8A%80%E6%9C%AF/">Java技术</a> <span class="sep"></span> <a class="cap breadcrumb-link" href="/categories/Java%E6%8A%80%E6%9C%AF/SpringBoot/">SpringBoot</a></div><div id="post-meta">发布于&nbsp;<time datetime="2021-10-27T01:32:15.000Z">2021-10-27</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>SpringBoot单元测试</span></h1>
+<h1 id="1、单元测试-JUnit5简介"><a href="#1、单元测试-JUnit5简介" class="headerlink" title="1、单元测试-JUnit5简介"></a>1、单元测试-JUnit5简介</h1><p><strong>Spring Boot 2.2.0 版本开始引入 JUnit 5 作为单元测试默认库</strong></p>
+<p>作为最新版本的JUnit框架，JUnit5与之前版本的JUnit框架有很大的不同。由三个不同子项目的几个不同模块组成。</p>
+<p><strong>JUnit 5 &#x3D; JUnit Platform + JUnit Jupiter + JUnit Vintage</strong></p>
+<ul>
+<li><p><strong>JUnit Platform</strong>: Junit Platform是在JVM上启动测试框架的基础，不仅支持Junit自制的测试引擎，其他测试引擎也都可以接入。</p>
+</li>
+<li><p><strong>JUnit Jupiter</strong>: JUnit Jupiter提供了JUnit5的新的编程模型，是JUnit5新特性的核心。内部包含了一个测试引擎，用于在Junit Platform上运行。</p>
+</li>
+<li><p><strong>JUnit Vintage</strong>: 由于JUint已经发展多年，为了照顾老的项目，JUnit Vintage提供了兼容JUnit4.x，JUnit3.x的测试引擎。</p>
+</li>
+</ul>
+<p><strong>注意</strong>：</p>
+<ul>
+<li><p>SpringBoot 2.4 以上版本移除了默认对 Vintage 的依赖。如果需要兼容JUnit4需要自行引入（不能使用JUnit4的功能 @Test）</p>
+</li>
+<li><p>JUnit 5’s Vintage已经从spring-boot-starter-test从移除。如果需要继续兼容Junit4需要自行引入Vintage依赖：</p>
+</li>
+</ul>
+<h1 id="2、单元测试-常用测试注解"><a href="#2、单元测试-常用测试注解" class="headerlink" title="2、单元测试-常用测试注解"></a>2、单元测试-常用测试注解</h1><ul>
+<li>@Test：表示方法是测试方法。但是与JUnit4的@Test不同，他的职责非常单一不能声明任何属性，拓展的测试将会由Jupiter提供额外测试</li>
+<li>@ParameterizedTest：表示方法是参数化测试。</li>
+<li>@RepeatedTest：表示方法可重复执行。</li>
+<li>@DisplayName：为测试类或者测试方法设置展示名称。</li>
+<li>@BeforeEach：表示在每个单元测试之前执行。</li>
+<li>@AfterEach：表示在每个单元测试之后执行。</li>
+<li>@BeforeAll：表示在所有单元测试之前执行。</li>
+<li>@AfterAll：表示在所有单元测试之后执行。</li>
+<li>@Tag：表示单元测试类别，类似于JUnit4中的@Categories。</li>
+<li>@Disabled：表示测试类或测试方法不执行，类似于JUnit4中的@Ignore。</li>
+<li>@Timeout：表示测试方法运行如果超过了指定时间将会返回错误。</li>
+<li>@ExtendWith：为测试类或测试方法提供扩展类引用。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sirius.admin;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.*;</span><br><span class="line"></span><br><span class="line"><span class="meta">@DisplayName(&quot;Junit5功能测试&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Junit5Test</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@DisplayName(&quot;测试DisplayName注解&quot;)</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">testDisplayName</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@DisplayName(&quot;测试方法2&quot;)</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@BeforeEach</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">testBeforeEach</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;测试就要开始了&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@AfterEach</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">testAfterEach</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;测试结束了&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@BeforeAll</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">testBeforeAll</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;所有测试就要开始了&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@AfterAll</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">testAfterAll</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;所有测试结束了&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="3、单元测试-断言机制"><a href="#3、单元测试-断言机制" class="headerlink" title="3、单元测试-断言机制"></a>3、单元测试-断言机制</h1><p>断言Assertion是测试方法中的核心部分，用来对测试需要满足的条件进行验证。这些断言方法都是org.junit.jupiter.api.Assertions的静态方法。检查业务逻辑返回的数据是否合理。所有的测试运行结束以后，会有一个详细的测试报告。</p>
+<p>JUnit 5 内置的断言可以分成如下几个类别：</p>
+<h3 id="简单断言"><a href="#简单断言" class="headerlink" title="简单断言"></a>简单断言</h3><p>用来对单个值进行简单的验证。如：</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">assertEquals</td>
+<td align="center">判断两个对象或两个原始类型是否相等</td>
+</tr>
+<tr>
+<td align="center">assertNotEquals</td>
+<td align="center">判断两个对象或两个原始类型是否不相等</td>
+</tr>
+<tr>
+<td align="center">assertSame</td>
+<td align="center">判断两个对象引用是否指向同一个对象</td>
+</tr>
+<tr>
+<td align="center">assertNotSame</td>
+<td align="center">判断两个对象引用是否指向不同的对象</td>
+</tr>
+<tr>
+<td align="center">assertTrue</td>
+<td align="center">判断给定的布尔值是否为 true</td>
+</tr>
+<tr>
+<td align="center">assertFalse</td>
+<td align="center">判断给定的布尔值是否为 false</td>
+</tr>
+<tr>
+<td align="center">assertNull</td>
+<td align="center">判断给定的对象引用是否为 null</td>
+</tr>
+<tr>
+<td align="center">assertNotNull</td>
+<td align="center">判断给定的对象引用是否不为 null</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 前面的断言失败，后面的代码都不会执行</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="meta">@DisplayName(&quot;测试简单断言&quot;)</span></span><br><span class="line">   <span class="meta">@Test</span></span><br><span class="line">   <span class="keyword">void</span> <span class="title function_">testSimpleAssertions</span><span class="params">()</span>&#123;</span><br><span class="line">       <span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> cal(<span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">       assertEquals(<span class="number">5</span>,res,<span class="string">&quot;业务逻辑计算失败&quot;</span>);</span><br><span class="line">       <span class="type">Object</span> <span class="variable">obj1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line">       <span class="type">Object</span> <span class="variable">obj2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line">       assertSame(obj1,obj2,<span class="string">&quot;两个对象不一样&quot;</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="数组断言"><a href="#数组断言" class="headerlink" title="数组断言"></a>数组断言</h3><p>通过 assertArrayEquals 方法来判断两个对象或原始类型的数组是否相等。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="meta">@DisplayName(&quot;array assertion&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">array</span><span class="params">()</span> &#123;</span><br><span class="line">	assertArrayEquals(<span class="keyword">new</span> <span class="title class_">int</span>[]&#123;<span class="number">1</span>, <span class="number">2</span>&#125;, <span class="keyword">new</span> <span class="title class_">int</span>[] &#123;<span class="number">1</span>, <span class="number">2</span>&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="组合断言"><a href="#组合断言" class="headerlink" title="组合断言"></a>组合断言</h3><p><code>assertAll()</code>方法接受多个 <code>org.junit.jupiter.api.Executable</code> 函数式接口的实例作为要验证的断言，可以通过 lambda 表达式很容易的提供这些断言。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="meta">@DisplayName(&quot;assert all&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">all</span><span class="params">()</span> &#123;</span><br><span class="line"> assertAll(<span class="string">&quot;Math&quot;</span>,</span><br><span class="line">    () -&gt; assertEquals(<span class="number">2</span>, <span class="number">1</span> + <span class="number">1</span>),</span><br><span class="line">    () -&gt; assertTrue(<span class="number">1</span> &gt; <span class="number">0</span>)</span><br><span class="line"> );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="异常断言"><a href="#异常断言" class="headerlink" title="异常断言"></a>异常断言</h3><p>在JUnit4时期，想要测试方法的异常情况时，需要用<code>@Rule</code>注解的<code>ExpectedException</code>变量还是比较麻烦的。而JUnit5提供了一种新的断言方式<code>Assertions.assertThrows()</code>，配合函数式编程就可以进行使用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="meta">@DisplayName(&quot;异常测试&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">exceptionTest</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">ArithmeticException</span> <span class="variable">exception</span> <span class="operator">=</span> Assertions.assertThrows(</span><br><span class="line">           <span class="comment">//扔出断言异常</span></span><br><span class="line">            ArithmeticException.class, () -&gt; System.out.println(<span class="number">1</span> % <span class="number">0</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="超时断言"><a href="#超时断言" class="headerlink" title="超时断言"></a>超时断言</h3><p>JUnit5还提供了Assertions.assertTimeout()为测试方法设置了超时时间。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="meta">@DisplayName(&quot;超时测试&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">timeoutTest</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">//如果测试方法时间超过1s将会异常</span></span><br><span class="line">    Assertions.assertTimeout(Duration.ofMillis(<span class="number">1000</span>), () -&gt; Thread.sleep(<span class="number">500</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="快速失败"><a href="#快速失败" class="headerlink" title="快速失败"></a>快速失败</h3><p>通过 fail 方法直接使得测试失败。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="meta">@DisplayName(&quot;fail&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">shouldFail</span><span class="params">()</span> &#123;</span><br><span class="line">	fail(<span class="string">&quot;This should fail&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="4、单元测试-前置条件"><a href="#4、单元测试-前置条件" class="headerlink" title="4、单元测试-前置条件"></a>4、单元测试-前置条件</h1><p>JUnit 5 中的前置条件（assumptions【假设】）类似于断言，不同之处在于不满足的<strong>断言assertions</strong>会使得测试方法失败，而<strong>不满足的前置条件只会使得测试方法的执行终止</strong>。</p>
+<p>前置条件可以看成是测试方法执行的前提，当该前提不满足时，就没有继续执行的必要。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@DisplayName(&quot;前置条件&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AssumptionsTest</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">environment</span> <span class="operator">=</span> <span class="string">&quot;DEV&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="meta">@DisplayName(&quot;simple&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">simpleAssume</span><span class="params">()</span> &#123;</span><br><span class="line">        assumeTrue(Objects.equals(<span class="built_in">this</span>.environment, <span class="string">&quot;DEV&quot;</span>));</span><br><span class="line">        assumeFalse(() -&gt; Objects.equals(<span class="built_in">this</span>.environment, <span class="string">&quot;PROD&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="meta">@DisplayName(&quot;assume then do&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">assumeThenDo</span><span class="params">()</span> &#123;</span><br><span class="line">        assumingThat(</span><br><span class="line">            Objects.equals(<span class="built_in">this</span>.environment, <span class="string">&quot;DEV&quot;</span>),</span><br><span class="line">            () -&gt; System.out.println(<span class="string">&quot;In DEV&quot;</span>)</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>assumeTrue 和 assumFalse 确保给定的条件为 true 或 false，不满足条件会使得测试执行终止。</p>
+<p>assumingThat 的参数是表示条件的布尔值和对应的 Executable 接口的实现对象。只有条件满足时，Executable 对象才会被执行；当条件不满足时，测试执行并不会终止。</p>
+<h1 id="5、单元测试-嵌套测试"><a href="#5、单元测试-嵌套测试" class="headerlink" title="5、单元测试-嵌套测试"></a>5、单元测试-嵌套测试</h1><p>JUnit 5 可以通过 Java 中的内部类和<code>@Nested</code> 注解实现嵌套测试，从而可以更好的把相关的测试方法组织在一起。在内部类中可以使用<code>@BeforeEach</code> 和<code>@AfterEach</code>注解，而且嵌套的层次没有限制。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@DisplayName(&quot;A stack&quot;)</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TestingAStackDemo</span> &#123;</span><br><span class="line"></span><br><span class="line">    Stack&lt;Object&gt; stack;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="meta">@DisplayName(&quot;is instantiated with new Stack()&quot;)</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">isInstantiatedWithNew</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Nested</span></span><br><span class="line">    <span class="meta">@DisplayName(&quot;when new&quot;)</span></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">WhenNew</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@BeforeEach</span></span><br><span class="line">        <span class="keyword">void</span> <span class="title function_">createNewStack</span><span class="params">()</span> &#123;</span><br><span class="line">            stack = <span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Test</span></span><br><span class="line">        <span class="meta">@DisplayName(&quot;is empty&quot;)</span></span><br><span class="line">        <span class="keyword">void</span> <span class="title function_">isEmpty</span><span class="params">()</span> &#123;</span><br><span class="line">            assertTrue(stack.isEmpty());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Test</span></span><br><span class="line">        <span class="meta">@DisplayName(&quot;throws EmptyStackException when popped&quot;)</span></span><br><span class="line">        <span class="keyword">void</span> <span class="title function_">throwsExceptionWhenPopped</span><span class="params">()</span> &#123;</span><br><span class="line">            assertThrows(EmptyStackException.class, stack::pop);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Test</span></span><br><span class="line">        <span class="meta">@DisplayName(&quot;throws EmptyStackException when peeked&quot;)</span></span><br><span class="line">        <span class="keyword">void</span> <span class="title function_">throwsExceptionWhenPeeked</span><span class="params">()</span> &#123;</span><br><span class="line">            assertThrows(EmptyStackException.class, stack::peek);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Nested</span></span><br><span class="line">        <span class="meta">@DisplayName(&quot;after pushing an element&quot;)</span></span><br><span class="line">        <span class="keyword">class</span> <span class="title class_">AfterPushing</span> &#123;</span><br><span class="line"></span><br><span class="line">            <span class="type">String</span> <span class="variable">anElement</span> <span class="operator">=</span> <span class="string">&quot;an element&quot;</span>;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@BeforeEach</span></span><br><span class="line">            <span class="keyword">void</span> <span class="title function_">pushAnElement</span><span class="params">()</span> &#123;</span><br><span class="line">                stack.push(anElement);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Test</span></span><br><span class="line">            <span class="meta">@DisplayName(&quot;it is no longer empty&quot;)</span></span><br><span class="line">            <span class="keyword">void</span> <span class="title function_">isNotEmpty</span><span class="params">()</span> &#123;</span><br><span class="line">                assertFalse(stack.isEmpty());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Test</span></span><br><span class="line">            <span class="meta">@DisplayName(&quot;returns the element when popped and is empty&quot;)</span></span><br><span class="line">            <span class="keyword">void</span> <span class="title function_">returnElementWhenPopped</span><span class="params">()</span> &#123;</span><br><span class="line">                assertEquals(anElement, stack.pop());</span><br><span class="line">                assertTrue(stack.isEmpty());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Test</span></span><br><span class="line">            <span class="meta">@DisplayName(&quot;returns the element when peeked but remains not empty&quot;)</span></span><br><span class="line">            <span class="keyword">void</span> <span class="title function_">returnElementWhenPeeked</span><span class="params">()</span> &#123;</span><br><span class="line">                assertEquals(anElement, stack.peek());</span><br><span class="line">                assertFalse(stack.isEmpty());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="6、单元测试-参数化测试"><a href="#6、单元测试-参数化测试" class="headerlink" title="6、单元测试-参数化测试"></a>6、单元测试-参数化测试</h1><p>参数化测试是JUnit5很重要的一个新特性，它使得用不同的参数多次运行测试成为了可能，也为我们的单元测试带来许多便利。</p>
+<p>利用@ValueSource等注解，指定入参，我们将可以使用不同的参数进行多次单元测试，而不需要每新增一个参数就新增一个单元测试，省去了很多冗余代码。</p>
+<p>利用**@ValueSource**等注解，指定入参，我们将可以使用不同的参数进行多次单元测试，而不需要每新增一个参数就新增一个单元测试，省去了很多冗余代码。</p>
+<ul>
+<li>@ValueSource: 为参数化测试指定入参来源，支持八大基础类以及String类型,Class类型</li>
+<li>@NullSource: 表示为参数化测试提供一个null的入参</li>
+<li>@EnumSource: 表示为参数化测试提供一个枚举入参</li>
+<li>@CsvFileSource：表示读取指定CSV文件内容作为参数化测试入参</li>
+<li>@MethodSource：表示读取指定方法的返回值作为参数化测试入参(注意方法返回需要是一个流)</li>
+</ul>
+<p>当然如果参数化测试仅仅只能做到指定普通的入参还达不到让我觉得惊艳的地步。让我真正感到他的强大之处的地方在于他可以支持外部的各类入参。如:CSV,YML,JSON 文件甚至方法的返回值也可以作为入参。只需要去实现<strong>ArgumentsProvider</strong>接口，任何外部文件都可以作为它的入参。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ParameterizedTest</span></span><br><span class="line"><span class="meta">@ValueSource(strings = &#123;&quot;one&quot;, &quot;two&quot;, &quot;three&quot;&#125;)</span></span><br><span class="line"><span class="meta">@DisplayName(&quot;参数化测试1&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">parameterizedTest1</span><span class="params">(String string)</span> &#123;</span><br><span class="line">    System.out.println(string);</span><br><span class="line">    Assertions.assertTrue(StringUtils.isNotBlank(string));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@ParameterizedTest</span></span><br><span class="line"><span class="meta">@MethodSource(&quot;method&quot;)</span>    <span class="comment">//指定方法名</span></span><br><span class="line"><span class="meta">@DisplayName(&quot;方法来源参数&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testWithExplicitLocalMethodSource</span><span class="params">(String name)</span> &#123;</span><br><span class="line">    System.out.println(name);</span><br><span class="line">    Assertions.assertNotNull(name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> Stream&lt;String&gt; <span class="title function_">method</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> Stream.of(<span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2021/10/28/SpringBoot%E7%9A%84Web%E5%BC%80%E5%8F%91/">SpringBoot的Web开发</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2021/10/26/SpringBoot%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE/">SpringBoot数据访问</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

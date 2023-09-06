@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>2.Java集合 - Cccccpg</title>
+
+  
+    <meta name="description" content="该部分内容主要包含Java集合中相关知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2.Java集合">
+<meta property="og:url" content="https://cccccpg.github.io/2023/06/16/2-Java%E9%9B%86%E5%90%88/index.html">
+<meta property="og:site_name" content="Cccccpg">
+<meta property="og:description" content="该部分内容主要包含Java集合中相关知识">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/1679626675887-e82a0029-f3c1-4578-a2c2-8afa82f3e5f9.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/1679883584962-b1a0b6df-a801-4710-b1fe-efe19419117d.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/1679887354948-f981415c-e278-4a9e-b7fc-2739449b0cd5.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/1679887361430-2c8688f6-ec3a-43dd-b33e-cf971e94b21b.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/1679886355833-289e85ef-537a-4f3f-a7a9-f37843d33188.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/1679900105138-6350ed5d-09b0-469e-8a0a-c66b9186696f.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/1679900123366-ea60f4b4-7a1c-465a-9068-584e6d8e0a4e.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/1679900155258-5a8acf53-d21d-4ef4-b4c8-1009acb1a387.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230803154308536.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230803155324831.png">
+<meta property="article:published_time" content="2023-06-16T01:29:40.000Z">
+<meta property="article:modified_time" content="2023-09-06T08:56:54.755Z">
+<meta property="article:author" content="Cccccpg">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="八股">
+<meta property="article:tag" content="基础">
+<meta property="article:tag" content="面试">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/1679626675887-e82a0029-f3c1-4578-a2c2-8afa82f3e5f9.png">
+  
+  
+  
+  <meta name="keywords" content="Java,八股,基础,面试">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/%E5%A4%B4%E5%83%8F.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">Cccccpg</div></a></div>
+
+<nav class="menu dis-select"></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">2.Java集合</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6"><span class="toc-text">1.1 集合框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E9%9B%86%E5%90%88%E7%B1%BB"><span class="toc-text">2.1 线程安全的集合类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-ArrayList%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E7%BA%BF%E7%A8%8B%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84"><span class="toc-text">3.1 ArrayList为什么是线程不安全的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-HashSet"><span class="toc-text">3.2 HashSet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-ArrayList%E5%92%8CLinkedList%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">4.1 ArrayList和LinkedList的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-ArrayList%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6"><span class="toc-text">5.1 ArrayList扩容机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-%E5%A6%82%E6%9E%9Cnew-ArrayList-20-%EF%BC%8C%E6%AD%A4%E6%97%B6%E9%9C%80%E8%A6%81%E6%89%A9%E5%AE%B9%E5%87%A0%E6%AC%A1%EF%BC%9F"><span class="toc-text">5.2 如果new ArrayList&lt;&gt;(20)，此时需要扩容几次？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-HashSet%E5%8E%BB%E9%87%8D%E5%8E%9F%E7%90%86"><span class="toc-text">6.1 HashSet去重原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-JDK-1-8%E4%B9%8B%E5%89%8D"><span class="toc-text">7.1 JDK 1.8之前</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-JDK-1-8%E4%B9%8B%E5%90%8E"><span class="toc-text">7.2 JDK 1.8之后</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-1-%E4%B8%BA%E4%BB%80%E4%B9%88HashMap%E7%9A%84%E5%BA%95%E5%B1%82%E8%A6%81%E7%94%A8%E7%BA%A2%E9%BB%91%E6%A0%91%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E5%B9%B3%E8%A1%A1%E6%A0%91%E5%91%A2%EF%BC%9F"><span class="toc-text">7.2.1 为什么HashMap的底层要用红黑树，而不是平衡树呢？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-3-put%E7%9A%84%E5%85%B7%E4%BD%93%E8%BF%87%E7%A8%8B"><span class="toc-text">7.3 put的具体过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-4-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%B4%9F%E8%BD%BD%E5%9B%A0%E5%AD%90%E6%98%AF0-75%EF%BC%9F"><span class="toc-text">7.4 为什么负载因子是0.75？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-5-%E8%AE%B2%E4%B8%80%E8%AE%B2HashMap%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6"><span class="toc-text">7.5 讲一讲HashMap的扩容机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-1-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">9.1 性能测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-2-%E5%AE%89%E5%85%A8%E6%80%A7%E8%83%BD"><span class="toc-text">9.2 安全性能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-1-JDK1-8%E4%B9%8B%E5%89%8D"><span class="toc-text">13.1 JDK1.8之前</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-2-JDK1-8%E4%B9%8B%E5%90%8E"><span class="toc-text">13.2 JDK1.8之后</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-3-%E6%80%BB%E7%BB%93"><span class="toc-text">13.3 总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-4-ConcurrentHashMap%E5%B7%B2%E7%BB%8F%E7%94%A8%E4%BA%86synchronized%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%A6%81%E7%94%A8CAS%E5%91%A2%EF%BC%9F"><span class="toc-text">13.4 ConcurrentHashMap已经用了synchronized为什么还要用CAS呢？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-5-ConcurrentHashMap%E7%9A%84put%E6%93%8D%E4%BD%9C%E7%9A%84%E6%B5%81%E7%A8%8B%EF%BC%9F"><span class="toc-text">13.5 ConcurrentHashMap的put操作的流程？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-6-ConcurrentHashMap%E6%98%AF%E6%80%8E%E4%B9%88%E6%89%A9%E5%AE%B9%E7%9A%84%EF%BC%9F"><span class="toc-text">13.6 ConcurrentHashMap是怎么扩容的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-7-%E8%BF%81%E7%A7%BB%E6%97%B6%E4%BC%9A%E6%8C%89%E4%B8%80%E5%AE%9A%E7%9A%84%E7%AE%97%E6%B3%95%E5%B0%86%E7%BA%A2%E9%BB%91%E6%A0%91%E5%92%8C%E9%93%BE%E8%A1%A8%E6%8B%86%E5%88%86%E4%B8%BA%E4%B8%A4%E4%BB%BD%EF%BC%8C%E8%BF%99%E4%B8%AA%E7%AE%97%E6%B3%95%E5%85%B7%E4%BD%93%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">13.7 迁移时会按一定的算法将红黑树和链表拆分为两份，这个算法具体是什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#13-7-1-%E9%93%BE%E8%A1%A8%E8%BF%81%E7%A7%BB"><span class="toc-text">13.7.1 链表迁移</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-7-2-%E7%BA%A2%E9%BB%91%E6%A0%91%E8%BF%81%E7%A7%BB"><span class="toc-text">13.7.2 红黑树迁移</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-8-%E5%A6%82%E6%9E%9C%E4%B8%80%E4%B8%AAConcurrentHashMap%E5%9C%A8%E8%A2%AB%E5%A4%9A%E4%B8%AA%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%97%B6%E6%93%8D%E4%BD%9C%EF%BC%8C%E8%BF%99%E4%B8%AA%E6%97%B6%E5%80%99%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%AE%B9%E4%BC%9A%E6%9C%89%E5%87%A0%E4%B8%AA%E7%BA%BF%E7%A8%8B%E5%9C%A8%E5%A4%84%E7%90%86%EF%BC%9F"><span class="toc-text">13.8  如果一个ConcurrentHashMap在被多个线程同时操作，这个时候进行扩容会有几个线程在处理？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-9-ConcurrentHashMap%E5%9C%A8get%E6%97%B6%E4%BC%9A%E5%8A%A0%E9%94%81%E5%90%97%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">13.9 ConcurrentHashMap在get时会加锁吗？为什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-10-ConcurrentHashMap%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E5%85%81%E8%AE%B8key%E5%92%8Cvalue%E4%B8%BAnull%EF%BC%9FHashMap%E5%85%81%E8%AE%B8%E5%90%97%EF%BC%9F"><span class="toc-text">13.10 ConcurrentHashMap为什么不允许key和value为null？HashMap允许吗？</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Java%E5%85%AB%E8%82%A1/">Java八股</a> <span class="sep"></span> <a class="cap breadcrumb-link" href="/categories/Java%E5%85%AB%E8%82%A1/%E5%9F%BA%E7%A1%80/">基础</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-06-16T01:29:40.000Z">2023-06-16</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>2.Java集合</span></h1>
+<h1 id="1、集合框架"><a href="#1、集合框架" class="headerlink" title="1、集合框架"></a>1、集合框架</h1><h2 id="1-1-集合框架"><a href="#1-1-集合框架" class="headerlink" title="1.1 集合框架"></a>1.1 集合框架</h2><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/1679626675887-e82a0029-f3c1-4578-a2c2-8afa82f3e5f9.png" alt="image.png"/></div><div class="image-meta"><span class="image-caption center">image.png</span></div></div>
+
+<h1 id="2、哪些集合类是线程安全的？"><a href="#2、哪些集合类是线程安全的？" class="headerlink" title="2、哪些集合类是线程安全的？"></a>2、哪些集合类是线程安全的？</h1><h2 id="2-1-线程安全的集合类"><a href="#2-1-线程安全的集合类" class="headerlink" title="2.1 线程安全的集合类"></a>2.1 线程安全的集合类</h2><ul>
+<li><strong>Vector</strong>：就比 arraylist 多了个同步化机制（线程安全），因为效率较低， 现在已经不太建议使用。在 web 应用中，特别是前台页面，往往效率（页面响应速度）是优先考虑的。 </li>
+<li><strong>Statck</strong>：堆栈类，先进后出。  </li>
+<li><strong>HashTable</strong>：就比 HashMap 多了个线程安全。 </li>
+<li><strong>ConcurrentHashMap</strong>：线程安全的集合类。</li>
+<li><strong>enumeration</strong>：枚举，相当于迭代器。</li>
+</ul>
+<h1 id="3、集合类线程不安全举例"><a href="#3、集合类线程不安全举例" class="headerlink" title="3、集合类线程不安全举例"></a>3、集合类线程不安全举例</h1><h2 id="3-1-ArrayList为什么是线程不安全的"><a href="#3-1-ArrayList为什么是线程不安全的" class="headerlink" title="3.1 ArrayList为什么是线程不安全的"></a>3.1 ArrayList为什么是线程不安全的</h2><p>请编写一个ArrayList不安全的案例并给出解决方案？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        List&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= <span class="number">30</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt;&#123;</span><br><span class="line">                list.add(UUID.randomUUID().toString().substring(<span class="number">0</span>, <span class="number">8</span>));</span><br><span class="line">                System.out.println(list);</span><br><span class="line">            &#125;, String.valueOf(i)).start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>故障现象：</strong>这段代码创建了 30 个线程，每个线程都向一个共享的列表 <strong>list</strong> ，并且向其中添加一个长度为 8 的随机字符串，然后输出当前列表内容。由于多个线程同时对 <strong>list</strong> 进行操作，因此会出现线程安全问题。</p>
+<p>结果会报<code>java.util.ConcurrentModificationException</code>异常</p>
+<p><strong>解决方案：</strong></p>
+<ol>
+<li>使用线程安全的数据结构，比如说<code>Vector</code>或者<code>CopyOnWriteArrayList</code>。</li>
+<li>使用 <strong>Collections.synchronizedList()</strong> 方法将非线程安全的 <strong>ArrayList</strong> 转换成线程安全的。</li>
+<li>在修改共享数据时，使用同步锁保证线程安全。其中使用同步锁时，要注意锁定的对象应该是所有线程共享的，而不是县城内部的局部变量。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        List&lt;String&gt; list = Collections.synchronizedList(<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;());</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">30</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (list)&#123;</span><br><span class="line">                list.add(UUID.randomUUID().toString().substring(<span class="number">0</span>, <span class="number">8</span>));</span><br><span class="line">                System.out.println(list);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>建议</strong>：在<strong>读多写少</strong>时，推荐使用<code>CopyOnWriteArrayList</code>，因为这个类里面是通过lock锁来实现线程同步的。</p>
+<h2 id="3-2-HashSet"><a href="#3-2-HashSet" class="headerlink" title="3.2 HashSet"></a>3.2 HashSet</h2><p><strong>HashSet底层数据结构是HashMap，那么为什么HashSet在执行</strong><code>add</code><strong>方法时，只添加1个元素，而不是HashMap中同时添加key和value呢？</strong></p>
+<p>通过查看源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Object</span> <span class="variable">PRESENT</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="title function_">HashSet</span><span class="params">()</span> &#123;</span><br><span class="line">    map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">add</span><span class="params">(E e)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> map.put(e, PRESENT)==<span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以发现，HashSet底层其实就是用HashMap实现的，Set在使用add添加元素的时候，用的就是HashMap的<code>put</code>方法，只不过在添加的时候，将需要添加的元素<code>e</code>作为key添加，而Value是一个默认的用<code>final</code>修饰的<code>Object</code>对象<code>PRESENT</code>。</p>
+<h1 id="4、ArrayList和LinkedList的区别"><a href="#4、ArrayList和LinkedList的区别" class="headerlink" title="4、ArrayList和LinkedList的区别"></a>4、ArrayList和LinkedList的区别</h1><h2 id="4-1-ArrayList和LinkedList的区别"><a href="#4-1-ArrayList和LinkedList的区别" class="headerlink" title="4.1 ArrayList和LinkedList的区别"></a>4.1 ArrayList和LinkedList的区别</h2><ul>
+<li><strong>线程安全：</strong>两者都不同步，线程都不安全。</li>
+<li><strong>底层数据结构：</strong><code>ArrayList</code>底层使用的是Object数组；<code>LinkedList</code>底层使用的是<strong>双向链表</strong>。</li>
+<li><strong>插入删除元素：</strong><code>ArrayList</code>采用数组存储；<code>LinkedList</code>采用链表存储，所以与数据结构中数组和链表特性相同。</li>
+<li><strong>快速访问：</strong><code>ArrayList</code>可以通过元素序号快速访问对象；<code>LinkedList</code>不支持高效的元素访问。</li>
+<li><strong>内存空间占用：</strong> <code>ArrayList</code> 的空间浪费主要体现在在 list 列表的结尾会预留一定的容量空间； <code>LinkedList</code> 的空间花费则体现在它的每一个元素都需要消耗比 ArrayList 更多的空间（因为要存放直接后继和直接前驱以及数据）。</li>
+</ul>
+<h1 id="5、ArrayList的扩容机制"><a href="#5、ArrayList的扩容机制" class="headerlink" title="5、ArrayList的扩容机制"></a>5、ArrayList的扩容机制</h1><h2 id="5-1-ArrayList扩容机制"><a href="#5-1-ArrayList扩容机制" class="headerlink" title="5.1 ArrayList扩容机制"></a>5.1 ArrayList扩容机制</h2><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/1679883584962-b1a0b6df-a801-4710-b1fe-efe19419117d.png" alt="image.png"/></div><div class="image-meta"><span class="image-caption center">image.png</span></div></div>
+<p><code>ArrayList</code>的底层采用<code>Object</code>数组来存储数据，在往 <code>ArrayList</code> 里面添加元素时，才会涉及到扩容机制。</p>
+<p>由于采用的是数组存储，所以会给数组设置默认长度10。</p>
+<p>当数组中没有元素时，是不会设置为默认长度10 的，此时数组是一个空数组。只有要添加元素时，会进入 <code>ensureCapacityInternal()</code>进行判断，如果数据数组为空数组，在添加第一个元素时才将数组长度扩容为默认值10，如果数组不为空数组 ， 就在 <code>ensureCapacityInternal()</code>里 面 调 用 <code>ensureExplicitCapacity()</code>来判断是否需要扩容。</p>
+<p>如果需要扩容，才调用 <code>grow()</code>方法进行扩容。在<code>grow()</code>方法里面，会通过右移位运算将数组长度的新长度扩容为**原来的 1.5倍左右（oldCapacity 为偶数就是 1.5 倍，否则是 1.5 倍左右)**。</p>
+<p>扩容后如果新容量不能满足所需容量，就将新容量扩大为所需容量。也即新容量大于 <code>MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8</code>，就调用<code>hugeCapacity()</code>方法来比较 <code>minCapacity</code> 和 <code>MAX_ARRAY_SIZE</code> 的大小，如果 <code>minCapacity</code> 大于默认最大容量，则新容量设为则为 <code>Integer.MAX_VALUE</code>，否则，新容量大小则为 <code>MAX_ARRAY_SIZE</code>，即为 <code>Integer.MAX_VALUE - 8</code>。如果最大容量大于<code>Integer.MAX_VALUE</code>，那么就会转为负数，然后抛出异常。</p>
+<p>最后将原数组中的元素拷贝到扩容后的新数组， 并将原数组的引用设置为拷贝后的数组。 </p>
+<h2 id="5-2-如果new-ArrayList-20-，此时需要扩容几次？"><a href="#5-2-如果new-ArrayList-20-，此时需要扩容几次？" class="headerlink" title="5.2 如果new ArrayList&lt;&gt;(20)，此时需要扩容几次？"></a>5.2 如果new ArrayList&lt;&gt;(20)，此时需要扩容几次？</h2><p>此时不会扩容，因为如果通过构造函数直接指定了ArrayList的长度，初始化时就会直接分配给ArrayList指定大小的容量，而不会触发扩容机制。</p>
+<h1 id="6、HashSet如何检查重复？"><a href="#6、HashSet如何检查重复？" class="headerlink" title="6、HashSet如何检查重复？"></a>6、HashSet如何检查重复？</h1><h2 id="6-1-HashSet去重原理"><a href="#6-1-HashSet去重原理" class="headerlink" title="6.1 HashSet去重原理"></a>6.1 HashSet去重原理</h2><p>把对象添加到HashSet中时，</p>
+<ol>
+<li><code>HashSet</code>会计算对象的<code>hashCode</code>值，来判断对象加入的位置，同时也会与其他加入的对象<code>hashCode</code>值作比较；</li>
+<li>如果没有相同的<code>hashcode</code>，<code>HashSet</code>会假设对象没有重复出现；</li>
+<li>如果有相同的<code>hashCode</code>，会调用<code>equals</code>来检查<code>hashCode</code>相同的对象是否真的相同；</li>
+<li>如果用equals比较之后，两者相同，那么<code>HashSet</code>就不会让这个元素加入。</li>
+</ol>
+<p><strong>简单总结：</strong>首先比较hashCode是否相等，再使用equals比较值是否相等。</p>
+<h1 id="7、HashMap的底层实现"><a href="#7、HashMap的底层实现" class="headerlink" title="7、HashMap的底层实现"></a>7、HashMap的底层实现</h1><h2 id="7-1-JDK-1-8之前"><a href="#7-1-JDK-1-8之前" class="headerlink" title="7.1 JDK 1.8之前"></a>7.1 JDK 1.8之前</h2><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/1679887354948-f981415c-e278-4a9e-b7fc-2739449b0cd5.png" alt="image.png"/></div><div class="image-meta"><span class="image-caption center">image.png</span></div></div>
+<p>底层采用<strong>数组+链表</strong>，HashMap 通过它的<code>hash()</code>方法获取 key 对应的<code>hashCode</code>值，然后通过<code>(n-1) &amp; hash</code> 判断当前元素存放的位置，如果当前位置存在元素的话，就判断该元素与要存入的 hash 值以及 key 是否相同，如果相同就直接覆盖，不相同的话，就通过拉链法解决 hash 冲突，将元素存放到链表中。</p>
+<h2 id="7-2-JDK-1-8之后"><a href="#7-2-JDK-1-8之后" class="headerlink" title="7.2 JDK 1.8之后"></a>7.2 JDK 1.8之后</h2><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/1679887361430-2c8688f6-ec3a-43dd-b33e-cf971e94b21b.png" alt="image.png"/></div><div class="image-meta"><span class="image-caption center">image.png</span></div></div>
+<p>JDK1.8 之后底层采用的是<strong>数组+（链表和红黑树）</strong>，主要不同在于解决hash冲突时，当链表长度超过设定的阈值长度时（默认为 8），会先判断数组的长度是否小于 64(初始最大容量)，如果小于的话，并不是直接转为红黑树，而是进行扩容，只有当数组长度大于 64 时，才会将对应的链表转换为红黑树。</p>
+<h3 id="7-2-1-为什么HashMap的底层要用红黑树，而不是平衡树呢？"><a href="#7-2-1-为什么HashMap的底层要用红黑树，而不是平衡树呢？" class="headerlink" title="7.2.1 为什么HashMap的底层要用红黑树，而不是平衡树呢？"></a>7.2.1 为什么HashMap的底层要用红黑树，而不是平衡树呢？</h3><p>因为HashMap中需要频繁的新增或删除数据，一旦树中节点需要改变，那必然导致树的结构需要调整。而红黑树不像平衡树那样追求“完全平衡”，红黑树只需要部分达到平衡即可，所以其增删节点时旋转的次数会比平衡树降低很多，这也就意味着红黑树的调整效率比平衡树高很多，同样也更好设计和实现。</p>
+<h2 id="7-3-put的具体过程"><a href="#7-3-put的具体过程" class="headerlink" title="7.3 put的具体过程"></a>7.3 put的具体过程</h2><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/1679886355833-289e85ef-537a-4f3f-a7a9-f37843d33188.png" alt="image.png"/></div><div class="image-meta"><span class="image-caption center">image.png</span></div></div>
+
+<ol>
+<li>判断键值对数组 table[i]是否为空或为null，若是，则执行 resize()进行扩容；否则进行下一步 ； </li>
+<li>根据 key计算hash 值得到插入的数组索引 i，如果 table[i]&#x3D;&#x3D;null，直接新建节点添加，如果 table[i]不为空，则进行下一步； </li>
+<li>判断 table[i]的首个元素是否和 key 一样，如果相同直接覆盖 value，否则进行下一步，这里的相同指的是 hashCode 以及 equals； </li>
+<li>判断 table[i] 是否为 treeNode，即 table[i] 是否是红黑树，如果是红黑树，则直接在树中插入键值对，否则操作链表； </li>
+<li>遍历 table[i]，判断链表长度是否大于 8，大于 8 的话就准备将链表转换为红黑树，（当红黑树内节点数 &lt;&#x3D; 6时，会将红黑树退化成链表）在将链表转换为红黑树之前，会进行判断是否真的转为红黑树。</li>
+<li>如果当前数组的长度小于64，那么会先进行数组的扩容，否则才会真的转红黑树，然后在红黑树中执行插入操作，否则进行链表的插入操作；遍历过程中若发现 key 已经存在直接覆盖 value 即可；</li>
+<li>插入成功后，判断实际存在的键值对数量 size 是否超过了最大容量 <code>threshold</code>(数组长度*0.75)，如果超过，进行扩容。</li>
+</ol>
+<h2 id="7-4-为什么负载因子是0-75？"><a href="#7-4-为什么负载因子是0-75？" class="headerlink" title="7.4 为什么负载因子是0.75？"></a>7.4 为什么负载因子是0.75？</h2><p>loadFactor 太大导致查找元素效率低，存放的数据拥挤，hash冲突概率大大提升；太小会导致数组的利用率低，存放的数据会很分散。</p>
+<p>loadFactor 的默认值为 <strong>0.75f 是官方给出的一个比较好的临界值，可以保证查询性能和空间利用效率之间取得平衡</strong>。</p>
+<h2 id="7-5-讲一讲HashMap的扩容机制"><a href="#7-5-讲一讲HashMap的扩容机制" class="headerlink" title="7.5 讲一讲HashMap的扩容机制"></a>7.5 讲一讲HashMap的扩容机制</h2><ol>
+<li>初始化或达到扩容阈值（<code>数组长度 * 0.75</code>）时，调用<code>resize()</code>方法进行扩容，第一次添加数据初始化数组长度为16；</li>
+<li>创建新的数组，新数组长度是原来数组长度的2倍；</li>
+<li>将原数组上的数据移到新数组上，其中没有Hash冲突的key，直接计算其在新数组中的索引位置添加；</li>
+<li>如果存在Hash冲突的key，先采用链地址法解决，如果是红黑树，则直接在红黑树中添加；如果是链表，则需要拆分链表，要么该元素留在原来的位置，要么移动到原来位置+增加的数组大小这个位置上。</li>
+<li>所有的元素移动完毕后，原数组的引用替换为新数组的引用，完成扩容操作。</li>
+</ol>
+<h1 id="8、HashMap的长度为什么是2的幂次方？"><a href="#8、HashMap的长度为什么是2的幂次方？" class="headerlink" title="8、HashMap的长度为什么是2的幂次方？"></a>8、HashMap的长度为什么是2的幂次方？</h1><p>当我们往 HashMap 里面 <code>put</code>元素的时候，会通过 hashMap 的 hash 方法，获取 key 对应的 hashCode 值，然后拿这个值去判断该元素要存放在那个地方。</p>
+<p>这里采用的是<code>(n-1) &amp; hash</code>，也即右移16位，其中 n 为 HashMap 的长度，这个操作只有当 n 是 2 的幂次方时，<code>(n-1) &amp; hash</code> 才和 <code>hash % n</code> 表示的是一个意思，这样才能找到这个 key 在数组中对应的位置。</p>
+<p>如果不是 2 的幂次方， <code>(n-1) &amp; hash</code> 是不等于 <code>hash%n</code> 的，之所以采用位运算的好处是：相较于%操作，它的<strong>计算效率更高，能保证散列均匀分布</strong>。  </p>
+<h1 id="9、HashMap有哪几种常见的遍历方式？"><a href="#9、HashMap有哪几种常见的遍历方式？" class="headerlink" title="9、HashMap有哪几种常见的遍历方式？"></a>9、HashMap有哪几种常见的遍历方式？</h1><ol>
+<li>迭代器（Iterator）方式遍历</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// entrySet遍历</span></span><br><span class="line">Iterator&lt;Map.Entry&lt;Integer, String&gt;&gt; iterator = map.entrySet().iterator();</span><br><span class="line"><span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">    Map.Entry&lt;Integer, String&gt; entry = iterator.next();</span><br><span class="line">    System.out.println(entry.getKey());</span><br><span class="line">    System.out.println(entry.getValue());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// keySet遍历</span></span><br><span class="line">Iterator&lt;Integer&gt; iterator = map.keySet().iterator();</span><br><span class="line"><span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">    <span class="type">Integer</span> <span class="variable">key</span> <span class="operator">=</span> iterator.next();</span><br><span class="line">    System.out.println(key);</span><br><span class="line">    System.out.println(map.get(key));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>For Each方式遍历</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// entrySet遍历</span></span><br><span class="line"><span class="keyword">for</span> (Map.Entry&lt;Integer, String&gt; entry : map.entrySet()) &#123;</span><br><span class="line">    System.out.println(entry.getKey());</span><br><span class="line">    System.out.println(entry.getValue());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// keySet遍历</span></span><br><span class="line"><span class="keyword">for</span> (Integer key : map.keySet()) &#123;</span><br><span class="line">    System.out.println(key);</span><br><span class="line">    System.out.println(map.get(key));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>Lambda表达式遍历</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// lambda表达式遍历</span></span><br><span class="line">map.forEach((key, value) -&gt; &#123;</span><br><span class="line">    System.out.println(key);</span><br><span class="line">    System.out.println(value);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>Streams API遍历</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 单线程遍历</span></span><br><span class="line">map.entrySet().stream().forEach((entry) -&gt; &#123;</span><br><span class="line">    System.out.println(entry.getKey());</span><br><span class="line">    System.out.println(entry.getValue());</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 多线程遍历</span></span><br><span class="line">map.entrySet().parallelStream().forEach((entry) -&gt; &#123;</span><br><span class="line">    System.out.println(entry.getKey());</span><br><span class="line">    System.out.println(entry.getValue());</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="9-1-性能测试"><a href="#9-1-性能测试" class="headerlink" title="9.1 性能测试"></a>9.1 性能测试</h2><p><code>entrySet</code>的性能比<code>keySet</code>的性能好，尽量使用<code>entrySet</code>来遍历Map集合。</p>
+<p><code>KeySet</code> 在循环时使用了 <code>map.get(key)</code>，而 map.get(key) 相当于又遍历了一遍 Map 集合去查询 key 所对应的值。</p>
+<p><strong>为什么要用“又”这个词？</strong></p>
+<p>那是因为<strong>在使用迭代器或者 for 循环时，其实已经遍历了一遍 Map 集合了，因此再使用 map.get(key) 查询时，相当于遍历了两遍</strong>。而 <code>EntrySet </code>只遍历了一遍 Map 集合，之后通过代码“<code>Entry&lt;Integer, String&gt; entry = iterator.next()</code>”把对象的 key 和 value 值都放入到了 Entry 对象中，因此再获取 key 和 value 值时就无需再遍历 Map 集合，只需要从 Entry 对象中取值就可以了。</p>
+<p>所以，<strong>EntrySet 的性能比 KeySet 的性能高出了一倍，因为 KeySet 相当于循环了两遍 Map 集合，而 EntrySet 只循环了一遍</strong>。</p>
+<h2 id="9-2-安全性能"><a href="#9-2-安全性能" class="headerlink" title="9.2 安全性能"></a>9.2 安全性能</h2><p>我们不能在遍历中使用集合 map.remove() 来删除数据，这是非安全的操作方式，但我们可以使用迭代器的 iterator.remove() 的方法来删除数据，这是安全的删除集合的方式。同样的我们也可以使用 Lambda 中的 removeIf 来提前删除数据，或者是使用 Stream 中的 filter 过滤掉要删除的数据进行循环，这样都是安全的，当然我们也可以在 for 循环前删除数据在遍历也是线程安全的。<br>所以，<strong>尽量使用迭代器（Iterator）来遍历EntrySet的遍历方式操作Map集合</strong></p>
+<h1 id="10、有哪些解决哈希冲突的方法？"><a href="#10、有哪些解决哈希冲突的方法？" class="headerlink" title="10、有哪些解决哈希冲突的方法？"></a>10、有哪些解决哈希冲突的方法？</h1><ol>
+<li>开放定址法：在发生冲突时，会去寻找一个新的空地址存放；<ol>
+<li>线性探测法：如果冲突了，就往后找空的地方放；</li>
+<li>平方探测法：如果冲突了，进行平方，向前或向后找空地方放；</li>
+</ol>
+</li>
+<li>再Hash法：如果发生冲突，那就再进行hash计算，直到没有发生冲突为止；</li>
+<li>链地址法。HashMap用的就是这种方法；</li>
+</ol>
+<h1 id="11、为什么HashMap中String、Integer这样的包装类适合作为Key？"><a href="#11、为什么HashMap中String、Integer这样的包装类适合作为Key？" class="headerlink" title="11、为什么HashMap中String、Integer这样的包装类适合作为Key？"></a>11、为什么HashMap中String、Integer这样的包装类适合作为Key？</h1><p><code>String</code>、<code>Integer</code>等包装类的特性能够保证Hash值的不可更改性和计算准确性，能够有效地减少Hash碰撞的几率。</p>
+<p>因为这些包装类都是<code>final</code>类型，具有不可变性，可以保证存储的<code>key</code>具有不可更改性，不会存在获取hash值不同的情况。而同时，这些包装类的内部已经重写<code>equals</code>、<code>hashCode</code>等方法，遵守了HashMap内部的规范，不容易出现hash值计算错误的情况。</p>
+<h1 id="12、ConcurrentHashMap和HashTable的区别？"><a href="#12、ConcurrentHashMap和HashTable的区别？" class="headerlink" title="12、ConcurrentHashMap和HashTable的区别？"></a>12、ConcurrentHashMap和HashTable的区别？</h1><p><strong>底层数据结构：</strong>ConcurrentHashMap在JDK1.8之前，采用的是数组+链表来实现；而在JDK1.8及之后的版本，采用的是数组+链表&#x2F;红黑树。HashTable采用的是数组+链表实现的。<br><strong>实现线程安全的方式：</strong></p>
+<ul>
+<li>在 JDK1.7 的时候，<code>ConcurrentHashMap</code>（分段锁 <code>ReentrantLock</code>） 对整个桶数组进行了分割分段(Segment)，每一把锁只锁容器其中一部分数据，多线程访问容器里不同数据段的数据，就不会存在锁竞争，提高并发访问率。</li>
+</ul>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/1679900105138-6350ed5d-09b0-469e-8a0a-c66b9186696f.png" alt="image.png"/></div><div class="image-meta"><span class="image-caption center">image.png</span></div></div>
+
+<ul>
+<li>到了 JDK1.8 的时候已经摒弃了 Segment 的概念，而是直接用 <code>Node 数组 + 链表 + 红黑树</code>的数据结构来实现，并发控制使用 <code>synchronized </code>和 <code>CAS </code>来操作。（JDK1.6 以后 对 synchronized 锁做了很多优化） 整个看起来就像是优化过且线程安全的 HashMap，虽然在 JDK1.8 中还能看到 Segment 的 数据结构，但是已经简化了属性，只是为了兼容旧版本；</li>
+</ul>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/1679900123366-ea60f4b4-7a1c-465a-9068-584e6d8e0a4e.png" alt="image.png"/></div><div class="image-meta"><span class="image-caption center">image.png</span></div></div>
+
+<ul>
+<li>HashTable(同一把锁) : 使用 synchronized 来保证线程安全，效率非常低下。当一个线程访问同步方法时，其他线程也访问同步方法，可能会进入阻塞或轮询状态，如使用 <code>put </code>添加元素，另一个线程不能使用 <code>put </code>添加元素，也不能使用 <code>get</code>，竞争会越来越激烈，效率也会越低。</li>
+</ul>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/1679900155258-5a8acf53-d21d-4ef4-b4c8-1009acb1a387.png" alt="image.png"/></div><div class="image-meta"><span class="image-caption center">image.png</span></div></div> 
+
+<h1 id="13、ConcurrentHashMap的线程安全是怎么实现的？"><a href="#13、ConcurrentHashMap的线程安全是怎么实现的？" class="headerlink" title="13、ConcurrentHashMap的线程安全是怎么实现的？"></a>13、ConcurrentHashMap的线程安全是怎么实现的？</h1><h2 id="13-1-JDK1-8之前"><a href="#13-1-JDK1-8之前" class="headerlink" title="13.1 JDK1.8之前"></a>13.1 JDK1.8之前</h2><p>首先将数据分为一段一段的存储，然后给每一段数据配一把锁，当一个线程占用锁访问其中一个段数据时，其他段的数据也能被其他线程访问。 </p>
+<p>ConcurrentHashMap 是由 Segment 数组结构和 HashEntry 数组结构组成。 Segment 实现了 ReentrantLock，所以 Segment 是一种<strong>可重入锁</strong>，扮演锁的角色。HashEntry 用于存储键值对数据。  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Segment</span>&lt;K,V&gt; <span class="keyword">extends</span> <span class="title class_">ReentrantLock</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一个 ConcurrentHashMap 里包含一个 Segment 数组，Segment 的个数一旦<strong>初始化就不能改变</strong>。 Segment 数组的大小默认是 16，也就是说默认可以同时支持 16 个线程并发写。</p>
+<p>Segment 的结构和 HashMap 类似，是一种数组和链表结构，一个 Segment 包含一个 HashEntry 数组，每个 HashEntry 是一个链表结构的元素，每个 Segment 守护着一个 HashEntry 数组里的元素，当对 HashEntry 数组的数据进行修改时，必须首先获得对应的 Segment 的锁。</p>
+<p>也就是说，对同一 Segment 的并发写入会被阻塞，不同 Segment 的写入是可以并发执行的。</p>
+<h2 id="13-2-JDK1-8之后"><a href="#13-2-JDK1-8之后" class="headerlink" title="13.2 JDK1.8之后"></a>13.2 JDK1.8之后</h2><p>ConcurrentHashMap 取消了 Segment 分段锁，采用 <code>Node + CAS + synchronized </code>来保证并发安全。</p>
+<p>数据结构跟 HashMap 1.8 的结构类似，数组+链表&#x2F;红黑二叉树。</p>
+<p>Java 8 在链表长度超过一定阈值（8）时，会判断数组长度是否64，是的话就将链表（寻址时间复杂度为 O(N)）转换为红黑树（寻址时间复杂度为 O(log(N))）。</p>
+<p>Java 8 中，锁粒度更细，<code>synchronized </code>只锁定当前<strong>链表或红黑二叉树的首节点</strong>，这样只要 hash 不冲突，就不会产生并发，就不会影响其他 Node 的读写，效率大幅提升。</p>
+<h2 id="13-3-总结"><a href="#13-3-总结" class="headerlink" title="13.3 总结"></a>13.3 总结</h2><ul>
+<li><strong>线程安全实现方式</strong> ：JDK 1.7 采用 Segment 分段锁来保证安全， Segment 是继承自 ReentrantLock。JDK1.8 放弃了 Segment 分段锁的设计，采用 Node + CAS + synchronized 保证线程安全，锁粒度更细，synchronized 只锁定当前链表或红黑二叉树的首节点。</li>
+<li><strong>Hash 碰撞解决方法</strong> : JDK 1.7 采用拉链法，JDK1.8 采用拉链法结合红黑树（链表长度超过一定阈值时，将链表转换为红黑树）。</li>
+<li><strong>并发度</strong> ：JDK 1.7 最大并发度是 Segment 的个数，默认是 16。JDK 1.8 最大并发度是 Node 数组的大小，并发度更大。</li>
+</ul>
+<h2 id="13-4-ConcurrentHashMap已经用了synchronized为什么还要用CAS呢？"><a href="#13-4-ConcurrentHashMap已经用了synchronized为什么还要用CAS呢？" class="headerlink" title="13.4 ConcurrentHashMap已经用了synchronized为什么还要用CAS呢？"></a>13.4 ConcurrentHashMap已经用了synchronized为什么还要用CAS呢？</h2><p>简单来说，都是保证了多线程下的原子性。<strong>CAS用于在数组中插入新节点</strong>，因为CAS操作是乐观锁，并没有加锁，而且实现比较简单，适用于无竞争的情况。而**<code>synchronized</code>用于在链表中或红黑树中插入删除节点**，如果到了要插入链表或者红黑树的地步，那说明竞争就比较激烈了，所以用<code>synchronized</code>锁首节点。</p>
+<ul>
+<li>当数组中当前位置为空的时候，可以通过CAS把新的节点写到数组中对应的位置；</li>
+<li>当数组中当前位置不为空时，通过synchronized来添加或删除节点。如果当前位置是链表，就遍历链表找到合适的位置插入或删除节点。如果当前位置是红黑树，就按照红黑树的规则插入或删除节点；</li>
+<li>当链表长度大于阈值（默认为8）时，就把链表转换为红黑树。当<strong>红黑树节点数小于等于</strong>阈值（默认为6）时，就把红黑树转换为链表。</li>
+</ul>
+<h2 id="13-5-ConcurrentHashMap的put操作的流程？"><a href="#13-5-ConcurrentHashMap的put操作的流程？" class="headerlink" title="13.5 ConcurrentHashMap的put操作的流程？"></a>13.5 ConcurrentHashMap的put操作的流程？</h2><ol>
+<li>计算key的hash值；</li>
+<li>如果当前table还没有初始化就会调用<code>initTable</code>方法进行初始化；</li>
+<li>如果table对应的位置为空，那么直接用CAS操作直接插入即可；</li>
+<li>如果检测到内部正在进行扩容操作，该线程就会帮它一起扩容；</li>
+<li>如果table对应的位置不为空，<strong>会先用synchronized锁住链表或红黑树的头元素</strong>。然后再继续对链表或红黑树执行添加操作；</li>
+<li>如果链表长度已经大于8（默认），就会判断是否要转为红黑树。（操作和HashMap一样）</li>
+<li>如果添加成功就调用<code>addCount()</code>方法统计<code>size</code>，并检查是否需要扩容。</li>
+</ol>
+<h2 id="13-6-ConcurrentHashMap是怎么扩容的？"><a href="#13-6-ConcurrentHashMap是怎么扩容的？" class="headerlink" title="13.6 ConcurrentHashMap是怎么扩容的？"></a>13.6 ConcurrentHashMap是怎么扩容的？</h2><p>需要扩容的情况：</p>
+<ol>
+<li>当前容量超过阈值；</li>
+<li>当链表元素大于8个，并且数组长度小于64的时候；</li>
+<li>当其他线程扩容时，会帮助一起扩容；</li>
+</ol>
+<p>扩容过程：通过CAS设置<code>sizeCtl</code>、<code>transferindex</code>等变量，协调多个线程并发扩容，<strong>其中无锁的关键就是CAS操作</strong>。</p>
+<ol>
+<li><p>需要扩容时，假设此时原table数组长度是64，那么此时记录<code>transferindex = 63，sizeCtl = 48</code>（sizeCtl的含义指的是扩容的阈值），若要进行扩容操作，会使得<code>sizeCtl = -2</code>（-2表示此时的hash桶正在处于扩容的过程中，这里用来记录当前并发扩容线程的数量）；</p>
+</li>
+<li><p>创建一个新数组newTable，长度为原数组table的两倍，也即128；</p>
+</li>
+<li><p>扩容线程A会先划分区间，让<code>transferindex - 16 = 47</code>，然后线程A会将<code>table[63]</code>到<code>table[47]</code>这个区间的hash桶向newTable中倒序进行数据迁移；</p>
+</li>
+<li><p>迁移时，会将桶内的链表或红黑树，按照一定的算法拆分成两份，分别插入到newTable[i]和newTable[n + i]的位置上（其中n为原数组的长度，这里就是64）。</p>
+</li>
+<li><p>该桶内的元素迁移完毕之后，会被设置为<code>ForwardingNode</code>节点，目的是告诉后来的其他线程，这个节点已经数据迁移完毕了，没有节点了；</p>
+</li>
+<li><p>若此时线程B访问到了这个<code>ForwardingNode</code>节点。</p>
+<ul>
+<li>如果线程B执行的是<code>put</code>等写操作，会先协助扩容，线程B去到transferindex标记的位置，重复上述线程A的操作，将transferindex减16，然后对自己负责的这部分区间进行倒序数据迁移，此时的<code>sizeCtl = sizeCtl - 1 = -3</code>表示新来了个线程。</li>
+<li>如果线程B执行的是<code>get</code>等读操作，则会调用<code>ForwardingNode</code>中的<code>find</code>方法，去newTable中找自己需要的元素，此时不会帮忙扩容；</li>
+</ul>
+<p><strong>注：线程B和线程A此时是同步进行扩容迁移操作的，因为两个线程负责的是不同的区间，所以他们之间是互不干扰的；</strong></p>
+</li>
+<li><p>如果线程A先执行完原本区间的迁移工作，就会到<code>transferindex </code>的位置，又会继续上面的过程，继续执行扩容迁移操作，直到transferindex的值等于0结束，才表示这个线程的扩容操作已经结束。每一个线程走到<code>transferindex = 0</code>的位置，就会让sizeCtl的值+1。</p>
+</li>
+<li><p>只有当<code>transferindex = 0</code>并且<code>sizeCtl = -1</code>时，才表示整个扩容的流程结束，然后会重新初始化，将table &#x3D; newTable，并且sizeCtl &#x3D; 128 * 0.75 &#x3D; 96。</p>
+</li>
+</ol>
+<h2 id="13-7-迁移时会按一定的算法将红黑树和链表拆分为两份，这个算法具体是什么？"><a href="#13-7-迁移时会按一定的算法将红黑树和链表拆分为两份，这个算法具体是什么？" class="headerlink" title="13.7 迁移时会按一定的算法将红黑树和链表拆分为两份，这个算法具体是什么？"></a>13.7 迁移时会按一定的算法将红黑树和链表拆分为两份，这个算法具体是什么？</h2><h3 id="13-7-1-链表迁移"><a href="#13-7-1-链表迁移" class="headerlink" title="13.7.1 链表迁移"></a>13.7.1 链表迁移</h3><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230803154308536.png" alt="image-20230803154308536" style="zoom:70%;" />
+
+<ol>
+<li>首先会锁住Node节点，然后再进行迁移操作；</li>
+<li>先找到lastRun节点，将其设置为<strong>hn链表</strong>的节点；</li>
+<li>从首节点开始遍历链表，将蓝色的节点设置为<strong>ln链表</strong>中的节点，红色的节点设置为<strong>hn链表</strong>中的节点；</li>
+<li>依次循环上述步骤，直到原链表被拆分为hn链表和ln节点链表两个链表，这样就拆分为两个链表了；</li>
+</ol>
+<p>注：lastRun节点保证了后面的节点与自己的与运算结果相同，避免了没有必要的循环，所以到lastRun开始就不循环了。从这开始后面要不然全是红的，要不然全是蓝的；</p>
+<h3 id="13-7-2-红黑树迁移"><a href="#13-7-2-红黑树迁移" class="headerlink" title="13.7.2 红黑树迁移"></a>13.7.2 红黑树迁移</h3><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230803155324831.png" alt="image-20230803155324831" style="zoom:67%;" />
+
+<ol>
+<li>首先会锁住数组上的TreeBin节点，再进行迁移；</li>
+<li>还是一样以链表的方式遍历红黑树，将其拼接到hn和ln两个链表上；</li>
+<li>不满足红黑树条件的，将其转换为普通的链表；</li>
+<li>满足红黑树条件的将其转换为红黑树；</li>
+</ol>
+<h2 id="13-8-如果一个ConcurrentHashMap在被多个线程同时操作，这个时候进行扩容会有几个线程在处理？"><a href="#13-8-如果一个ConcurrentHashMap在被多个线程同时操作，这个时候进行扩容会有几个线程在处理？" class="headerlink" title="13.8  如果一个ConcurrentHashMap在被多个线程同时操作，这个时候进行扩容会有几个线程在处理？"></a>13.8  如果一个ConcurrentHashMap在被多个线程同时操作，这个时候进行扩容会有几个线程在处理？</h2><p>这个要分类讨论，假设一个ConcurrentHashMap在同时被10个线程操作，此时进行扩容操作：</p>
+<ul>
+<li>如果其中有5个线程执行的是put等写操作，那么扩容的时候就会有5个线程在一起进行扩容；</li>
+<li>如果剩下的5个线程执行的时get等读操作，这些线程是不会协助扩容的。</li>
+</ul>
+<p><strong>简单来说：</strong>只有执行写操作的线程才会帮忙扩容，读操作的线程并不会执行协助扩容操作。</p>
+<h2 id="13-9-ConcurrentHashMap在get时会加锁吗？为什么？"><a href="#13-9-ConcurrentHashMap在get时会加锁吗？为什么？" class="headerlink" title="13.9 ConcurrentHashMap在get时会加锁吗？为什么？"></a>13.9 ConcurrentHashMap在get时会加锁吗？为什么？</h2><p>get 方法不需要加锁，因为 Node 的元素 val 和指针 next 是用 volatile 修饰的，在多线程环境下线程A修改结点的val或者新增节点的时候是对线程B可见的。</p>
+<h2 id="13-10-ConcurrentHashMap为什么不允许key和value为null？HashMap允许吗？"><a href="#13-10-ConcurrentHashMap为什么不允许key和value为null？HashMap允许吗？" class="headerlink" title="13.10 ConcurrentHashMap为什么不允许key和value为null？HashMap允许吗？"></a>13.10 ConcurrentHashMap为什么不允许key和value为null？HashMap允许吗？</h2><p>HashMap允许key和value为null，但是只允许一个key为null，不能有多个。</p>
+<p>因为ConcurrentHashMap的应用场景一般都是多线程，如果<code>map.get(key)</code>得到的结果是<code>null</code>，就会出问题，因为无法判断是这个<code>key</code>对应的<code>value</code>本来就是<code>null</code>，还是没有找到对应的<code>key</code>才返回的<code>null</code>，这就有了二义性。</p>
+<p>而HashMap可以这么操作是因为HashMap的应用场景是单线程情况下，可以用<code>containsKey(key)</code>判断<code>map</code>内是否存在了这个<code>key</code>。</p>
+<h1 id="14、了解HashMap在1-7中多线程死循环问题吗？"><a href="#14、了解HashMap在1-7中多线程死循环问题吗？" class="headerlink" title="14、了解HashMap在1.7中多线程死循环问题吗？"></a>14、了解HashMap在1.7中多线程死循环问题吗？</h1><p>因为HashMap在1.7中的底层数据结构采用的是数组＋链表实现的，在插入新元素的时候采用的是<strong>头插法</strong>。而在数组进行扩容的时候，会进行数据迁移，这个过程中有可能会导致死循环。</p>
+<p>比如说，现在有两个线程。</p>
+<p>线程一：读取到当前HashMap数据中的一个链表，在准备进行扩容的时候，线程二介入。</p>
+<p>线程二：读取HashMap，直接进行扩容。因为插入元素采用的是头插法，所以链表的顺序会倒过来，比如原来是AB，扩容后会变成BA，线程二执行结束。</p>
+<p>当线程一再回来继续执行的时候就会导致链表出现环结构，从而出现死循环问题。</p>
+<p>在1.8中，插入链表的方法更改为<strong>尾插法</strong>，保持了与扩容前一样的顺序，就避免了出现死循环问题。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wildyuhao/article/details/108182478">大厂面试爱问的HashMap死锁问题，看这一篇就够了_hashmap的死锁问题_wildyuhao的博客-CSDN博客</a></p>
+<h1 id="15、HashMap和HashTable的区别"><a href="#15、HashMap和HashTable的区别" class="headerlink" title="15、HashMap和HashTable的区别"></a>15、HashMap和HashTable的区别</h1><ul>
+<li><strong>线程是否安全</strong>：HashMap线程不安全，HashTable线程安全；</li>
+<li><strong>效率</strong>：因为HashTable是线程安全的，内部的方法基本都经过<code>synchronized</code> 修饰，所以其效率是不如HashMap的；</li>
+<li><strong>是否支持null的key</strong>：HashMap支持存null的key和value，但是只支持一个null的key，而HashTable不允许有null的key和value；</li>
+<li><strong>底层数据结构不同</strong>：HashMap是数组+链表&#x2F;红黑树，而HashTable是数组+链表；</li>
+<li><strong>默认初始容量和扩容大小不同</strong>：HashMap数组的默认初始容量是16，每次扩容为2n，而HashTable默认初始容量大小为11，扩容为2n+1。</li>
+</ul>
+<h1 id="16、HashMap和TreeMap的区别"><a href="#16、HashMap和TreeMap的区别" class="headerlink" title="16、HashMap和TreeMap的区别"></a>16、HashMap和TreeMap的区别</h1><p>TreeMap比HashMap多了对集合中的元素根据键排序的能力，以及对集合内元素的搜索能力。</p>
+
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/06/20/3-Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/">3.Java多线程</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/06/15/1-Java%E5%9F%BA%E7%A1%80/">1.Java基础</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
