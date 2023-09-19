@@ -46,7 +46,7 @@
 <meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230831152733033.png">
 <meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/1679624312548-77de3d3e-4229-41b4-8834-a13f9b90b6d2.png">
 <meta property="article:published_time" content="2023-06-15T05:25:41.000Z">
-<meta property="article:modified_time" content="2023-09-12T12:14:14.247Z">
+<meta property="article:modified_time" content="2023-09-17T07:10:28.292Z">
 <meta property="article:author" content="Cccccpg">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="八股">
@@ -164,13 +164,12 @@
 <ol>
 <li><p>包装类里面有一些很有用的方法和属性，如 HashCode，ParseInt。</p>
 </li>
-<li><p>基本类型不能赋 null 值，但某些场合又需要。</p>
+<li><p>基本类型不能赋 <code>null </code>值，但某些场合又需要。</p>
 </li>
 <li><p>有些地方不能直接用基本类型，比如集合的泛型里面。</p>
-<p>因此，光有基本数据类型是不行的，引入包装类，弥补基本数据类型的缺陷。</p>
 </li>
 </ol>
-<hr>
+<p>因此，光有基本数据类型是不行的，引入包装类，弥补基本数据类型的缺陷。</p>
 <h2 id="2-2-常量池缓存技术"><a href="#2-2-常量池缓存技术" class="headerlink" title="2.2 常量池缓存技术"></a>2.2 常量池缓存技术</h2><p>在 Java 中基本类型的包装类的大部分都实现了常量池技术。比如： Byte,Short,Integer,Long 这 4 种包装类默认创建了数值 [-128，127] 的相应类型的缓存数据，Character 创建了数值在[0,127]范围的缓存数据， Boolean 直接返回 True Or False 。两种浮点数类型的包装类 Float，Double没有实现常量池技术。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">Integer</span> <span class="variable">e</span> <span class="operator">=</span> <span class="number">1</span>;                  <span class="comment">// 整型变量，存储在栈中</span></span><br><span class="line">    <span class="type">Integer</span> <span class="variable">f</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Integer</span>(<span class="number">1</span>);     <span class="comment">// 整型对象，存储在堆中</span></span><br><span class="line">    <span class="type">Integer</span> <span class="variable">g</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Integer</span>(<span class="number">128</span>);</span><br><span class="line"></span><br><span class="line">    System.out.println(e == f);     <span class="comment">//这里&#x27;==&#x27;比较的是他们在内存中的地址，而不是值，所以不同</span></span><br><span class="line">    System.out.println(e.equals(f));<span class="comment">//要比较值，需要用equals方法，比较的是内容</span></span><br><span class="line">    System.out.println(g == f);</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">&quot;---------------------------&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">Double</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">1.0</span>;</span><br><span class="line">    <span class="type">Double</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">1.0</span>;</span><br><span class="line">    <span class="type">Double</span> <span class="variable">c</span> <span class="operator">=</span> <span class="number">2.0</span>;</span><br><span class="line">    <span class="type">Double</span> <span class="variable">d</span> <span class="operator">=</span> <span class="number">2.0</span>;</span><br><span class="line"></span><br><span class="line">    System.out.println(a == b);               <span class="comment">// 浮点数是以二进制形式存储的，在数值计算时会产生精度误差</span></span><br><span class="line">    System.out.println((c - <span class="number">0</span>) == (d - <span class="number">0</span>));   <span class="comment">// 最好的方法是通过与定值作差，进行比较</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
