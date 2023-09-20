@@ -46,7 +46,7 @@
 <meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230831152733033.png">
 <meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/1679624312548-77de3d3e-4229-41b4-8834-a13f9b90b6d2.png">
 <meta property="article:published_time" content="2023-06-15T05:25:41.000Z">
-<meta property="article:modified_time" content="2023-09-17T07:10:28.292Z">
+<meta property="article:modified_time" content="2023-09-20T13:04:39.447Z">
 <meta property="article:author" content="Cccccpg">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="八股">
@@ -463,6 +463,7 @@
 <p><code>NIO</code> 有三大核心部分：**<code>Channel</code>（通道）、<code>Buffer</code>（缓冲区）、<code>Selector</code>（选择器）** 。</p>
 <p>它是一种支持面向缓冲的，基于通道的 I&#x2F;O 操作方法。对于<strong>高负载</strong>、<strong>高并发</strong>的（网络） 应用，应使用 NIO 。在<strong>同步非阻塞 IO</strong> 模型中，应用程序会<strong>一直发起 read()调用</strong>，等待数据从内核空间拷贝到用户空间的这段时间里，线程依然是阻塞的，直到在内核把数据拷贝到用户空间。</p>
 <p>相比于<strong>同步阻塞 IO 模型</strong>，同步非阻塞 IO 模型确实有了很大改进。通过轮询操作，避免了一直阻塞。但是，这种 IO 模型同样存在问题：应用程序不断进行 I&#x2F;O 系统调用轮询数据是否已经准备好的过程是<strong>十分消耗 CPU 资源的</strong>。</p>
+<p>适用场景：NIO适用于连接数目多而且连接比较短的架构，比如聊天服务器，并发局限于应用中。</p>
 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/1629204717413-32393d5c-5ad4-4691-b9ca-7c6363952e72.png" alt="NIO" fancybox="true"/></div><div class="image-meta"><span class="image-caption center">NIO</span></div></div>
 
 <h3 id="11-2-1-Buffer的优点"><a href="#11-2-1-Buffer的优点" class="headerlink" title="11.2.1 Buffer的优点"></a>11.2.1 Buffer的优点</h3><p>缓冲区(Buffer)就是在内存中预留指定大小的存储空间用来对输入&#x2F;输出(I&#x2F;O)的数据作临时存储，这部分预留的内存空间就叫做缓冲区：</p>
