@@ -30,11 +30,13 @@
 <meta property="og:site_name" content="Cccccpg">
 <meta property="og:description" content="该部分主要总结了测试方面的相关基础知识">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/2020100722240517.png">
 <meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230827164118183.png">
 <meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230827164544031.png">
+<meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/20200517222058632.png">
 <meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/20190807104414715.png">
 <meta property="article:published_time" content="2023-08-17T08:22:24.000Z">
-<meta property="article:modified_time" content="2023-09-22T14:10:33.945Z">
+<meta property="article:modified_time" content="2023-09-23T01:45:51.052Z">
 <meta property="article:author" content="Cccccpg">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="八股">
@@ -42,7 +44,7 @@
 <meta property="article:tag" content="面试">
 <meta property="article:tag" content="测试">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230827164118183.png">
+<meta name="twitter:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/2020100722240517.png">
   
   
   
@@ -87,7 +89,7 @@
 
 <div class="widgets">
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">测试基础</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%EF%BC%9F"><span class="toc-text">1. 什么是软件测试？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="toc-text">1.1 什么是单元测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E4%BB%80%E4%B9%88%E6%98%AF%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95"><span class="toc-text">1.2 什么是集成测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E4%BB%80%E4%B9%88%E6%98%AF%E7%B3%BB%E7%BB%9F%E6%B5%8B%E8%AF%95"><span class="toc-text">1.3 什么是系统测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E4%BB%80%E4%B9%88%E6%98%AF%E5%9B%9E%E5%BD%92%E6%B5%8B%E8%AF%95"><span class="toc-text">1.4 什么是回归测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-%E4%BB%80%E4%B9%88%E6%98%AF%E9%AA%8C%E6%94%B6%E6%B5%8B%E8%AF%95"><span class="toc-text">1.5 什么是验收测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BB%80%E4%B9%88%E6%98%AF%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95%EF%BC%9F"><span class="toc-text">2. 什么是黑盒测试？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BB%80%E4%B9%88%E6%98%AF%E7%99%BD%E7%9B%92%E6%B5%8B%E8%AF%95%EF%BC%9F"><span class="toc-text">3. 什么是白盒测试？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E8%A6%86%E7%9B%96%E6%A0%87%E5%87%86%E4%BB%8E%E5%BC%B1%E5%88%B0%E5%BC%BA"><span class="toc-text">3.1 覆盖标准从弱到强</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BB%80%E4%B9%88%E6%98%AF%E7%81%B0%E7%9B%92%E6%B5%8B%E8%AF%95%EF%BC%9F"><span class="toc-text">4. 什么是灰盒测试？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%9B%E8%A1%8C%E4%BA%86%E7%99%BD%E7%9B%92%E6%B5%8B%E8%AF%95%E4%B9%8B%E5%90%8E%E8%BF%98%E8%A6%81%E8%BF%9B%E8%A1%8C%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95%EF%BC%9F"><span class="toc-text">5. 为什么进行了白盒测试之后还要进行黑盒测试？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%B5%8B%E8%AF%95%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">6. 测试基本流程是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%B8%B8%E8%A7%81%E7%9A%84%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">7. 常见的测试方法有哪些？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E7%AD%89%E4%BB%B7%E7%B1%BB%E5%88%92%E5%88%86%E6%B3%95"><span class="toc-text">7.1 等价类划分法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E8%BE%B9%E7%95%8C%E5%80%BC%E5%88%86%E6%9E%90%E6%B3%95"><span class="toc-text">7.2 边界值分析法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-%E5%88%A4%E5%AE%9A%E8%A1%A8%E6%B3%95"><span class="toc-text">7.3 判定表法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-%E5%9B%A0%E6%9E%9C%E5%9B%BE%E5%88%86%E6%9E%90%E6%B3%95"><span class="toc-text">7.4 因果图分析法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-5-%E9%94%99%E8%AF%AF%E6%8E%A8%E6%B5%8B%E6%B3%95"><span class="toc-text">7.5 错误推测法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%EF%BC%9F"><span class="toc-text">8. 为什么要进行自动化测试？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-%E8%AF%B4%E8%AF%B4%E4%BD%A0%E7%9F%A5%E9%81%93%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6"><span class="toc-text">8.1 说说你知道的自动化测试框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E5%92%8C%E6%89%8B%E5%8A%A8%E6%B5%8B%E8%AF%95%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-text">8.2 自动化测试和手动测试的优缺点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#8-2-1-%E6%89%8B%E5%8A%A8%E6%B5%8B%E8%AF%95"><span class="toc-text">8.2.1 手动测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-2-2-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95"><span class="toc-text">8.2.2 自动化测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-%E8%AF%B4%E4%B8%80%E8%AF%B4jmeter"><span class="toc-text">8.3 说一说jmeter</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E7%9A%84%E6%B5%81%E7%A8%8B%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">9. 软件开发的流程是什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="toc-text">9.1 需求分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1"><span class="toc-text">9.2 概要设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1"><span class="toc-text">9.3 详细设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-4-%E7%BC%96%E7%A8%8B%E5%AE%9E%E7%8E%B0"><span class="toc-text">9.4 编程实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-5-%E6%B5%8B%E8%AF%95"><span class="toc-text">9.5 测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-6-%E8%BD%AF%E4%BB%B6%E4%BA%A4%E4%BB%98"><span class="toc-text">9.6 软件交付</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-7-%E9%AA%8C%E6%94%B6"><span class="toc-text">9.7 验收</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-8-%E7%BB%B4%E6%8A%A4"><span class="toc-text">9.8 维护</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%BE%AE%E4%BF%A1%E8%B4%A6%E5%8F%B7%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95%E7%95%8C%E9%9D%A2%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%EF%BC%9F"><span class="toc-text">10. 如何设计微信账号密码登录界面测试用例？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#10-1-%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">10.1 功能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-2-%E7%95%8C%E9%9D%A2%E6%B5%8B%E8%AF%95"><span class="toc-text">10.2 界面测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-3-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">10.3 性能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-4-%E5%AE%89%E5%85%A8%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="toc-text">10.4 安全性测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-5-%E5%85%BC%E5%AE%B9%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="toc-text">10.5 兼容性测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-6-%E6%9C%AC%E5%9C%B0%E5%8C%96%E6%B5%8B%E8%AF%95"><span class="toc-text">10.6 本地化测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E8%AF%B4%E4%B8%80%E8%AF%B4bug%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%92%8Cbug%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-text">11. 说一说bug的生命周期和bug的类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-1-bug%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">11.1 bug的生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2-bug%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-text">11.2 bug的类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E6%80%8E%E4%B9%88%E7%BC%96%E5%86%99%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%EF%BC%9F"><span class="toc-text">12. 怎么编写测试用例？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%BE%AE%E4%BF%A1%E6%9C%8B%E5%8F%8B%E5%9C%88%E7%82%B9%E8%B5%9E%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B"><span class="toc-text">13. 如何设计微信朋友圈点赞测试用例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#13-1-%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">13.1 功能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-2-%E7%95%8C%E9%9D%A2%E6%B5%8B%E8%AF%95"><span class="toc-text">13.2 界面测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-3-%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95"><span class="toc-text">13.3 接口测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-4-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">13.4 性能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-5-%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95"><span class="toc-text">13.5 安全测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-6-%E5%BC%B1%E7%BD%91%E6%B5%8B%E8%AF%95"><span class="toc-text">13.6 弱网测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-7-%E4%B8%AD%E6%96%AD%E6%B5%8B%E8%AF%95"><span class="toc-text">13.7 中断测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-8-%E5%85%BC%E5%AE%B9%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="toc-text">13.8 兼容性测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-%E5%A6%82%E4%BD%95%E5%AF%B9%E4%B8%80%E4%B8%AA%E6%9D%AF%E5%AD%90%E8%AE%BE%E8%AE%A1%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B"><span class="toc-text">14. 如何对一个杯子设计测试用例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#14-1-%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">14.1 功能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-2-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">14.2 性能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-3-%E7%95%8C%E9%9D%A2%E6%B5%8B%E8%AF%95"><span class="toc-text">14.3 界面测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-4-%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95"><span class="toc-text">14.4 安全测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-5-%E6%98%93%E7%94%A8%E6%80%A7"><span class="toc-text">14.5 易用性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-6-%E5%85%BC%E5%AE%B9%E6%80%A7"><span class="toc-text">14.6 兼容性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-7-%E9%9C%87%E5%8A%A8%E6%B5%8B%E8%AF%95"><span class="toc-text">14.7 震动测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-8-%E5%8F%AF%E7%A7%BB%E6%A4%8D%E6%80%A7"><span class="toc-text">14.8 可移植性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%EF%BC%9F"><span class="toc-text">15. 如何设计微信支付测试用例？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-%E5%A6%82%E6%9E%9C%E7%82%B9%E5%87%BB%E4%B8%80%E4%B8%AA%E6%8C%89%E9%92%AE%E4%BD%86%E6%98%AF%E6%B2%A1%E5%8F%8D%E5%BA%94%EF%BC%8C%E6%80%8E%E4%B9%88%E6%8E%92%E6%9F%A5%E8%BF%99%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="toc-text">16. 如果点击一个按钮但是没反应，怎么排查这个问题？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#16-1-%E6%80%8E%E4%B9%88%E8%BF%9B%E8%A1%8C%E6%8A%93%E5%8C%85%EF%BC%9F"><span class="toc-text">16.1 怎么进行抓包？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#17-%E9%A1%B9%E7%9B%AE%E6%80%8E%E4%B9%88%E8%BF%9B%E8%A1%8C%E5%8E%8B%E6%B5%8B%EF%BC%9F"><span class="toc-text">17. 项目怎么进行压测？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#18-%E9%81%87%E5%88%B0%E8%BF%87%E9%82%A3%E4%BA%9B%E5%8D%B0%E8%B1%A1%E6%B7%B1%E5%88%BB%E7%9A%84bug%EF%BC%9F%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%E7%9A%84%EF%BC%9F"><span class="toc-text">18. 遇到过那些印象深刻的bug？怎么解决的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#19-%E7%BB%99%E4%BD%A0%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E4%B8%BAip%E5%9C%B0%E5%9D%80%EF%BC%8C%E5%B9%B6%E8%AE%BE%E8%AE%A1%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B"><span class="toc-text">19. 给你一个字符串判断是否为ip地址，并设计测试用例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#19-1-%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E4%B8%BAip%E5%9C%B0%E5%9D%80"><span class="toc-text">19.1 判断字符串是否为ip地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-2-%E8%AE%BE%E8%AE%A1%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B"><span class="toc-text">19.2 设计测试用例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20-%E5%BC%80%E6%94%BE%E6%80%A7%E9%97%AE%E9%A2%98"><span class="toc-text">20. 开放性问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#20-1-%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF%E5%9B%A0%E4%B8%BA%E5%BC%80%E5%8F%91%E8%80%8C%E6%8E%A8%E8%BF%9F%EF%BC%8C%E6%B5%8B%E8%AF%95%E6%97%B6%E9%97%B4%E8%A2%AB%E5%8E%8B%E7%BC%A9%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="toc-text">20.1 项目上线因为开发而推迟，测试时间被压缩该怎么办？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20-2-%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF%E5%90%8E%E5%8F%91%E7%8E%B0bug%EF%BC%8C%E8%AF%A5%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86%EF%BC%9F"><span class="toc-text">20.2 项目上线后发现bug，该怎么处理？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20-3-%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98%E8%AF%B4%E4%B8%8D%E6%98%AFbug%E8%AF%A5%E6%80%8E%E4%B9%88%E5%BA%94%E5%AF%B9%EF%BC%9F"><span class="toc-text">20.3 开发人员说不是bug该怎么应对？</span></a></li></ol></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">测试基础</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80"><span class="toc-text">1. 测试基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AF%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%EF%BC%9F"><span class="toc-text">1.1 什么是软件测试？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="toc-text">1.1 什么是单元测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E4%BB%80%E4%B9%88%E6%98%AF%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95"><span class="toc-text">1.2 什么是集成测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E4%BB%80%E4%B9%88%E6%98%AF%E7%B3%BB%E7%BB%9F%E6%B5%8B%E8%AF%95"><span class="toc-text">1.3 什么是系统测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E4%BB%80%E4%B9%88%E6%98%AF%E5%9B%9E%E5%BD%92%E6%B5%8B%E8%AF%95"><span class="toc-text">1.4 什么是回归测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-%E4%BB%80%E4%B9%88%E6%98%AF%E9%AA%8C%E6%94%B6%E6%B5%8B%E8%AF%95"><span class="toc-text">1.5 什么是验收测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-%E4%BB%80%E4%B9%88%E6%98%AF%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95%EF%BC%9F"><span class="toc-text">1.6 什么是黑盒测试？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-%E4%BB%80%E4%B9%88%E6%98%AF%E7%99%BD%E7%9B%92%E6%B5%8B%E8%AF%95%EF%BC%9F"><span class="toc-text">1.7 什么是白盒测试？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A6%86%E7%9B%96%E6%A0%87%E5%87%86%E4%BB%8E%E5%BC%B1%E5%88%B0%E5%BC%BA"><span class="toc-text">覆盖标准从弱到强</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-8-%E4%BB%80%E4%B9%88%E6%98%AF%E7%81%B0%E7%9B%92%E6%B5%8B%E8%AF%95%EF%BC%9F"><span class="toc-text">1.8 什么是灰盒测试？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-9-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%9B%E8%A1%8C%E4%BA%86%E7%99%BD%E7%9B%92%E6%B5%8B%E8%AF%95%E4%B9%8B%E5%90%8E%E8%BF%98%E8%A6%81%E8%BF%9B%E8%A1%8C%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95%EF%BC%9F"><span class="toc-text">1.9 为什么进行了白盒测试之后还要进行黑盒测试？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B5%8B%E8%AF%95%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">2. 测试基本流程是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%B8%B8%E8%A7%81%E7%9A%84%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">3. 常见的测试方法有哪些？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E7%AD%89%E4%BB%B7%E7%B1%BB%E5%88%92%E5%88%86%E6%B3%95"><span class="toc-text">3.1 等价类划分法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E8%BE%B9%E7%95%8C%E5%80%BC%E5%88%86%E6%9E%90%E6%B3%95"><span class="toc-text">3.2 边界值分析法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E5%88%A4%E5%AE%9A%E8%A1%A8%E6%B3%95"><span class="toc-text">3.3 判定表法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E5%9B%A0%E6%9E%9C%E5%9B%BE%E5%88%86%E6%9E%90%E6%B3%95"><span class="toc-text">3.4 因果图分析法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-%E9%94%99%E8%AF%AF%E6%8E%A8%E6%B5%8B%E6%B3%95"><span class="toc-text">3.5 错误推测法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%EF%BC%9F"><span class="toc-text">4. 为什么要进行自动化测试？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E8%AF%B4%E8%AF%B4%E4%BD%A0%E7%9F%A5%E9%81%93%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6"><span class="toc-text">4.1 说说你知道的自动化测试框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E5%92%8C%E6%89%8B%E5%8A%A8%E6%B5%8B%E8%AF%95%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-text">4.2 自动化测试和手动测试的优缺点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-1-%E6%89%8B%E5%8A%A8%E6%B5%8B%E8%AF%95"><span class="toc-text">4.2.1 手动测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-2-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95"><span class="toc-text">4.2.2 自动化测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E8%AF%B4%E4%B8%80%E8%AF%B4jmeter"><span class="toc-text">4.3 说一说jmeter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-%E6%9C%89%E7%94%A8%E8%BF%87%E4%BB%80%E4%B9%88%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%E5%90%97%EF%BC%9F"><span class="toc-text">4.4 有用过什么测试工具吗？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E7%9A%84%E6%B5%81%E7%A8%8B%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">5. 软件开发的流程是什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="toc-text">5.1 需求分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1"><span class="toc-text">5.2 概要设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1"><span class="toc-text">5.3 详细设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-%E7%BC%96%E7%A8%8B%E5%AE%9E%E7%8E%B0"><span class="toc-text">5.4 编程实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5-%E6%B5%8B%E8%AF%95"><span class="toc-text">5.5 测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-6-%E8%BD%AF%E4%BB%B6%E4%BA%A4%E4%BB%98"><span class="toc-text">5.6 软件交付</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-7-%E9%AA%8C%E6%94%B6"><span class="toc-text">5.7 验收</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-8-%E7%BB%B4%E6%8A%A4"><span class="toc-text">5.8 维护</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E6%90%9C%E7%B4%A2%E6%A1%86%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%EF%BC%9F"><span class="toc-text">6. 如何设计搜索框测试用例？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">6.1 功能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-%E7%95%8C%E9%9D%A2%E6%B5%8B%E8%AF%95"><span class="toc-text">6.2 界面测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-%E5%AE%89%E5%85%A8%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="toc-text">6.3 安全性测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-%E5%85%BC%E5%AE%B9%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="toc-text">6.4 兼容性测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">6.5 性能测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E8%B4%AD%E7%89%A9%E8%BD%A6%E7%9A%84%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%EF%BC%9F"><span class="toc-text">7. 如何设计购物车的测试用例？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">7.1 功能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">7.2 性能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-%E7%95%8C%E9%9D%A2%E6%B5%8B%E8%AF%95"><span class="toc-text">7.3 界面测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-%E5%AE%89%E5%85%A8%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="toc-text">7.4 安全性测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-5-%E5%85%BC%E5%AE%B9%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="toc-text">7.5 兼容性测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-6-%E6%98%93%E7%94%A8%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="toc-text">7.6 易用性测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-7-%E7%BD%91%E7%BB%9C%E6%B5%8B%E8%AF%95"><span class="toc-text">7.7 网络测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-8-%E4%B8%AD%E6%96%AD%E6%B5%8B%E8%AF%95"><span class="toc-text">7.8 中断测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%EF%BC%9F"><span class="toc-text">8. 如何设计微信红包测试用例？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E6%89%8B%E6%9C%BA%E5%BC%80%E6%9C%BA%E9%94%AE%E7%9A%84%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%EF%BC%9F"><span class="toc-text">9. 如何设计手机开机键的测试用例？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">9.1 功能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">9.2 性能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-%E5%8F%AF%E9%9D%A0%E6%80%A7"><span class="toc-text">9.3 可靠性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-4-%E6%98%93%E7%94%A8%E6%80%A7"><span class="toc-text">9.4 易用性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%BE%AE%E4%BF%A1%E8%B4%A6%E5%8F%B7%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95%E7%95%8C%E9%9D%A2%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%EF%BC%9F"><span class="toc-text">10. 如何设计微信账号密码登录界面测试用例？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#10-1-%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">10.1 功能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-2-%E7%95%8C%E9%9D%A2%E6%B5%8B%E8%AF%95"><span class="toc-text">10.2 界面测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-3-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">10.3 性能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-4-%E5%AE%89%E5%85%A8%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="toc-text">10.4 安全性测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-5-%E5%85%BC%E5%AE%B9%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="toc-text">10.5 兼容性测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-6-%E6%9C%AC%E5%9C%B0%E5%8C%96%E6%B5%8B%E8%AF%95"><span class="toc-text">10.6 本地化测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E8%AF%B4%E4%B8%80%E8%AF%B4bug%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%92%8Cbug%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-text">11. 说一说bug的生命周期和bug的类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-1-bug%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">11.1 bug的生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2-bug%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-text">11.2 bug的类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E6%80%8E%E4%B9%88%E7%BC%96%E5%86%99%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%EF%BC%9F"><span class="toc-text">12. 怎么编写测试用例？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%BE%AE%E4%BF%A1%E6%9C%8B%E5%8F%8B%E5%9C%88%E7%82%B9%E8%B5%9E%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B"><span class="toc-text">13. 如何设计微信朋友圈点赞测试用例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#13-1-%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">13.1 功能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-2-%E7%95%8C%E9%9D%A2%E6%B5%8B%E8%AF%95"><span class="toc-text">13.2 界面测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-3-%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95"><span class="toc-text">13.3 接口测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-4-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">13.4 性能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-5-%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95"><span class="toc-text">13.5 安全测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-6-%E5%BC%B1%E7%BD%91%E6%B5%8B%E8%AF%95"><span class="toc-text">13.6 弱网测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-7-%E4%B8%AD%E6%96%AD%E6%B5%8B%E8%AF%95"><span class="toc-text">13.7 中断测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-8-%E5%85%BC%E5%AE%B9%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="toc-text">13.8 兼容性测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-%E5%A6%82%E4%BD%95%E5%AF%B9%E4%B8%80%E4%B8%AA%E6%9D%AF%E5%AD%90%E8%AE%BE%E8%AE%A1%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B"><span class="toc-text">14. 如何对一个杯子设计测试用例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#14-1-%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">14.1 功能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-2-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-text">14.2 性能测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-3-%E7%95%8C%E9%9D%A2%E6%B5%8B%E8%AF%95"><span class="toc-text">14.3 界面测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-4-%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95"><span class="toc-text">14.4 安全测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-5-%E6%98%93%E7%94%A8%E6%80%A7"><span class="toc-text">14.5 易用性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-6-%E5%85%BC%E5%AE%B9%E6%80%A7"><span class="toc-text">14.6 兼容性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-7-%E9%9C%87%E5%8A%A8%E6%B5%8B%E8%AF%95"><span class="toc-text">14.7 震动测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-8-%E5%8F%AF%E7%A7%BB%E6%A4%8D%E6%80%A7"><span class="toc-text">14.8 可移植性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%EF%BC%9F"><span class="toc-text">15. 如何设计微信支付测试用例？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-%E5%A6%82%E6%9E%9C%E9%A1%B5%E9%9D%A2%E7%82%B9%E5%87%BB%E4%B8%80%E4%B8%AA%E6%8C%89%E9%92%AE%E4%BD%86%E6%98%AF%E6%B2%A1%E5%8F%8D%E5%BA%94%EF%BC%8C%E6%80%8E%E4%B9%88%E6%8E%92%E6%9F%A5%E8%BF%99%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="toc-text">16. 如果页面点击一个按钮但是没反应，怎么排查这个问题？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#16-1-%E6%80%8E%E4%B9%88%E8%BF%9B%E8%A1%8C%E6%8A%93%E5%8C%85%EF%BC%9F"><span class="toc-text">16.1 怎么进行抓包？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#17-%E9%A1%B9%E7%9B%AE%E6%80%8E%E4%B9%88%E8%BF%9B%E8%A1%8C%E5%8E%8B%E6%B5%8B%EF%BC%9F"><span class="toc-text">17. 项目怎么进行压测？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#18-%E9%81%87%E5%88%B0%E8%BF%87%E9%82%A3%E4%BA%9B%E5%8D%B0%E8%B1%A1%E6%B7%B1%E5%88%BB%E7%9A%84bug%EF%BC%9F%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%E7%9A%84%EF%BC%9F"><span class="toc-text">18. 遇到过那些印象深刻的bug？怎么解决的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#19-%E7%BB%99%E4%BD%A0%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E4%B8%BAip%E5%9C%B0%E5%9D%80%EF%BC%8C%E5%B9%B6%E8%AE%BE%E8%AE%A1%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B"><span class="toc-text">19. 给你一个字符串判断是否为ip地址，并设计测试用例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#19-1-%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E4%B8%BAip%E5%9C%B0%E5%9D%80"><span class="toc-text">19.1 判断字符串是否为ip地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-2-%E8%AE%BE%E8%AE%A1%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B"><span class="toc-text">19.2 设计测试用例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20-%E5%BC%80%E6%94%BE%E6%80%A7%E9%97%AE%E9%A2%98"><span class="toc-text">20. 开放性问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#20-1-%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF%E5%9B%A0%E4%B8%BA%E5%BC%80%E5%8F%91%E8%80%8C%E6%8E%A8%E8%BF%9F%EF%BC%8C%E6%B5%8B%E8%AF%95%E6%97%B6%E9%97%B4%E8%A2%AB%E5%8E%8B%E7%BC%A9%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="toc-text">20.1 项目上线因为开发而推迟，测试时间被压缩该怎么办？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20-2-%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF%E5%90%8E%E5%8F%91%E7%8E%B0bug%EF%BC%8C%E8%AF%A5%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86%EF%BC%9F"><span class="toc-text">20.2 项目上线后发现bug，该怎么处理？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20-3-%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98%E8%AF%B4%E4%B8%8D%E6%98%AFbug%E8%AF%A5%E6%80%8E%E4%B9%88%E5%BA%94%E5%AF%B9%EF%BC%9F"><span class="toc-text">20.3 开发人员说不是bug该怎么应对？</span></a></li></ol></li></ol></div></div></widget>
 
 
 
@@ -109,7 +111,9 @@
 
 <article class='md-text content post'>
 <h1 class="article-title"><span>测试基础</span></h1>
-<h2 id="1-什么是软件测试？"><a href="#1-什么是软件测试？" class="headerlink" title="1. 什么是软件测试？"></a>1. 什么是软件测试？</h2><p>使用某些技术手段对软件进行操作，发现软件缺陷，判断软件是否满足用户使用的需求。</p>
+<h2 id="1-测试基础"><a href="#1-测试基础" class="headerlink" title="1. 测试基础"></a>1. 测试基础</h2><h3 id="1-1-什么是软件测试？"><a href="#1-1-什么是软件测试？" class="headerlink" title="1.1 什么是软件测试？"></a>1.1 什么是软件测试？</h3><p>使用某些技术手段对软件进行操作，发现软件缺陷，判断软件是否满足用户使用的需求。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/2020100722240517.png" alt="测试分类" fancybox="true"/></div><div class="image-meta"><span class="image-caption center">测试分类</span></div></div>
+
 <h3 id="1-1-什么是单元测试"><a href="#1-1-什么是单元测试" class="headerlink" title="1.1 什么是单元测试"></a>1.1 什么是单元测试</h3><p>完成最小的软件设计单元（模块）的验证工作，目标是确保模块被正确的编码，使用过程设计描述作为指南，对重要的控制路径进行测试以发现模块内的错误，通常情况下是白盒的，对代码风格和规则、程序设计和结构、业务逻辑等进行静态测试，及早的发现和解决不易显现的错误。</p>
 <h3 id="1-2-什么是集成测试"><a href="#1-2-什么是集成测试" class="headerlink" title="1.2 什么是集成测试"></a>1.2 什么是集成测试</h3><p>通过测试发现与模块接口有关的问题。目标是把通过了单元测试的模块拿来，构造一个在设计中所描述的程序结构，应当避免一次性的集成（除非软件规模很小），而采用增量集成。 </p>
 <p>自顶向下集成：模块集成的顺序是首先集成主模块，然后按照控制层次结构向下进行集成，隶属于主模块的模块按照深度优先或广度优先的方式集成到整个结构中去。</p>
@@ -121,15 +125,15 @@
 <p>验收测试包括<strong>Alpha测试</strong>和<strong>Beta测试</strong>。</p>
 <p> Alpha测试：是由用户在开发者的场所来进行的，在一个受控的环境中进行。 </p>
 <p>Beta测试：由软件的最终用户在一个或多个用户场所来进行的，开发者通常不在现场，用户记录测试中遇到的问题并报告给开发者，开发者对系统进行最后的修改，并开始准备发布最终的软件。</p>
-<h2 id="2-什么是黑盒测试？"><a href="#2-什么是黑盒测试？" class="headerlink" title="2. 什么是黑盒测试？"></a>2. 什么是黑盒测试？</h2><p><strong>黑盒测试</strong>：在进行测试时，我们看不见程序的源代码，只<strong>对程序的功能进行测试</strong>。 </p>
+<h3 id="1-6-什么是黑盒测试？"><a href="#1-6-什么是黑盒测试？" class="headerlink" title="1.6 什么是黑盒测试？"></a>1.6 什么是黑盒测试？</h3><p><strong>黑盒测试</strong>：在进行测试时，我们看不见程序的源代码，只<strong>对程序的功能进行测试</strong>。 </p>
 <p>就号像一个黑色的盒子一样，看不到内部有什么东西。</p>
 <p>在黑盒测试的过程中主要关注<strong>输入与输出以及输出是否符合预期</strong>，并不关注具体代码的实现。</p>
 <p> <strong>常用的黑盒测试方法有</strong>：等价类划分法；边界值分析法；因果图法；场景法；正交实验设计法；判定表驱动分析法；错误推测法；功能图分析法。</p>
-<h2 id="3-什么是白盒测试？"><a href="#3-什么是白盒测试？" class="headerlink" title="3. 什么是白盒测试？"></a>3. 什么是白盒测试？</h2><p><strong>白盒测试</strong>：在测试的过程中能看到程序的源代码，主要是<strong>对程序的源代码进行测试</strong>。</p>
+<h3 id="1-7-什么是白盒测试？"><a href="#1-7-什么是白盒测试？" class="headerlink" title="1.7 什么是白盒测试？"></a>1.7 什么是白盒测试？</h3><p><strong>白盒测试</strong>：在测试的过程中能看到程序的源代码，主要是<strong>对程序的源代码进行测试</strong>。</p>
 <p>测试人员检查程序的内部结构，根据内部逻辑来设计测试用例，比如单元测试就是一种白盒测试。 </p>
 <p>白盒测试根据软件的内部逻辑设计测试用例，常用的技术是逻辑覆盖，即<strong>考察用测试数据运行被测程序时对程序逻辑的覆盖程度</strong>。</p>
 <p><strong>主要的覆盖标准有 6 种：语句覆盖、判定覆盖、条件覆盖、判定&#x2F;条件覆盖、组合条件覆盖和路径覆盖。</strong></p>
-<h3 id="3-1-覆盖标准从弱到强"><a href="#3-1-覆盖标准从弱到强" class="headerlink" title="3.1 覆盖标准从弱到强"></a>3.1 覆盖标准从弱到强</h3><ol>
+<h4 id="覆盖标准从弱到强"><a href="#覆盖标准从弱到强" class="headerlink" title="覆盖标准从弱到强"></a>覆盖标准从弱到强</h4><ol>
 <li>语句覆盖每条语句至少执行一次。 </li>
 <li>判定覆盖每个判定的每个分支至少执行一次。 </li>
 <li>条件覆盖每个判定的每个条件应取到各种可能的值。 </li>
@@ -137,18 +141,18 @@
 <li>条件组合覆盖每个判定中各条件的每一种组合至少出现一次。 </li>
 <li>路径覆盖使程序中每一条可能的路径至少执行一次。</li>
 </ol>
-<h2 id="4-什么是灰盒测试？"><a href="#4-什么是灰盒测试？" class="headerlink" title="4. 什么是灰盒测试？"></a>4. 什么是灰盒测试？</h2><p><strong>灰盒测试</strong>：是介于白盒测试和黑盒测试之间的一种测试方法，它能看见程序的<strong>部分</strong>源码，<strong>主要是对程序的接口进行测试</strong>。</p>
+<h3 id="1-8-什么是灰盒测试？"><a href="#1-8-什么是灰盒测试？" class="headerlink" title="1.8 什么是灰盒测试？"></a>1.8 什么是灰盒测试？</h3><p><strong>灰盒测试</strong>：是介于白盒测试和黑盒测试之间的一种测试方法，它能看见程序的<strong>部分</strong>源码，<strong>主要是对程序的接口进行测试</strong>。</p>
 <p>在我们执行测试的过程中，一般是先进行单元测试 -&gt; 集成测试 -&gt; 系统测试。</p>
 <p>在我们测试完成单个模块运行正确之后，还需要去验证单个模块与模块组合在一起时是否会出现问题，这个测试方式就是灰盒测试。</p>
-<h2 id="5-为什么进行了白盒测试之后还要进行黑盒测试？"><a href="#5-为什么进行了白盒测试之后还要进行黑盒测试？" class="headerlink" title="5. 为什么进行了白盒测试之后还要进行黑盒测试？"></a>5. 为什么进行了白盒测试之后还要进行黑盒测试？</h2><p>白盒测试不仅仅关注输入与输出的结果是否正确，同时还关注程序是如何处理的。而黑盒测试在整个测试过程中只关注输入和输出，如果输入一个测试数据，输出的结果是正确的，我们就认为这个功能是正确的。虽然从某种角度来看，白盒测试比黑盒测试更为全面。但是有一些黑盒测试的内容是白盒测试不能做到的。比如黑盒测试是更接近于用户角度使用的测试，因此我们还会关注程序的易用性、界面展示、业务流程等，而白盒测试时并不考虑这些。</p>
-<h2 id="6-测试基本流程是什么？"><a href="#6-测试基本流程是什么？" class="headerlink" title="6. 测试基本流程是什么？"></a>6. 测试基本流程是什么？</h2><ol>
+<h3 id="1-9-为什么进行了白盒测试之后还要进行黑盒测试？"><a href="#1-9-为什么进行了白盒测试之后还要进行黑盒测试？" class="headerlink" title="1.9 为什么进行了白盒测试之后还要进行黑盒测试？"></a>1.9 为什么进行了白盒测试之后还要进行黑盒测试？</h3><p>白盒测试不仅仅关注输入与输出的结果是否正确，同时还关注程序是如何处理的。而黑盒测试在整个测试过程中只关注输入和输出，如果输入一个测试数据，输出的结果是正确的，我们就认为这个功能是正确的。虽然从某种角度来看，白盒测试比黑盒测试更为全面。但是有一些黑盒测试的内容是白盒测试不能做到的。比如黑盒测试是更接近于用户角度使用的测试，因此我们还会关注程序的易用性、界面展示、业务流程等，而白盒测试时并不考虑这些。</p>
+<h2 id="2-测试基本流程是什么？"><a href="#2-测试基本流程是什么？" class="headerlink" title="2. 测试基本流程是什么？"></a>2. 测试基本流程是什么？</h2><ol>
 <li><strong>需求分析</strong>：阅读需求文档，联合前端、后端、测试、产品等部门，确保各部门对需求理解一致，了解软件需要的具体功能；</li>
 <li><strong>计划编写</strong>：确定测试的目标和范围，对人力、物力进行分配，确定哪些人要具体做哪些事情，对进度进行安排，确定要使用哪些测试工具、测试策略；</li>
 <li><strong>用例设计</strong>：分析需求，从需求中提取测试点，用来设计测试用例；</li>
 <li><strong>用例执行，提交缺陷，回归测试</strong>：当进行测试后，会发现软件的缺陷。确定缺陷后，将缺陷提交给开发人员，开发人员修改后进行回归测试；</li>
 <li><strong>测试报告</strong>：编写测试的总结报告。</li>
 </ol>
-<h2 id="7-常见的测试方法有哪些？"><a href="#7-常见的测试方法有哪些？" class="headerlink" title="7. 常见的测试方法有哪些？"></a>7. 常见的测试方法有哪些？</h2><h3 id="7-1-等价类划分法"><a href="#7-1-等价类划分法" class="headerlink" title="7.1 等价类划分法"></a>7.1 等价类划分法</h3><p>适用于穷举场景下</p>
+<h2 id="3-常见的测试方法有哪些？"><a href="#3-常见的测试方法有哪些？" class="headerlink" title="3. 常见的测试方法有哪些？"></a>3. 常见的测试方法有哪些？</h2><h3 id="3-1-等价类划分法"><a href="#3-1-等价类划分法" class="headerlink" title="3.1 等价类划分法"></a>3.1 等价类划分法</h3><p>适用于穷举场景下</p>
 <p>具体内容：在所有的测试数据中，对具有某种共同特征的数据集合进行划分，然后从每一个子集中选取少数具有代表性的数据作为测试用例。 </p>
 <p>比如：<strong>验证6-10位自然数QQ号的合法性</strong> </p>
 <p>按照等价类划分法： </p>
@@ -156,7 +160,7 @@
 <li>有效等价类：6-10位自然数；</li>
 <li>无效等价类：小于6位，大于10位自然数，以及6-10位非自然数</li>
 </ul>
-<h3 id="7-2-边界值分析法"><a href="#7-2-边界值分析法" class="headerlink" title="7.2 边界值分析法"></a>7.2 边界值分析法</h3><p>适用于有边界的范围</p>
+<h3 id="3-2-边界值分析法"><a href="#3-2-边界值分析法" class="headerlink" title="3.2 边界值分析法"></a>3.2 边界值分析法</h3><p>适用于有边界的范围</p>
 <p>具体内容：对输入、输出的边界值进行测试，在边界值分析法中规范了要选择的边界值，上点、离点、内点。</p>
 <ul>
 <li>上点：正好等于；</li>
@@ -165,7 +169,7 @@
 </ul>
 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230827164118183.png" alt="image-20230827164118183" fancybox="true"/></div><div class="image-meta"><span class="image-caption center">image-20230827164118183</span></div></div>
 
-<h3 id="7-3-判定表法"><a href="#7-3-判定表法" class="headerlink" title="7.3 判定表法"></a>7.3 判定表法</h3><p>以表格的形式表达多条件依赖逻辑判断的工具。</p>
+<h3 id="3-3-判定表法"><a href="#3-3-判定表法" class="headerlink" title="3.3 判定表法"></a>3.3 判定表法</h3><p>以表格的形式表达多条件依赖逻辑判断的工具。</p>
 <p>比如：<strong>验证“若用户欠费或者关机，则不允许主被叫”功能的测试</strong>。</p>
 <ul>
 <li><strong>条件桩</strong>：列出问题中的所有条件，列出条件的次序无关紧要；</li>
@@ -175,22 +179,22 @@
 </ul>
 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230827164544031.png" alt="image-20230827164544031" fancybox="true"/></div><div class="image-meta"><span class="image-caption center">image-20230827164544031</span></div></div>
 
-<h3 id="7-4-因果图分析法"><a href="#7-4-因果图分析法" class="headerlink" title="7.4 因果图分析法"></a>7.4 因果图分析法</h3><p>利用图解法分析输入的各种组合情况，从而设计测试用例。</p>
-<h3 id="7-5-错误推测法"><a href="#7-5-错误推测法" class="headerlink" title="7.5 错误推测法"></a>7.5 错误推测法</h3><p>根据测试者以往的测试经验对可能出现的错误进行测试。</p>
-<h2 id="8-为什么要进行自动化测试？"><a href="#8-为什么要进行自动化测试？" class="headerlink" title="8. 为什么要进行自动化测试？"></a>8. 为什么要进行自动化测试？</h2><p>自动化测试是指使用自动化测试工具来执行测试用例。</p>
+<h3 id="3-4-因果图分析法"><a href="#3-4-因果图分析法" class="headerlink" title="3.4 因果图分析法"></a>3.4 因果图分析法</h3><p>利用图解法分析输入的各种组合情况，从而设计测试用例。</p>
+<h3 id="3-5-错误推测法"><a href="#3-5-错误推测法" class="headerlink" title="3.5 错误推测法"></a>3.5 错误推测法</h3><p>根据测试者以往的测试经验对可能出现的错误进行测试。</p>
+<h2 id="4-为什么要进行自动化测试？"><a href="#4-为什么要进行自动化测试？" class="headerlink" title="4. 为什么要进行自动化测试？"></a>4. 为什么要进行自动化测试？</h2><p>自动化测试是指使用自动化测试工具来执行测试用例。</p>
 <ol>
 <li>通过采用自动化测试，可以替代大量重复性的工作，提高测试效率；</li>
 <li>保证每次测试的一致性和可重复性。由于每次自动化测试执行时脚本都是相同的，所以每次执行的测试具有一致性，同时也可以提高回归测试的效率；</li>
 <li>可以更好的利用非工作时间。由于自动化测试能按计划自动执行，因此就可以利用非工作时间使用自动化测试来执行测试。</li>
 </ol>
-<h3 id="8-1-说说你知道的自动化测试框架"><a href="#8-1-说说你知道的自动化测试框架" class="headerlink" title="8.1 说说你知道的自动化测试框架"></a>8.1 说说你知道的自动化测试框架</h3><ul>
+<h3 id="4-1-说说你知道的自动化测试框架"><a href="#4-1-说说你知道的自动化测试框架" class="headerlink" title="4.1 说说你知道的自动化测试框架"></a>4.1 说说你知道的自动化测试框架</h3><ul>
 <li>Selenium（Web应用程序自动化测试）</li>
 <li>Appium（移动应用程序自动化测试） </li>
 <li>TestComplete（桌面应用程序自动化测试）   </li>
 <li>JMeter（负载测试）   </li>
 <li>Robot Framework（通用自动化测试框架）</li>
 </ul>
-<h3 id="8-2-自动化测试和手动测试的优缺点"><a href="#8-2-自动化测试和手动测试的优缺点" class="headerlink" title="8.2 自动化测试和手动测试的优缺点"></a>8.2 自动化测试和手动测试的优缺点</h3><h4 id="8-2-1-手动测试"><a href="#8-2-1-手动测试" class="headerlink" title="8.2.1 手动测试"></a>8.2.1 手动测试</h4><p><strong>缺点:</strong> </p>
+<h3 id="4-2-自动化测试和手动测试的优缺点"><a href="#4-2-自动化测试和手动测试的优缺点" class="headerlink" title="4.2 自动化测试和手动测试的优缺点"></a>4.2 自动化测试和手动测试的优缺点</h3><h4 id="4-2-1-手动测试"><a href="#4-2-1-手动测试" class="headerlink" title="4.2.1 手动测试"></a>4.2.1 手动测试</h4><p><strong>缺点:</strong> </p>
 <ol>
 <li>重复的手动测试，代价高 ;</li>
 <li>依赖于测试人员的能力。</li>
@@ -201,7 +205,7 @@
 <li>测试人员具有审美能力和心理体验；</li>
 <li>测试人员具有逻辑推理能力和是非判断能力。</li>
 </ol>
-<h4 id="8-2-2-自动化测试"><a href="#8-2-2-自动化测试" class="headerlink" title="8.2.2 自动化测试"></a>8.2.2 自动化测试</h4><p><strong>优点:</strong> </p>
+<h4 id="4-2-2-自动化测试"><a href="#4-2-2-自动化测试" class="headerlink" title="4.2.2 自动化测试"></a>4.2.2 自动化测试</h4><p><strong>优点:</strong> </p>
 <ol>
 <li>减少时间和成本，提高资源利用率；</li>
 <li>能够测试手动测试无法进行测试的板块；</li>
@@ -215,19 +219,187 @@
 <li>测试自动化不能提高有效性，还有可能制约软件开发；</li>
 <li>工具本身不具备想象力。</li>
 </ol>
-<h3 id="8-3-说一说jmeter"><a href="#8-3-说一说jmeter" class="headerlink" title="8.3 说一说jmeter"></a>8.3 说一说jmeter</h3><p>jmeter是一款JAVA环境运行的工具，只要按装了java环境就可以直接打开jmeter包了，不需要另外安装。jmeter是一款多功能的接口测试用具并且可以进行性能测试，可以实现多线程组同时启动。</p>
+<h3 id="4-3-说一说jmeter"><a href="#4-3-说一说jmeter" class="headerlink" title="4.3 说一说jmeter"></a>4.3 说一说jmeter</h3><p>jmeter是一款JAVA环境运行的工具，只要按装了java环境就可以直接打开jmeter包了，不需要另外安装。jmeter是一款多功能的接口测试用具并且可以进行性能测试，可以实现多线程组同时启动。</p>
 <p>功能比postman多。</p>
-<h2 id="9-软件开发的流程是什么？"><a href="#9-软件开发的流程是什么？" class="headerlink" title="9. 软件开发的流程是什么？"></a>9. 软件开发的流程是什么？</h2><h3 id="9-1-需求分析"><a href="#9-1-需求分析" class="headerlink" title="9.1 需求分析"></a>9.1 需求分析</h3><ol>
+<h3 id="4-4-有用过什么测试工具吗？"><a href="#4-4-有用过什么测试工具吗？" class="headerlink" title="4.4 有用过什么测试工具吗？"></a>4.4 有用过什么测试工具吗？</h3><ul>
+<li>接口测试用Swagger、postman；</li>
+<li>抓包工具用WireShark、Fiddler；</li>
+<li>性能测试用jmeter；</li>
+<li>自动化测试用selenium、appium。</li>
+</ul>
+<h2 id="5-软件开发的流程是什么？"><a href="#5-软件开发的流程是什么？" class="headerlink" title="5. 软件开发的流程是什么？"></a>5. 软件开发的流程是什么？</h2><h3 id="5-1-需求分析"><a href="#5-1-需求分析" class="headerlink" title="5.1 需求分析"></a>5.1 需求分析</h3><ol>
 <li>相关系统分析员向用户初步了解需求，然后用相关的工具软件列出要开发的系统的大功能模块，每个大功能模块有哪些小功能模块，对于有些需求比较明确相关的界面时，在这一步里面可以初步定义好少量的界面。</li>
 <li>系统分析员深入了解和分析需求，根据自己的经验和需求用WORD或相关的工具再做出一份文档系统的功能需求文档。这次的文档会清楚列出系统大致的大功能模块，大功能模块有哪些小功能模块，并且还列出相关的界面和界面功能。</li>
 <li>系统分析员向用户再次确认需求。</li>
 </ol>
-<h3 id="9-2-概要设计"><a href="#9-2-概要设计" class="headerlink" title="9.2 概要设计"></a>9.2 概要设计</h3><p>开发者需要对软件系统进行概要设计，即系统设计。概要设计需要对软件系统的设计进行考虑，包括系统的基本处理流程、系统的组织结构、模块划分、功能分配、接口设计、运行设计、数据结构设计和出错处理设计等，为软件的详细设计提供基础。</p>
-<h3 id="9-3-详细设计"><a href="#9-3-详细设计" class="headerlink" title="9.3 详细设计"></a>9.3 详细设计</h3><p>在概要设计的基础上，开发者需要进行软件系统的详细设计。在详细设计中，描述实现具体模块所涉及到的主要算法、数据结构、类的层次结构及调用关系，需要说明软件系统各个层次中的每一个程序(每个模块或子程序)的设计考虑，以便进行编码和测试。应当保证软件的需求完全分配给整个软件。详细设计应当足够详细，能够根据详细设计报告进行编码。</p>
-<h3 id="9-4-编程实现"><a href="#9-4-编程实现" class="headerlink" title="9.4 编程实现"></a>9.4 编程实现</h3><p>在软件编码阶段，开发者根据《软件系统详细设计报告》中对数据结构、算法分析和模块实现等方面的设计要求，开始具体的编写程序工作，分别实现各模块的功能，从而实现对目标系统的功能、性能、接口、界面等方面的要求。</p>
-<h3 id="9-5-测试"><a href="#9-5-测试" class="headerlink" title="9.5 测试"></a>9.5 测试</h3><p>测试编写好的系统。交给用户使用，用户使用后一个一个的确认每个功能。测试同样是项目研发中一个相当重要的步骤，对于一个大型软件，3个月到1年的外部测试都是正常的，因为永远都会有不可预料的问题存在。完成测试后，完成验收并完成最后的一些帮助文档，整体项目才算告一段落，当然日后少不了升级，修补等等工作，只要不是想通过一锤子买卖骗钱，就要不停的跟踪软件的运营状况并持续修补升级，直到这个软件被彻底淘汰为止。</p>
-<h3 id="9-6-软件交付"><a href="#9-6-软件交付" class="headerlink" title="9.6 软件交付"></a>9.6 软件交付</h3><p>在软件测试证明软件达到要求后，软件开发者应向用户提交开发的目标安装程序、数据库的数据字典、《用户安装手册》、《用户使用指南》、需求报告、设计报告、测试报告等双方合同约定的产物。</p>
-<h3 id="9-7-验收"><a href="#9-7-验收" class="headerlink" title="9.7 验收"></a>9.7 验收</h3><h3 id="9-8-维护"><a href="#9-8-维护" class="headerlink" title="9.8 维护"></a>9.8 维护</h3><h2 id="10-如何设计微信账号密码登录界面测试用例？"><a href="#10-如何设计微信账号密码登录界面测试用例？" class="headerlink" title="10. 如何设计微信账号密码登录界面测试用例？"></a>10. 如何设计微信账号密码登录界面测试用例？</h2><h3 id="10-1-功能测试"><a href="#10-1-功能测试" class="headerlink" title="10.1 功能测试"></a>10.1 功能测试</h3><ol>
+<h3 id="5-2-概要设计"><a href="#5-2-概要设计" class="headerlink" title="5.2 概要设计"></a>5.2 概要设计</h3><p>开发者需要对软件系统进行概要设计，即系统设计。概要设计需要对软件系统的设计进行考虑，包括系统的基本处理流程、系统的组织结构、模块划分、功能分配、接口设计、运行设计、数据结构设计和出错处理设计等，为软件的详细设计提供基础。</p>
+<h3 id="5-3-详细设计"><a href="#5-3-详细设计" class="headerlink" title="5.3 详细设计"></a>5.3 详细设计</h3><p>在概要设计的基础上，开发者需要进行软件系统的详细设计。在详细设计中，描述实现具体模块所涉及到的主要算法、数据结构、类的层次结构及调用关系，需要说明软件系统各个层次中的每一个程序(每个模块或子程序)的设计考虑，以便进行编码和测试。应当保证软件的需求完全分配给整个软件。详细设计应当足够详细，能够根据详细设计报告进行编码。</p>
+<h3 id="5-4-编程实现"><a href="#5-4-编程实现" class="headerlink" title="5.4 编程实现"></a>5.4 编程实现</h3><p>在软件编码阶段，开发者根据《软件系统详细设计报告》中对数据结构、算法分析和模块实现等方面的设计要求，开始具体的编写程序工作，分别实现各模块的功能，从而实现对目标系统的功能、性能、接口、界面等方面的要求。</p>
+<h3 id="5-5-测试"><a href="#5-5-测试" class="headerlink" title="5.5 测试"></a>5.5 测试</h3><p>测试编写好的系统。交给用户使用，用户使用后一个一个的确认每个功能。测试同样是项目研发中一个相当重要的步骤，对于一个大型软件，3个月到1年的外部测试都是正常的，因为永远都会有不可预料的问题存在。完成测试后，完成验收并完成最后的一些帮助文档，整体项目才算告一段落，当然日后少不了升级，修补等等工作，只要不是想通过一锤子买卖骗钱，就要不停的跟踪软件的运营状况并持续修补升级，直到这个软件被彻底淘汰为止。</p>
+<h3 id="5-6-软件交付"><a href="#5-6-软件交付" class="headerlink" title="5.6 软件交付"></a>5.6 软件交付</h3><p>在软件测试证明软件达到要求后，软件开发者应向用户提交开发的目标安装程序、数据库的数据字典、《用户安装手册》、《用户使用指南》、需求报告、设计报告、测试报告等双方合同约定的产物。</p>
+<h3 id="5-7-验收"><a href="#5-7-验收" class="headerlink" title="5.7 验收"></a>5.7 验收</h3><h3 id="5-8-维护"><a href="#5-8-维护" class="headerlink" title="5.8 维护"></a>5.8 维护</h3><h2 id="6-如何设计搜索框测试用例？"><a href="#6-如何设计搜索框测试用例？" class="headerlink" title="6. 如何设计搜索框测试用例？"></a>6. 如何设计搜索框测试用例？</h2><h3 id="6-1-功能测试"><a href="#6-1-功能测试" class="headerlink" title="6.1 功能测试"></a>6.1 功能测试</h3><ol>
+<li>搜索内容为空，验证系统如何处理；</li>
+<li>搜索内容为空格，查看系统如何处理；</li>
+<li>边界值验证：在允许的字符串范围内外，验证系统的处理；</li>
+<li>超长字符串输入，系统是否会截取允许的长度来检验结果；</li>
+<li>合法的字符串长度后，加空格验证检索结果；</li>
+<li>多关键字中间加入空格，逗号，tab验证系统的结果是否正确；</li>
+<li>验证每种合法的输入，结果是否正确；</li>
+<li>是否支持检索内容的复制、粘贴、编辑等操作；</li>
+<li>是否支持回车键搜索；</li>
+<li>多次输入相同的内容，查看系统的检索结果是否一致；</li>
+<li>特殊字符、转义字符、html脚本等需要做处理；</li>
+<li>敏感词汇，提示用户无权限等；</li>
+<li>输入的内容是否支持快捷键操作等；</li>
+<li>只能输入允许的字符串长度等；</li>
+<li>输入链接是否正确跳转；</li>
+<li>搜索的历史纪录是否显示在下面；</li>
+<li>搜索内容有没有联想功能。</li>
+</ol>
+<h3 id="6-2-界面测试"><a href="#6-2-界面测试" class="headerlink" title="6.2 界面测试"></a>6.2 界面测试</h3><ol>
+<li>查看UI是否显示正确，布局是否合理；</li>
+<li>是否有错别字；</li>
+<li>搜索结果显示的布局是否美观；</li>
+<li>已查看的结果链接，链接的颜色要灰化处理；</li>
+<li>结果数量庞大时，页面的分页布局是否合理。</li>
+</ol>
+<h3 id="6-3-安全性测试"><a href="#6-3-安全性测试" class="headerlink" title="6.3 安全性测试"></a>6.3 安全性测试</h3><ol>
+<li>脚本的禁用；</li>
+<li>SQL的注入，检索SQL SELECT语句等；</li>
+<li>敏感内容的检索是禁止的；</li>
+<li>特殊字符的检索；</li>
+<li>被删除、加密、授权的数据，不允许被查出来，是否有安全设计控制。</li>
+</ol>
+<h3 id="6-4-兼容性测试"><a href="#6-4-兼容性测试" class="headerlink" title="6.4 兼容性测试"></a>6.4 兼容性测试</h3><ol>
+<li>多平台Windows，mac；</li>
+<li>移动平台android，ios；</li>
+<li>多浏览器火狐、chrome、IE等。</li>
+</ol>
+<h3 id="6-5-性能测试"><a href="#6-5-性能测试" class="headerlink" title="6.5 性能测试"></a>6.5 性能测试</h3><ol>
+<li>搜索页面的链接打开速度是否满足设计要求；</li>
+<li>搜索出结果消耗时间，是否满足设计要求。</li>
+</ol>
+<h2 id="7-如何设计购物车的测试用例？"><a href="#7-如何设计购物车的测试用例？" class="headerlink" title="7. 如何设计购物车的测试用例？"></a>7. 如何设计购物车的测试用例？</h2><h3 id="7-1-功能测试"><a href="#7-1-功能测试" class="headerlink" title="7.1 功能测试"></a>7.1 功能测试</h3><ul>
+<li>添加商品<ol>
+<li>是否能够添加商品；</li>
+<li>添加单个商品数量是否有上下限；</li>
+<li>添加商品种类是否有上下限；</li>
+<li>添加同类型商品的不同规格商品显示是否分条显示；</li>
+<li>加入购物车商品排序是否合理。</li>
+</ol>
+</li>
+<li>删除商品<ol>
+<li>能否删除单类商品；</li>
+<li>是否有快速删除多种商品方式（全选，删除）；</li>
+<li>删除商品是否有确认提示。</li>
+</ol>
+</li>
+<li>跳转商品详情<ol>
+<li>跳转商品图片显示是否正常；</li>
+<li>跳转商品链接显示内容是否完整，是否过长；</li>
+<li>点击图片或者链接是否能够跳转商品详情。</li>
+</ol>
+</li>
+<li>编辑商品、商品跳转<ol>
+<li>是否有通过+ -编辑商品数量方式；</li>
+<li>是否有通过输入直接编辑商品数量方式；</li>
+<li>编辑商品数量是否有上下限；</li>
+<li>编辑商品数量是否考虑库存情况；</li>
+<li>商品链接能否自动跳转。</li>
+</ol>
+</li>
+<li>检查商品数量，金额，优惠明细<ol>
+<li>商品加入购物车内是否和原价格一致；</li>
+<li>商品数量显示是否正确；</li>
+<li>选择商品总数是否正确；</li>
+<li>选中商品价格总额是否正确。</li>
+</ol>
+</li>
+<li>购物车与用户模块关联<ol>
+<li>未登录用户是否可以添加商品到购物车；</li>
+<li>未登录用户添加商品到购物车，登录后是否将商品合并到用户购物车；</li>
+<li>若不允许未登录用户添加商品到购物车，点击加购物车后是否有登录提示；</li>
+<li>用户有会员折扣时，购物车内商品价格是否对应。</li>
+</ol>
+</li>
+<li>购物车与商品订单模块关联<ol>
+<li>加入购物车商品有价格调整，购物车内商品价格是否跟随变化；</li>
+<li>加入购物车商品，库存变化时购物车是否有对应调整；</li>
+<li>购物车商品确认订单后是否会从购物车清除；</li>
+<li>订单价格是否与购物车内一致。</li>
+</ol>
+</li>
+<li>购物车与优惠活动模块关联<ol>
+<li>商家发放用户优惠券购物车对应变化；</li>
+<li>商品满减活动，购物车价格对应变化。</li>
+</ol>
+</li>
+</ul>
+<h3 id="7-2-性能测试"><a href="#7-2-性能测试" class="headerlink" title="7.2 性能测试"></a>7.2 性能测试</h3><ol>
+<li>进入购物车页面消耗时长；</li>
+<li>添加商品到购物车时长；</li>
+<li>进入购物车结算时长；</li>
+<li>对购物车页面内容变更，页面内容更新速度。（增加某个购买数量，页面对应显示更新速度）</li>
+<li>耗电量；</li>
+<li>消耗流量的多少；</li>
+<li>所占内存等。</li>
+</ol>
+<h3 id="7-3-界面测试"><a href="#7-3-界面测试" class="headerlink" title="7.3 界面测试"></a>7.3 界面测试</h3><ol>
+<li>界面的设计风格是否统一；</li>
+<li>界面中文字是否简洁，没有错别字。</li>
+</ol>
+<h3 id="7-4-安全性测试"><a href="#7-4-安全性测试" class="headerlink" title="7.4 安全性测试"></a>7.4 安全性测试</h3><ol>
+<li>支付过程中是否有个人信息&#x2F;密码丢失的风险；</li>
+<li>是否有金额被盗刷的风险。</li>
+</ol>
+<h3 id="7-5-兼容性测试"><a href="#7-5-兼容性测试" class="headerlink" title="7.5 兼容性测试"></a>7.5 兼容性测试</h3><ol>
+<li>苹果手机和安卓手机；</li>
+<li>苹果手机的不同版本；</li>
+<li>安卓手机不同的机型；</li>
+<li>网页版测试，五大浏览器；</li>
+<li>不同分辨率。</li>
+</ol>
+<h3 id="7-6-易用性测试"><a href="#7-6-易用性测试" class="headerlink" title="7.6 易用性测试"></a>7.6 易用性测试</h3><p>是否易操作，易学习，易理解</p>
+<h3 id="7-7-网络测试"><a href="#7-7-网络测试" class="headerlink" title="7.7 网络测试"></a>7.7 网络测试</h3><ol>
+<li>网络兼容性：2g&#x2F;3g&#x2F;4g，WiFi，热点，移动&#x2F;联通&#x2F;电信；</li>
+<li>无网测试；</li>
+<li>弱网：延时&amp;丢包。</li>
+</ol>
+<h3 id="7-8-中断测试"><a href="#7-8-中断测试" class="headerlink" title="7.8 中断测试"></a>7.8 中断测试</h3><p>前后台切换，网络异常，低电量，断电，来电，短信等</p>
+<h2 id="8-如何设计微信红包测试用例？"><a href="#8-如何设计微信红包测试用例？" class="headerlink" title="8. 如何设计微信红包测试用例？"></a>8. 如何设计微信红包测试用例？</h2><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/20200517222058632.png" alt="微信红包测试用例" fancybox="true"/></div><div class="image-meta"><span class="image-caption center">微信红包测试用例</span></div></div>
+
+<h2 id="9-如何设计手机开机键的测试用例？"><a href="#9-如何设计手机开机键的测试用例？" class="headerlink" title="9. 如何设计手机开机键的测试用例？"></a>9. 如何设计手机开机键的测试用例？</h2><h3 id="9-1-功能测试"><a href="#9-1-功能测试" class="headerlink" title="9.1 功能测试"></a>9.1 功能测试</h3><ul>
+<li>关机情况<ol>
+<li>长按是否正常开机；</li>
+<li>单击是否可以开机；</li>
+<li>双击是否可以开机。</li>
+</ol>
+</li>
+<li>开机情况<ol>
+<li>单点是否关闭屏幕；</li>
+<li>双击是否关闭屏幕后重新打开；</li>
+<li>长按是否关机；</li>
+<li>来电时点击是否取消来电响铃；</li>
+<li>打开APP后点击关机键是否息屏；</li>
+<li>关机键+音量键组合使用是否有其他效果；</li>
+<li>连续多次点击关机键是否有后台设置的sos效果；</li>
+<li>充电时是否可以关机和开机。</li>
+</ol>
+</li>
+</ul>
+<h3 id="9-2-性能测试"><a href="#9-2-性能测试" class="headerlink" title="9.2 性能测试"></a>9.2 性能测试</h3><ol>
+<li>息屏状态，短按开机键，检查屏幕点亮时间是否在需求时间内；</li>
+<li>亮屏状态，短按开机键，检查屏幕关闭时间是否在需求时间内；</li>
+<li>按下开机键，开机时间是否在需求时间内。</li>
+</ol>
+<h3 id="9-3-可靠性"><a href="#9-3-可靠性" class="headerlink" title="9.3 可靠性"></a>9.3 可靠性</h3><p>连续点击n次，检查开机键寿命次数是否符合需求。</p>
+<h3 id="9-4-易用性"><a href="#9-4-易用性" class="headerlink" title="9.4 易用性"></a>9.4 易用性</h3><ol>
+<li>开机键是否防滑；</li>
+<li>开机键是否容易被摸到；</li>
+<li>开机键是否容易按下；</li>
+<li>开机键位置是否合理，符合人体工学。</li>
+</ol>
+<h2 id="10-如何设计微信账号密码登录界面测试用例？"><a href="#10-如何设计微信账号密码登录界面测试用例？" class="headerlink" title="10. 如何设计微信账号密码登录界面测试用例？"></a>10. 如何设计微信账号密码登录界面测试用例？</h2><h3 id="10-1-功能测试"><a href="#10-1-功能测试" class="headerlink" title="10.1 功能测试"></a>10.1 功能测试</h3><ol>
 <li>输入正确的用户名和密码，点击提交按钮，验证是否能正确登录；</li>
 <li>输入错误的用户名或者密码,验证登录会失败，并且提示相应的错误信息；</li>
 <li>登录成功后能否能否跳转到正确的页面；</li>
@@ -388,7 +560,7 @@
 
 
 
-<h2 id="16-如果点击一个按钮但是没反应，怎么排查这个问题？"><a href="#16-如果点击一个按钮但是没反应，怎么排查这个问题？" class="headerlink" title="16. 如果点击一个按钮但是没反应，怎么排查这个问题？"></a>16. 如果点击一个按钮但是没反应，怎么排查这个问题？</h2><p>首先进行抓包，观察请求数据，有以下几种可能：</p>
+<h2 id="16-如果页面点击一个按钮但是没反应，怎么排查这个问题？"><a href="#16-如果页面点击一个按钮但是没反应，怎么排查这个问题？" class="headerlink" title="16. 如果页面点击一个按钮但是没反应，怎么排查这个问题？"></a>16. 如果页面点击一个按钮但是没反应，怎么排查这个问题？</h2><p>首先进行抓包，观察请求数据，有以下几种可能：</p>
 <ol>
 <li>抓包时，点击关注按钮，没有发送关联请求，那么这个问题得反应给前端开发让他修改。</li>
 <li>发送了请求，但是请求的参数错误，也需要前端修改。</li>
