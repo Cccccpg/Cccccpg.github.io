@@ -52,7 +52,7 @@
 <meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230504120300238.png">
 <meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230814111551195.png">
 <meta property="article:published_time" content="2023-07-02T06:47:29.000Z">
-<meta property="article:modified_time" content="2023-10-05T08:19:12.588Z">
+<meta property="article:modified_time" content="2023-10-09T13:25:55.712Z">
 <meta property="article:author" content="Cccccpg">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="八股">
@@ -560,7 +560,7 @@
 <li>开启lazy-free（惰性删除&#x2F;延迟释放）。让Redis采用异步方式延迟释放key使用的内存，将该操作交给单独的子线程处理，避免阻塞主线程。</li>
 </ol>
 <h2 id="7-3-Redis-bigkey"><a href="#7-3-Redis-bigkey" class="headerlink" title="7.3 Redis bigkey"></a>7.3 Redis bigkey</h2><h3 id="7-3-1-什么是bigkey？"><a href="#7-3-1-什么是bigkey？" class="headerlink" title="7.3.1 什么是bigkey？"></a>7.3.1 什么是bigkey？</h3><p>简单来说，如果一个key对应的value所占用的内存较大，那么这个key就可以看做是bigkey。</p>
-<p>那具体要占多大才算大呢？</p>
+<p><strong>那具体要占多大才算大呢？</strong></p>
 <p>String类型的value超过10kb，其他类型的value包含的元素超过5000个。</p>
 <h3 id="7-3-2-bigkey有什么危害？"><a href="#7-3-2-bigkey有什么危害？" class="headerlink" title="7.3.2 bigkey有什么危害？"></a>7.3.2 bigkey有什么危害？</h3><ul>
 <li><strong>客户端超时阻塞</strong>：由于Redis执行命令是单线程处理，然后在操作大key时会比较耗时，阻塞其他命令的执行；</li>
