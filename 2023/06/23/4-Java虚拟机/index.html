@@ -56,7 +56,7 @@
 <meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/g1-garbage-collector.png">
 <meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230810094623883.png">
 <meta property="article:published_time" content="2023-06-23T14:42:29.000Z">
-<meta property="article:modified_time" content="2023-10-05T08:27:29.356Z">
+<meta property="article:modified_time" content="2023-10-09T04:00:02.000Z">
 <meta property="article:author" content="Cccccpg">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="八股">
@@ -342,9 +342,9 @@
 <li>在内存中生成一个代表该类的<code>Class</code>对象，作为方法区这些数据的访问入口</li>
 </ol>
 <h2 id="2-3-类加载器"><a href="#2-3-类加载器" class="headerlink" title="2.3 类加载器"></a>2.3 类加载器</h2><ul>
-<li>类加载器是一个负责加载类的对象，用于实现类加载过程中的加载步骤</li>
-<li>每个Java类都有个引用指向加载它的<code>ClassLoader</code></li>
-<li>数组类不是通过<code>ClassLoader</code>创建的，是由JVM直接生成的</li>
+<li>类加载器是一个负责加载类的对象，用于实现类加载过程中的加载步骤；</li>
+<li>每个Java类都有个引用指向加载它的<code>ClassLoader</code>；</li>
+<li>数组类不是通过<code>ClassLoader</code>创建的，是由JVM直接生成的。</li>
 </ul>
 <p>简单来说，<strong>类加载器的主要作用就是加载 Java 类的字节码（ <code>.class</code> 文件）到 JVM 中（在内存中生成一个代表该类的 <code>Class</code> 对象）。</strong></p>
 <h3 id="2-3-1-类加载器加载规则"><a href="#2-3-1-类加载器加载规则" class="headerlink" title="2.3.1 类加载器加载规则"></a>2.3.1 类加载器加载规则</h3><p>JVM 启动的时候，并不会一次性加载所有的类，而是根据需要去动态加载。也就是说，<strong>大部分类在具体用到的时候才会去加载</strong>，这样对内存更加友好。</p>
