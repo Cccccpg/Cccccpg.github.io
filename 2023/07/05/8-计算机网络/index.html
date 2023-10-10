@@ -56,7 +56,7 @@
 <meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/arp_same_lan-008bdaef.png">
 <meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/arp_different_lan-ad156523.png">
 <meta property="article:published_time" content="2023-07-05T12:49:26.000Z">
-<meta property="article:modified_time" content="2023-09-12T09:27:30.195Z">
+<meta property="article:modified_time" content="2023-10-10T02:22:57.384Z">
 <meta property="article:author" content="Cccccpg">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="八股">
@@ -410,7 +410,7 @@
 
 <ul>
 <li><strong>第一次挥手</strong>：客户端发送一个FIN（SEQ&#x3D;x）标志的数据包给服务器，用来关闭客户端到服务器的数据传输。然后，客户端进入FIN-WAIT-1状态。</li>
-<li><strong>第二次挥手</strong>：服务器收到这个FIN（SEQ&#x3D;x）标志的数据包，它发送一个ACK（SEQ&#x3D;x+1）标志的数据包给客户端。然后此时服务器进入CLOSE-WAIT状态，客户端收到数据包后进入FIN-WAIT-2状态。</li>
+<li><strong>第二次挥手</strong>：服务器收到这个FIN（SEQ&#x3D;x）标志的数据包，它发送一个ACK（SEQ&#x3D;x+1）标志的数据包给客户端。然后此时服务器进入CLOSED-WAIT状态，客户端收到数据包后进入FIN-WAIT-2状态。</li>
 <li><strong>第三次挥手</strong>：服务器关闭与客户端之间的连接，并发送一个FIN（SEQ&#x3D;y）标志的数据包给客户端，请求关闭连接，然后服务器进入LAST-ACK状态。</li>
 <li><strong>第四次挥手</strong>：客户端收到FIN数据包后，发送ACK（SEQ&#x3D;y+1）标志的数据包给服务器，并且进入TIME_WAIT状态，服务器在收到ACK（SEQ&#x3D;y+1）标志的数据包后进入CLOSE状态。此时客户端等待2MSL后依然没有收到回复，就证明服务器已经正常关闭，随后客户端也就可以正常关闭了，也变成CLOSE状态。</li>
 </ul>

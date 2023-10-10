@@ -43,7 +43,7 @@
 <meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230818104836110.png">
 <meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230818164646225.png">
 <meta property="article:published_time" content="2023-07-10T05:52:54.000Z">
-<meta property="article:modified_time" content="2023-10-05T09:02:59.771Z">
+<meta property="article:modified_time" content="2023-10-10T02:50:56.259Z">
 <meta property="article:author" content="Cccccpg">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="八股">
@@ -148,7 +148,7 @@
 <li>MyBatis在处理<code>#&#123;&#125;</code>时，会将sql中的<code>#&#123;&#125;</code>替换为？号；MyBatis在处理<code>$&#123;&#125;</code>时，是把<code>$&#123;&#125;</code>替换成变量的值。</li>
 <li><code>#&#123;&#125;</code>可以有效防止SQL注入，提高系统安全性；<code>$&#123;&#125;</code>不能防止SQL注入。</li>
 </ol>
-<h3 id="1-1-1-为什么-能有效防止SQL注入？"><a href="#1-1-1-为什么-能有效防止SQL注入？" class="headerlink" title="1.1.1 为什么#{}能有效防止SQL注入？"></a>1.1.1 为什么#{}能有效防止SQL注入？</h3><p>因为#{}在SQL执行前，会将SQL语句发送给数据库进行编译，在执行的时候，直接使用编译好的SQL语句，替换占位符。因为SQL注入只能对编译过程起作用，所以#{}能很好的避免SQL注入问题。</p>
+<h3 id="1-1-1-为什么-能有效防止SQL注入？"><a href="#1-1-1-为什么-能有效防止SQL注入？" class="headerlink" title="1.1.1 为什么#{}能有效防止SQL注入？"></a>1.1.1 为什么#{}能有效防止SQL注入？</h3><p>因为<code>#&#123;&#125;</code>在SQL执行前，会将SQL语句发送给数据库进行编译，在执行的时候，直接使用编译好的SQL语句，替换占位符。因为SQL注入只能对编译过程起作用，所以#{}能很好的避免SQL注入问题。</p>
 <h3 id="1-1-2-这么好，那么为什么还要保留-呢？"><a href="#1-1-2-这么好，那么为什么还要保留-呢？" class="headerlink" title="1.1.2 #{}这么好，那么为什么还要保留${}呢？"></a>1.1.2 #{}这么好，那么为什么还要保留${}呢？</h3><p>如果我们用<code>#&#123;&#125;</code>来编写sql语句，会给对应的变量自动加上单引号’ ‘，比如<code>select * from #&#123;param&#125;</code>，最后执行的sql语句是<code>select * from &#39;user&#39;</code>。</p>
 <p>但是如果我们用<code>$&#123;&#125;</code>来写sql语句，就不会被加上单引号’ ‘，还是上述的例子，最后执行的是<code>select * from user</code>。</p>
 <p>所以，当我们需要拼接的变量不能带单引号的时候，就必须要用<code>$&#123;&#125;</code>，而其他情况下最好用<code>#&#123;&#125;</code>。</p>
