@@ -51,7 +51,7 @@
 <meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/image-20230409113009139.png">
 <meta property="og:image" content="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/disk-scheduling-algorithms.png">
 <meta property="article:published_time" content="2023-07-06T01:51:06.000Z">
-<meta property="article:modified_time" content="2023-10-25T02:28:34.635Z">
+<meta property="article:modified_time" content="2023-10-25T02:32:40.199Z">
 <meta property="article:author" content="Cccccpg">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="八股">
@@ -331,7 +331,7 @@
 <li><strong>页式管理</strong>：把物理内存分为连续等长的物理页，应用程序的虚拟地址空间也被分为连续等长的虚拟页。</li>
 <li><strong>段页式管理</strong>：结合了段式和页式管理的一种内存管理机制，把物理内存先分为若干段，每个段又继续分为若干大小的页。</li>
 </ul>
-<h2 id="4-4-什么是虚拟内存？有什么用？"><a href="#4-4-什么是虚拟内存？有什么用？" class="headerlink" title="4.4 什么是虚拟内存？有什么用？"></a>4.4 什么是虚拟内存？有什么用？</h2><p><strong>虚拟内存(Virtual Memory)</strong> 是计算机系统内存管理非常重要的一个技术，本质上来说它只是逻辑存在的，是一个假想出来的内存空间，主要作用是<strong>作为进程访问主存（物理内存）的桥梁并简化内存管理</strong>。</p>
+<h2 id="4-4-什么是虚拟内存？有什么用？"><a href="#4-4-什么是虚拟内存？有什么用？" class="headerlink" title="4.4 什么是虚拟内存？有什么用？"></a>4.4 什么是虚拟内存？有什么用？</h2><p><strong>虚拟内存(Virtual Memory)</strong> 是计算机系统内存管理非常重要的一个技术，本质上来说它只是逻辑存在的，是一个假想出来的内存空间，主要作用是作为进程访问主存（物理内存）的桥梁并简化内存管理。</p>
 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/virtual-memory.png)" alt="- **隔离进程**：使进程间彼此隔离，一个进程无法更改另一个进程的物理内存。 - **提升物理内存的利用率**。 - **简化内存管理**。 - **多个进程共享物理内存**。 - **提高内存使用安全性**。 - **提供更大的可使用内存空间**。 ### 4.4.1 什么是虚拟地址和物理地址？ **物理地址**是物理内存中的地址，也即内存地址寄存器中的地址。 **虚拟地址**是程序中访问的内存地址，也即开发时访问的地址。 操作系统中一般通过**内存管理单元**将虚拟地址转化为物理地址，这个过程被称为**地址转换**。 ### 4.4.2 虚拟地址和物理地址之间是怎么映射的？ 主要有三种方式： 1. 分段机制 2. 分页机制 3. 段页机制 现代操作系统中更多采用分页机制。 ### 4.4.3 为什么虚拟地址切换空间会比较费时？ 进程都有自己的虚拟地址空间，把虚拟地址转换为物理地址需要查找页表，页表查找是一个很慢的过程，因此通常使用 Cache 来缓存常用的地址映射，这样可以加速页表查找。 这个 Cache 就是 TLB（translation Lookaside Buffer）， TLB 本质上就是一个 Cache，是用来加速页表查找的 虚拟内存作为进程访问主存的桥梁" fancybox="true"/></div><div class="image-meta"><span class="image-caption center">- **隔离进程**：使进程间彼此隔离，一个进程无法更改另一个进程的物理内存。 - **提升物理内存的利用率**。 - **简化内存管理**。 - **多个进程共享物理内存**。 - **提高内存使用安全性**。 - **提供更大的可使用内存空间**。 ### 4.4.1 什么是虚拟地址和物理地址？ **物理地址**是物理内存中的地址，也即内存地址寄存器中的地址。 **虚拟地址**是程序中访问的内存地址，也即开发时访问的地址。 操作系统中一般通过**内存管理单元**将虚拟地址转化为物理地址，这个过程被称为**地址转换**。 ### 4.4.2 虚拟地址和物理地址之间是怎么映射的？ 主要有三种方式： 1. 分段机制 2. 分页机制 3. 段页机制 现代操作系统中更多采用分页机制。 ### 4.4.3 为什么虚拟地址切换空间会比较费时？ 进程都有自己的虚拟地址空间，把虚拟地址转换为物理地址需要查找页表，页表查找是一个很慢的过程，因此通常使用 Cache 来缓存常用的地址映射，这样可以加速页表查找。 这个 Cache 就是 TLB（translation Lookaside Buffer）， TLB 本质上就是一个 Cache，是用来加速页表查找的 虚拟内存作为进程访问主存的桥梁</span></div></div>。
 
 <p>由于每个进程都有自己的虚拟地址空间，每个进程都有自己的页表记录虚拟地址与物理地址的转换关系， 那么当进程切换后页表也要进行切换，页表切换后 TLB 就失效了，Cache 失效导致命中率降低，那么虚拟地址转换为物理地址就会变慢，表现出来的就是程序运行会变慢。而线程切换则不会导致 TLB 失效，因为线程无需切换地址空间，因此我们通常说线程切换要比较进程切换块，原因就在这里。</p>
