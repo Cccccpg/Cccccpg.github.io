@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>实习笔记-Go基础语法 - Cccccpg</title>
+
+  
+    <meta name="description" content="实习期间为了看懂go项目，学了点go的语法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实习笔记-Go基础语法">
+<meta property="og:url" content="https://cccccpg.github.io/2024/01/02/%E5%AE%9E%E4%B9%A0%E7%AC%94%E8%AE%B0-Go%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/index.html">
+<meta property="og:site_name" content="Cccccpg">
+<meta property="og:description" content="实习期间为了看懂go项目，学了点go的语法">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-01-02T10:13:26.000Z">
+<meta property="article:modified_time" content="2024-01-02T10:15:28.641Z">
+<meta property="article:author" content="Cccccpg">
+<meta property="article:tag" content="工作">
+<meta property="article:tag" content="Go">
+<meta property="article:tag" content="语法">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  <meta name="keywords" content="工作,Go,语法">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cccccpg-blog.oss-cn-chengdu.aliyuncs.com/%E5%A4%B4%E5%83%8F.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">Cccccpg</div><div class="sub cap">热情，礼貌，一问三不知。</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">别点</a><a class="nav-item" href="/about/">社交</a></nav>
+</header>
+
+
+<div class="widgets">
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">实习笔记-Go基础语法</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E4%B8%8B%E5%88%92%E7%BA%BF"><span class="toc-text">1.下划线</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E4%B8%8B%E5%88%92%E7%BA%BF%E5%9C%A8import%E4%B8%AD"><span class="toc-text">1.1 下划线在import中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E4%B8%8B%E5%88%92%E7%BA%BF%E5%9C%A8%E4%BB%A3%E7%A0%81%E4%B8%AD"><span class="toc-text">1.2 下划线在代码中</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E6%8C%87%E9%92%88"><span class="toc-text">2.指针</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E7%BB%93%E6%9E%84%E4%BD%93"><span class="toc-text">3.结构体</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-for%E5%BE%AA%E7%8E%AF"><span class="toc-text">4.for循环</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E5%87%BD%E6%95%B0"><span class="toc-text">5.函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-%E5%88%87%E7%89%87"><span class="toc-text">6.切片</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">7.类型转换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">7.1 数值类型转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">7.2 字符串类型转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-3-%E6%8E%A5%E5%8F%A3%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">7.3 接口类型转换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-1-%E7%B1%BB%E5%9E%8B%E6%96%AD%E8%A8%80"><span class="toc-text">7.3.1 类型断言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-2-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">7.3.2 类型转换</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-%E6%8E%A5%E5%8F%A3"><span class="toc-text">8.接口</span></a></li></ol></div></div></widget>
+
+
+
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/Cccccpg" target="_blank" rel="external nofollow noopener noreferrer"><svg aria-hidden="true" height="24" viewBox="0 0 16 16" version="1.1" width="24" data-view-component="true" class="octicon octicon-mark-github"> <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path> </svg></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E5%AE%9E%E4%B9%A0%E7%AC%94%E8%AE%B0/">实习笔记</a></div><div id="post-meta">发布于&nbsp;<time datetime="2024-01-02T10:13:26.000Z">2024-01-02</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>实习笔记-Go基础语法</span></h1>
+<h1 id="1-下划线"><a href="#1-下划线" class="headerlink" title="1.下划线"></a>1.下划线</h1><h2 id="1-1-下划线在import中"><a href="#1-1-下划线在import中" class="headerlink" title="1.1 下划线在import中"></a>1.1 下划线在import中</h2><p>当导入一个包时，该包下的文件里所有init()函数都会被执行，然而，有些时候我们并不需要把整个包都导入进来，仅仅是是希望它执行init()函数而已。这个时候就可以使用 import 引用该包。即使用【import _ 包路径】只是引用该包，仅仅是为了调用init()函数，所以无法通过包名来调用包中的其他函数。 </p>
+<p>比如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> _ <span class="string">&quot;./hello&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>表示只引入当前文件夹中的hello包；</p>
+<h2 id="1-2-下划线在代码中"><a href="#1-2-下划线在代码中" class="headerlink" title="1.2 下划线在代码中"></a>1.2 下划线在代码中</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (<span class="string">&quot;os&quot;</span>)<span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    buf := <span class="built_in">make</span>([]<span class="type">byte</span>, <span class="number">1024</span>)</span><br><span class="line">    f, _ := os.Open(<span class="string">&quot;/Users/***/Desktop/text.txt&quot;</span>)</span><br><span class="line">    <span class="keyword">defer</span> f.Close()</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        n, _ := f.Read(buf)<span class="keyword">if</span> n == <span class="number">0</span> &#123;<span class="keyword">break</span>    </span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        os.Stdout.Write(buf[:n])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个下划线的意思是忽略这个变量，正常的写法是：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f,err := os.Open(<span class="string">&quot;xxxxxxx&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>但是此时不需要知道返回的错误值，就可以用下划线代替，忽略error变量。</p>
+<h1 id="2-指针"><a href="#2-指针" class="headerlink" title="2.指针"></a>2.指针</h1><p>区别于C&#x2F;C++中的指针，Go语言中的指针不能进行偏移和运算，是安全指针。</p>
+<p>Go语言中的函数传参都是值拷贝，当我们想要修改某个变量的时候，我们可以创建一个指向该变量地址的指针变量。</p>
+<p>传递数据使用指针，而无须拷贝数据。类型指针不能进行偏移和运算。</p>
+<p>Go语言中的指针操作非常简单，只需要记住两个符号：<code>&amp;</code>（取地址）和<code>*</code>（根据地址取值）。</p>
+<p>比如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;<span class="comment">//指针取值</span></span><br><span class="line">    a := <span class="number">10</span></span><br><span class="line">    b := &amp;a <span class="comment">// 取变量a的地址，将指针保存到b中</span></span><br><span class="line">    fmt.Printf(<span class="string">&quot;type of b:%T\n&quot;</span>, b)</span><br><span class="line">    c := *b <span class="comment">// 指针取值（根据指针去内存取值）</span></span><br><span class="line">    fmt.Printf(<span class="string">&quot;type of c:%T\n&quot;</span>, c)</span><br><span class="line">    fmt.Printf(<span class="string">&quot;value of c:%v\n&quot;</span>, c)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">type of b:*int</span><br><span class="line">type of c:int</span><br><span class="line">value of c:10</span><br></pre></td></tr></table></figure>
+
+<p>总结：&amp;和<em>是一对互补操作符，&amp;取出地址，</em>根据地址取出地址指向的值。</p>
+<h1 id="3-结构体"><a href="#3-结构体" class="headerlink" title="3.结构体"></a>3.结构体</h1><p>Go语言中没有“类”的概念，也不支持“类”的继承等面向对象的概念。Go语言中通过结构体的内嵌再配合接口比面向对象具有更高的扩展性和灵活性。</p>
+<p>Go语言中的基础数据类型可以表示一些事物的基本属性，但是当我们想表达一个事物的全部或部分属性时，这时候再用单一的基本数据类型明显就无法满足需求了。</p>
+<p>使用type和struct关键字来定义结构体，具体代码格式如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> 类型名 <span class="keyword">struct</span> &#123;</span><br><span class="line">    字段名 字段类型</span><br><span class="line">    字段名 字段类型</span><br><span class="line">    …</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">类型名：标识自定义结构体的名称，在同一个包内不能重复。</span><br><span class="line">字段名：表示结构体字段名。结构体中的字段名必须唯一。</span><br><span class="line">字段类型：表示结构体字段的具体类型。</span><br></pre></td></tr></table></figure>
+
+<p>结构体实例化：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 结构体实例 结构体类型</span><br></pre></td></tr></table></figure>
+
+<p>如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> person <span class="keyword">struct</span> &#123;</span><br><span class="line">    name <span class="type">string</span></span><br><span class="line">    city <span class="type">string</span></span><br><span class="line">    age  <span class="type">int8</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> p1 person</span><br><span class="line">    p1.name = <span class="string">&quot;zhangsan&quot;</span></span><br><span class="line">    p1.city = <span class="string">&quot;北京&quot;</span></span><br><span class="line">    p1.age = <span class="number">18</span></span><br><span class="line">    fmt.Printf(<span class="string">&quot;p1=%v\n&quot;</span>, p1) </span><br><span class="line">    fmt.Printf(<span class="string">&quot;p1=%#v\n&quot;</span>, p1) </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以通过.来访问结构体的字段（成员变量）,例如p1.name和p1.age等。</p>
+<h1 id="4-for循环"><a href="#4-for循环" class="headerlink" title="4.for循环"></a>4.for循环</h1><p>go中for循环3种形式</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> init; condition; post &#123; &#125;</span><br><span class="line"><span class="keyword">for</span> condition &#123; &#125;</span><br><span class="line"><span class="keyword">for</span> &#123; &#125;</span><br><span class="line"></span><br><span class="line">其中：</span><br><span class="line">    init： 一般为赋值表达式，给控制变量赋初值；</span><br><span class="line">    condition： 关系表达式或逻辑表达式，循环控制条件；</span><br><span class="line">    post： 一般为赋值表达式，给控制变量增量或减量。</span><br><span class="line">    </span><br><span class="line"><span class="keyword">for</span>语句执行过程如下：</span><br><span class="line">    <span class="number">1.</span>先对表达式 init 赋初值；</span><br><span class="line">    <span class="number">2.</span>判别赋值表达式 init 是否满足给定 condition 条件，若其值为真，满足循环条件，则执行循环体内语句；</span><br><span class="line">    <span class="number">3.</span>然后执行 post，进入第二次循环，再判别 condition；否则判断 condition 的值为假，不满足条件，就终止<span class="keyword">for</span>循环，执行循环体外语句。</span><br></pre></td></tr></table></figure>
+
+<p>如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">length</span><span class="params">(s <span class="type">string</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">    <span class="built_in">println</span>(<span class="string">&quot;call length.&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">len</span>(s)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    s := <span class="string">&quot;abcd&quot;</span></span><br><span class="line">    <span class="keyword">for</span> i, n := <span class="number">0</span>, length(s); i &lt; n; i++ &#123;   <span class="comment">// 避免多次调用 length 函数。</span></span><br><span class="line">        <span class="built_in">println</span>(i, s[i])</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>for 循环的 range 格式可以对 slice、map、数组、字符串等进行迭代循环。格式如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> key, value := <span class="keyword">range</span> oldMap &#123;</span><br><span class="line">    newMap[key] = value</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果只想读key：<code>for key := range oldMap</code>；</p>
+<p>如果只想读value：<code>for _, value := range oldMap</code></p>
+<h1 id="5-函数"><a href="#5-函数" class="headerlink" title="5.函数"></a>5.函数</h1><p>函数是基本的代码块，用于执行一个任务。</p>
+<p>Go 语言最少有个 main() 函数。</p>
+<p>Go 语言函数定义格式如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">function_name</span><span class="params">( [parameter list] )</span></span> [return_types] &#123;</span><br><span class="line">   函数体</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>函数定义解析：</p>
+<ul>
+<li>func：函数由 func 开始声明</li>
+<li>function_name：函数名称，参数列表和返回值类型构成了函数签名。</li>
+<li>parameter list：参数列表，参数就像一个占位符，当函数被调用时，你可以将值传递给参数，这个值被称为实际参数。参数列表指定的是参数类型、顺序、及参数个数。参数是可选的，也就是说函数也可以不包含参数。</li>
+<li>return_types：返回类型，函数返回一列值。return_types 是该列值的数据类型。有些功能不需要返回值，这种情况下 return_types 不是必须的。</li>
+<li>函数体：函数定义的代码集合。</li>
+</ul>
+<h1 id="6-切片"><a href="#6-切片" class="headerlink" title="6.切片"></a>6.切片</h1><p>Go 语言切片是对数组的抽象。</p>
+<p>Go 数组的长度不可改变，在特定场景中这样的集合就不太适用，Go 中提供了一种灵活，功能强悍的内置类型切片(“动态数组”)，与数组相比切片的长度是不固定的，可以追加元素，在追加时可能使切片的容量增大。</p>
+<p>声明一个未指定大小的数组来定义切片：<code>var identifier []type</code>，切片不需要说明长度</p>
+<p>或使用 <strong>make()</strong> 函数来创建切片:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> slice1 []<span class="keyword">type</span> = <span class="built_in">make</span>([]<span class="keyword">type</span>, <span class="built_in">len</span>)</span><br><span class="line"></span><br><span class="line">也可以简写为</span><br><span class="line"></span><br><span class="line">slice1 := <span class="built_in">make</span>([]<span class="keyword">type</span>, <span class="built_in">len</span>)</span><br></pre></td></tr></table></figure>
+
+<p>也可以指定容量，其中 <strong>capacity</strong> 为可选参数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make([]T, length, capacity)</span><br></pre></td></tr></table></figure>
+
+<p>这里 len 是数组的长度并且也是切片的初始长度。</p>
+<h1 id="7-类型转换"><a href="#7-类型转换" class="headerlink" title="7.类型转换"></a>7.类型转换</h1><p>类型转换用于将一种数据类型的变量转换为另外一种类型的变量。</p>
+<p>Go 语言类型转换基本格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type_name(expression)</span><br></pre></td></tr></table></figure>
+
+<p>type_name 为类型，expression 为表达式。</p>
+<h2 id="7-1-数值类型转换"><a href="#7-1-数值类型转换" class="headerlink" title="7.1 数值类型转换"></a>7.1 数值类型转换</h2><p>将整型转换为浮点型：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   <span class="keyword">var</span> sum <span class="type">int</span> = <span class="number">17</span></span><br><span class="line">   <span class="keyword">var</span> count <span class="type">int</span> = <span class="number">5</span></span><br><span class="line">   <span class="keyword">var</span> mean <span class="type">float32</span></span><br><span class="line">   </span><br><span class="line">   mean = <span class="type">float32</span>(sum)/<span class="type">float32</span>(count)</span><br><span class="line">   fmt.Printf(<span class="string">&quot;mean 的值为: %f\n&quot;</span>,mean)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-2-字符串类型转换"><a href="#7-2-字符串类型转换" class="headerlink" title="7.2 字符串类型转换"></a>7.2 字符串类型转换</h2><p>将一个字符串转换成另一个类型，可以使用以下语法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str <span class="type">string</span> = <span class="string">&quot;10&quot;</span></span><br><span class="line"><span class="keyword">var</span> num <span class="type">int</span></span><br><span class="line">num, _ = strconv.Atoi(str)</span><br></pre></td></tr></table></figure>
+
+<p>以上代码将字符串变量 str 转换为整型变量 num。</p>
+<p>注意⚠️：<strong>strconv.Atoi</strong> 函数返回两个值，第一个是转换后的整型值，第二个是可能发生的错误，我们可以使用空白标识符 <strong>_</strong> 来忽略这个错误。</p>
+<p>若要将整数转换为字符串，可以用<strong>strconv.Itoa</strong> 函数</p>
+<h2 id="7-3-接口类型转换"><a href="#7-3-接口类型转换" class="headerlink" title="7.3 接口类型转换"></a>7.3 接口类型转换</h2><p>接口类型转换有两种情况<strong>：类型断言</strong>和<strong>类型转换</strong>。</p>
+<h3 id="7-3-1-类型断言"><a href="#7-3-1-类型断言" class="headerlink" title="7.3.1 类型断言"></a>7.3.1 类型断言</h3><p>类型断言用于将接口类型转换为指定类型，其语法为：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">value.(<span class="keyword">type</span>) </span><br><span class="line">或者 </span><br><span class="line">value.(T)</span><br></pre></td></tr></table></figure>
+
+<p>其中 value 是接口类型的变量，type 或 T 是要转换成的类型。</p>
+<p>如果类型断言成功，它将返回转换后的值和一个布尔值，表示转换是否成功。</p>
+<p>例子：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> i <span class="keyword">interface</span>&#123;&#125; = <span class="string">&quot;Hello, World&quot;</span></span><br><span class="line">    str, ok := i.(<span class="type">string</span>)</span><br><span class="line">    <span class="keyword">if</span> ok &#123;</span><br><span class="line">        fmt.Printf(<span class="string">&quot;&#x27;%s&#x27; is a string\n&quot;</span>, str)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">&quot;conversion failed&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>首先，定义了一个接口类型变量 i，并将它赋值为字符串 “Hello, World”;</li>
+<li>然后，我们使用类型断言将 i 转换为字符串类型，并将转换后的值赋值给变量 str；</li>
+<li>最后，我们使用 ok 变量检查类型转换是否成功，如果成功，我们打印转换后的字符串；否则，我们打印转换失败的消息。</li>
+</ul>
+<h3 id="7-3-2-类型转换"><a href="#7-3-2-类型转换" class="headerlink" title="7.3.2 类型转换"></a>7.3.2 类型转换</h3><p>类型转换用于将一个接口类型的值转换为另一个接口类型，其语法为：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T(value)</span><br></pre></td></tr></table></figure>
+
+<p>T 是目标接口类型，value 是要转换的值。</p>
+<p>在类型转换中，我们必须保证要转换的值和目标接口类型之间是兼容的，否则编译器会报错。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Writer <span class="keyword">interface</span> &#123;</span><br><span class="line">    Write([]<span class="type">byte</span>) (<span class="type">int</span>, <span class="type">error</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> StringWriter <span class="keyword">struct</span> &#123;</span><br><span class="line">    str <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(sw *StringWriter)</span></span> Write(data []<span class="type">byte</span>) (<span class="type">int</span>, <span class="type">error</span>) &#123;</span><br><span class="line">    sw.str += <span class="type">string</span>(data)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">len</span>(data), <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> w Writer = &amp;StringWriter&#123;&#125;</span><br><span class="line">    sw := w.(*StringWriter)</span><br><span class="line">    sw.str = <span class="string">&quot;Hello, World&quot;</span></span><br><span class="line">    fmt.Println(sw.str)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>首先，定义了一个 Writer 接口和一个实现了该接口的结构体 StringWriter；</li>
+<li>然后，将 StringWriter 类型的指针赋值给 Writer 接口类型的变量 w；</li>
+<li>接着，使用类型转换将 w 转换为 StringWriter 类型，并将转换后的值赋值给变量 sw；</li>
+<li>最后，使用 sw 访问 StringWriter 结构体中的字段 str，并打印出它的值。</li>
+</ul>
+<h1 id="8-接口"><a href="#8-接口" class="headerlink" title="8.接口"></a>8.接口</h1><p>Go 语言提供了另外一种数据类型即接口，它把所有的具有<strong>共性</strong>的方法定义在一起，任何其他类型只要实现了这些方法就是实现了这个接口。</p>
+<p>接口可以让我们将不同的类型绑定到一组公共的方法上，从而实现多态和灵活的设计。</p>
+<p>Go 语言中的接口<strong>是隐式实现</strong>的，也就是说，<strong>如果一个类型实现了一个接口定义的所有方法，那么它就自动地实现了该接口</strong>。因此，我们可以通过将接口作为参数来实现对不同类型的调用，从而实现多态。</p>
+<p>格式：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 定义接口 */</span></span><br><span class="line"><span class="keyword">type</span> interface_name <span class="keyword">interface</span> &#123;</span><br><span class="line">   method_name1 [return_type]</span><br><span class="line">   method_name2 [return_type]</span><br><span class="line">   method_name3 [return_type]</span><br><span class="line">   ...</span><br><span class="line">   method_namen [return_type]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 定义结构体 */</span></span><br><span class="line"><span class="keyword">type</span> struct_name <span class="keyword">struct</span> &#123;</span><br><span class="line">   <span class="comment">/* variables */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 实现接口方法 */</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(struct_name_variable struct_name)</span></span> method_name1() [return_type] &#123;</span><br><span class="line">   <span class="comment">/* 方法实现 */</span></span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(struct_name_variable struct_name)</span></span> method_namen() [return_type] &#123;</span><br><span class="line">   <span class="comment">/* 方法实现*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Phone <span class="keyword">interface</span> &#123;</span><br><span class="line">    call()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> NokiaPhone <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(nokiaPhone NokiaPhone)</span></span> call() &#123;</span><br><span class="line">    fmt.Println(<span class="string">&quot;I am Nokia, I can call you!&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> IPhone <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(iPhone IPhone)</span></span> call() &#123;</span><br><span class="line">    fmt.Println(<span class="string">&quot;I am iPhone, I can call you!&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> phone Phone</span><br><span class="line"></span><br><span class="line">    phone = <span class="built_in">new</span>(NokiaPhone)</span><br><span class="line">    phone.call()</span><br><span class="line"></span><br><span class="line">    phone = <span class="built_in">new</span>(IPhone)</span><br><span class="line">    phone.call()</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上面的例子中，定义了一个接口 <strong>Phone</strong>，接口里面有一个方法 <strong>call();</strong></p>
+<p>然后我们在 <strong>main</strong> 函数里面定义了一个 <strong>Phone</strong> 类型变量，并分别为之赋值为 <strong>NokiaPhone</strong> 和 <strong>IPhone</strong>。然后调用 <strong>call()</strong> 方法，输出结果如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">I am Nokia, I can call you!</span><br><span class="line">I am iPhone, I can call you!</span><br></pre></td></tr></table></figure>
+
+<p>接口类型变量可以存储任何实现了该接口的类型的值。</p>
+
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/12/27/%E5%AE%9E%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%B9%82%E7%AD%89%E6%80%A7/">实习笔记-幂等性</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">Cccccpg</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"codeblock":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
